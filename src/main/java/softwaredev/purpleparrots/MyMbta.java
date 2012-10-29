@@ -1,4 +1,4 @@
-package main.java.softwaredev.purpleparrots;
+package softwaredev.purpleparrots;
 
 import java.io.IOException;
 import java.util.ArrayList;

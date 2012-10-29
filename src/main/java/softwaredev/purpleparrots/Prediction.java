@@ -1,4 +1,4 @@
-package main.java.softwaredev.purpleparrots;
+package softwaredev.purpleparrots;
 
 public class Prediction {
 	String stopId;
