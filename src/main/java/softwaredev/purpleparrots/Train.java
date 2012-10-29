@@ -1,4 +1,4 @@
-package softwaredev.purpleparrots;
+package main.java.softwaredev.purpleparrots;
 
 import java.util.List;
 

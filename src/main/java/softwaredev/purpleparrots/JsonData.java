@@ -1,4 +1,4 @@
-package softwaredev.purpleparrots;
+package main.java.softwaredev.purpleparrots;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
