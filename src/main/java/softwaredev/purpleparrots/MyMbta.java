@@ -26,12 +26,16 @@ public class MyMbta {
 		System.out.println(blue_trains);
 	}
 	
+	public static String getCurrentLocationOfTrains(String color) throws JsonParseException, JsonMappingException, IOException{
+		ArrayList<String> stations = new ArrayList();
+		Line line = new Line(color, stations);
+		List<Train> trains = JsonData.getTrains(line);
+		return trains.toString();
+	}
 	
 	
 	public static void main(String [] args) throws JsonParseException, JsonMappingException, IOException {
 		getCurrentLocationOfAllTrains();
-		
-		
 	}
 
 }
