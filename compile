@@ -1,0 +1,1 @@
+javac -d target -cp $(find src/main/resources/ -name '*.jar' | tr '\n' ':' | sed 's/:$/\n/') $(find ./src/main -name '*.java' | tr '\n' ' ') -Xlint:unchecked
