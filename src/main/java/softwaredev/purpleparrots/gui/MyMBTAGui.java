@@ -62,7 +62,8 @@ public class MyMBTAGui {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					frame = new TrainInformation();
+					//frame = new TrainInformation();
+					frame = new TrainLocation();
 				} catch (JsonParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
