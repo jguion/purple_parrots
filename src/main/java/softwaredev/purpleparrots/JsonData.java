@@ -25,8 +25,8 @@ public class JsonData {
 		return trips;
 	}
 	
-	public static List<Train> getTrains(Line line) throws JsonParseException, JsonMappingException, IOException{
-		List<Train> trains = new ArrayList();
+	public static ArrayList<Train> getTrains(Line line) throws JsonParseException, JsonMappingException, IOException{
+		ArrayList<Train> trains = new ArrayList();
 		JsonNode trips_list = getTData(line);
 		Iterator<JsonNode> trips = trips_list.iterator();
 		while(trips.hasNext()){

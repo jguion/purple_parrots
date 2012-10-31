@@ -2,6 +2,7 @@ package softwaredev.purpleparrots;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,6 +32,24 @@ public class MyMbta {
 		Line line = new Line(color, stations);
 		List<Train> trains = JsonData.getTrains(line);
 		return trains.toString();
+	}
+	
+	public static HashMap<String, Train> getCurrentLocationHash(String color) throws JsonParseException, JsonMappingException, IOException{
+		ArrayList<String> stations = new ArrayList();
+		Line line = new Line(color, stations);
+		ArrayList<Train> trains = JsonData.getTrains(line);
+		HashMap<String, Train> dict = new HashMap<String, Train>();
+		for(int i = 0; i < trains.size(); i++){
+			 Train t = trains.get(i);
+			 Prediction p = t.predictions.get(0);
+			 if(!(p.seconds > 0)){
+				 p = t.predictions.get(1);
+			 }
+			 
+			 dict.put(p.stopId, t);
+		}
+		
+		return dict;
 	}
 	
 	
