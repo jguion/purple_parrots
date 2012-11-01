@@ -39,14 +39,23 @@ public class MyMbta {
 		Line line = new Line(color, stations);
 		ArrayList<Train> trains = JsonData.getTrains(line);
 		HashMap<String, Train> dict = new HashMap<String, Train>();
+		Train t;
+		Prediction p = null;
 		for(int i = 0; i < trains.size(); i++){
-			 Train t = trains.get(i);
-			 Prediction p = t.predictions.get(0);
-			 if(!(p.seconds > 0)){
-				 p = t.predictions.get(1);
+			 t = trains.get(i);
+			 if (t.predictions != null) {
+				 for (int j = 0; j < t.predictions.size(); j++) {
+					 p = t.predictions.get(j);
+					 if (p.seconds < 0) {
+						 p = null;
+					 } else {
+						 break;
+					 }
+				 }
 			 }
-			 
-			 dict.put(p.stopId, t);
+			 if (p != null) {
+				 dict.put(p.stopId, t);
+			 }
 		}
 		
 		return dict;
