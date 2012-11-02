@@ -118,77 +118,77 @@ public class TrainLocation extends JFrame {
 		// v first <--- blue line train (yes, I know they're reverse ordered)
 		
 		Canvas canvas_145 = new Canvas();
-		canvas_145.setBounds(58, 425, 34, 32);
+		canvas_145.setBounds(98, 425, 34, 32);
 		contentPane.add(canvas_145);
 		if(blue_line_map.get("70037") != null){
 			canvas_145.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_144 = new Canvas();
-		canvas_144.setBounds(112, 425, 34, 32);
+		canvas_144.setBounds(184, 425, 34, 32);
 		contentPane.add(canvas_144);
 		if(blue_line_map.get("70039") != null){
 			canvas_144.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_143 = new Canvas();
-		canvas_143.setBounds(167, 425, 34, 32);
+		canvas_143.setBounds(273, 425, 34, 32);
 		contentPane.add(canvas_143);
 		if(blue_line_map.get("70041") != null){
 			canvas_143.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_142 = new Canvas();
-		canvas_142.setBounds(219, 425, 34, 32);
+		canvas_142.setBounds(360, 425, 34, 32);
 		contentPane.add(canvas_142);
 		if(blue_line_map.get("70043") != null){
 			canvas_142.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_141 = new Canvas();
-		canvas_141.setBounds(273, 425, 34, 32);
+		canvas_141.setBounds(443, 425, 34, 32);
 		contentPane.add(canvas_141);
 		if(blue_line_map.get("70045") != null){
 			canvas_141.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_140 = new Canvas();
-		canvas_140.setBounds(329, 425, 34, 32);
+		canvas_140.setBounds(529, 425, 34, 32);
 		contentPane.add(canvas_140);
 		if(blue_line_map.get("70047") != null){
 			canvas_140.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_139 = new Canvas();
-		canvas_139.setBounds(377, 425, 34, 32);
+		canvas_139.setBounds(615, 425, 34, 32);
 		contentPane.add(canvas_139);
 		if(blue_line_map.get("70049") != null){
 			canvas_139.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_138 = new Canvas();
-		canvas_138.setBounds(428, 425, 34, 32);
+		canvas_138.setBounds(701, 425, 34, 32);
 		contentPane.add(canvas_138);
 		if(blue_line_map.get("70051") != null){
 			canvas_138.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_137 = new Canvas();
-		canvas_137.setBounds(478, 425, 34, 32);
+		canvas_137.setBounds(784, 425, 34, 32);
 		contentPane.add(canvas_137);
 		if(blue_line_map.get("70053") != null){
 			canvas_137.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_136 = new Canvas();
-		canvas_136.setBounds(529, 425, 34, 32);
+		canvas_136.setBounds(873, 425, 34, 32);
 		contentPane.add(canvas_136);
 		if(blue_line_map.get("70055") != null){
 			canvas_136.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_135 = new Canvas();
-		canvas_135.setBounds(581, 425, 34, 32);
+		canvas_135.setBounds(959, 425, 34, 32);
 		contentPane.add(canvas_135);
 		if(blue_line_map.get("70057") != null){
 			canvas_135.setBackground(Color.BLACK);
@@ -199,77 +199,77 @@ public class TrainLocation extends JFrame {
 		// v first ---> blue line train
 		
 		Canvas canvas_146 = new Canvas();
-		canvas_146.setBounds(58, 535, 34, 32);
+		canvas_146.setBounds(98, 525, 34, 32);
 		contentPane.add(canvas_146);
 		if(blue_line_map.get("70040") != null){
 			canvas_146.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_147 = new Canvas();
-		canvas_147.setBounds(112, 535, 34, 32);
+		canvas_147.setBounds(184, 525, 34, 32);
 		contentPane.add(canvas_147);
 		if(blue_line_map.get("70042") != null){
 			canvas_147.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_148 = new Canvas();
-		canvas_148.setBounds(167, 535, 34, 32);
+		canvas_148.setBounds(273, 525, 34, 32);
 		contentPane.add(canvas_148);
 		if(blue_line_map.get("70044") != null){
 			canvas_148.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_149 = new Canvas();
-		canvas_149.setBounds(219, 535, 34, 32);
+		canvas_149.setBounds(360, 525, 34, 32);
 		contentPane.add(canvas_149);
 		if(blue_line_map.get("70046") != null){
 			canvas_149.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_150 = new Canvas();
-		canvas_150.setBounds(273, 535, 34, 32);
+		canvas_150.setBounds(443, 525, 34, 32);
 		contentPane.add(canvas_150);
 		if(blue_line_map.get("70048") != null){
 			canvas_150.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_151 = new Canvas();
-		canvas_151.setBounds(329, 535, 34, 32);
+		canvas_151.setBounds(529, 525, 34, 32);
 		contentPane.add(canvas_151);
 		if(blue_line_map.get("70050") != null){
 			canvas_151.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_152 = new Canvas();
-		canvas_152.setBounds(377, 535, 34, 32);
+		canvas_152.setBounds(615, 525, 34, 32);
 		contentPane.add(canvas_152);
 		if(blue_line_map.get("70052") != null){
 			canvas_152.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_153 = new Canvas();
-		canvas_153.setBounds(428, 535, 34, 32);
+		canvas_153.setBounds(701, 525, 34, 32);
 		contentPane.add(canvas_153);
 		if(blue_line_map.get("70054") != null){
 			canvas_153.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_154 = new Canvas();
-		canvas_154.setBounds(478, 535, 34, 32);
+		canvas_154.setBounds(784, 525, 34, 32);
 		contentPane.add(canvas_154);
 		if(blue_line_map.get("70056") != null){
 			canvas_154.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_155 = new Canvas();
-		canvas_155.setBounds(529, 535, 34, 32);
+		canvas_155.setBounds(873, 525, 34, 32);
 		contentPane.add(canvas_155);
 		if(blue_line_map.get("70058") != null){
 			canvas_155.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_156 = new Canvas();
-		canvas_156.setBounds(581, 535, 34, 32);
+		canvas_156.setBounds(959, 525, 34, 32);
 		contentPane.add(canvas_156);
 		if(blue_line_map.get("70060") != null){
 			canvas_156.setBackground(Color.BLACK);
@@ -278,12 +278,12 @@ public class TrainLocation extends JFrame {
 		// ^ last ---> blue line train
 		
 		Canvas canvas_119 = new Canvas();
-		canvas_119.setBounds(821, 265, 5, 100);
+		canvas_119.setBounds(821, 285, 5, 60);
 		canvas_119.setBackground(new Color(192, 192, 192));
 		contentPane.add(canvas_119);
 		
 		Canvas canvas_118 = new Canvas();
-		canvas_118.setBounds(628, 265, 5, 100);
+		canvas_118.setBounds(628, 285, 5, 60);
 		canvas_118.setBackground(new Color(192, 192, 192));
 		contentPane.add(canvas_118);
 		
@@ -861,7 +861,7 @@ public class TrainLocation extends JFrame {
 		HashMap<String, Train> red_line_map = MyMbta.getCurrentLocationHash("red");
 		
 		Canvas canvas_77 = new Canvas();
-		canvas_77.setBounds(46, 242, 34, 32);
+		canvas_77.setBounds(34, 242, 34, 32);
 		contentPane.add(canvas_77);
 		if(red_line_map.get("70061") != null){
 			canvas_77.setBackground(Color.BLACK);
@@ -875,70 +875,70 @@ public class TrainLocation extends JFrame {
 		}
 		
 		Canvas canvas_79 = new Canvas();
-		canvas_79.setBounds(122, 242, 34, 32);
+		canvas_79.setBounds(138, 242, 34, 32);
 		contentPane.add(canvas_79);
 		if(red_line_map.get("70066") != null){
 			canvas_79.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_80 = new Canvas();
-		canvas_80.setBounds(167, 242, 34, 32);
+		canvas_80.setBounds(184, 242, 34, 32);
 		contentPane.add(canvas_80);
 		if(red_line_map.get("70068") != null){
 			canvas_80.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_81 = new Canvas();
-		canvas_81.setBounds(219, 242, 34, 32);
+		canvas_81.setBounds(231, 242, 34, 32);
 		contentPane.add(canvas_81);
 		if(red_line_map.get("70070") != null){
 			canvas_81.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_82 = new Canvas();
-		canvas_82.setBounds(264, 242, 34, 32);
+		canvas_82.setBounds(284, 242, 34, 32);
 		contentPane.add(canvas_82);
 		if(red_line_map.get("70072") != null){
 			canvas_82.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_83 = new Canvas();
-		canvas_83.setBounds(312, 242, 34, 32);
+		canvas_83.setBounds(329, 242, 34, 32);
 		contentPane.add(canvas_83);
 		if(red_line_map.get("70074") != null){
 			canvas_83.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_84 = new Canvas();
-		canvas_84.setBounds(363, 242, 34, 32);
+		canvas_84.setBounds(377, 242, 34, 32);
 		contentPane.add(canvas_84);
 		if(red_line_map.get("70076") != null){
 			canvas_84.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_85 = new Canvas();
-		canvas_85.setBounds(413, 242, 34, 32);
+		canvas_85.setBounds(428, 242, 34, 32);
 		contentPane.add(canvas_85);
 		if(red_line_map.get("70078") != null){
 			canvas_85.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_86 = new Canvas();
-		canvas_86.setBounds(464, 242, 34, 32);
+		canvas_86.setBounds(482, 242, 34, 32);
 		contentPane.add(canvas_86);
 		if(red_line_map.get("70080") != null){
 			canvas_86.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_87 = new Canvas();
-		canvas_87.setBounds(516, 242, 34, 32);
+		canvas_87.setBounds(529, 242, 34, 32);
 		contentPane.add(canvas_87);
 		if(red_line_map.get("70082") != null){
 			canvas_87.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_88 = new Canvas();
-		canvas_88.setBounds(564, 242, 34, 32);
+		canvas_88.setBounds(568, 242, 34, 32);
 		contentPane.add(canvas_88);
 		if(red_line_map.get("70084") != null){
 			canvas_88.setBackground(Color.BLACK);
@@ -1012,7 +1012,7 @@ public class TrainLocation extends JFrame {
 		// v First ---> red line train
 		
 		Canvas canvas_96 = new Canvas();
-		canvas_96.setBounds(46, 352, 34, 32);
+		canvas_96.setBounds(34, 352, 34, 32);
 		contentPane.add(canvas_96);
 		if(red_line_map.get("70063") != null){
 			canvas_96.setBackground(Color.BLACK);
@@ -1026,63 +1026,63 @@ public class TrainLocation extends JFrame {
 		}
 		
 		Canvas canvas_98 = new Canvas();
-		canvas_98.setBounds(122, 352, 34, 32);
+		canvas_98.setBounds(138, 352, 34, 32);
 		contentPane.add(canvas_98);
 		if(red_line_map.get("70067") != null){
 			canvas_98.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_99 = new Canvas();
-		canvas_99.setBounds(167, 352, 34, 32);
+		canvas_99.setBounds(184, 352, 34, 32);
 		contentPane.add(canvas_99);
 		if(red_line_map.get("70069") != null){
 			canvas_99.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_100 = new Canvas();
-		canvas_100.setBounds(219, 352, 34, 32);
+		canvas_100.setBounds(231, 352, 34, 32);
 		contentPane.add(canvas_100);
 		if(red_line_map.get("70071") != null){
 			canvas_100.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_101 = new Canvas();
-		canvas_101.setBounds(264, 352, 34, 32);
+		canvas_101.setBounds(284, 352, 34, 32);
 		contentPane.add(canvas_101);
 		if(red_line_map.get("70073") != null){
 			canvas_101.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_102 = new Canvas();
-		canvas_102.setBounds(312, 352, 34, 32);
+		canvas_102.setBounds(329, 352, 34, 32);
 		contentPane.add(canvas_102);
 		if(red_line_map.get("70075") != null){
 			canvas_102.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_103 = new Canvas();
-		canvas_103.setBounds(363, 352, 34, 32);
+		canvas_103.setBounds(377, 352, 34, 32);
 		contentPane.add(canvas_103);
 		if(red_line_map.get("70077") != null){
 			canvas_103.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_104 = new Canvas();
-		canvas_104.setBounds(413, 352, 34, 32);
+		canvas_104.setBounds(428, 352, 34, 32);
 		contentPane.add(canvas_104);
 		if(red_line_map.get("70079") != null){
 			canvas_104.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_105 = new Canvas();
-		canvas_105.setBounds(464, 352, 34, 32);
+		canvas_105.setBounds(478, 352, 34, 32);
 		contentPane.add(canvas_105);
 		if(red_line_map.get("70081") != null){
 			canvas_105.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_106 = new Canvas();
-		canvas_106.setBounds(516, 352, 34, 32);
+		canvas_106.setBounds(526, 352, 34, 32);
 		contentPane.add(canvas_106);
 		if(red_line_map.get("70083") != null){
 			canvas_106.setBackground(Color.BLACK);
@@ -1090,7 +1090,7 @@ public class TrainLocation extends JFrame {
 		
 		// JFK split line
 		Canvas canvas_107 = new Canvas();
-		canvas_107.setBounds(564, 352, 34, 32);
+		canvas_107.setBounds(568, 352, 34, 32);
 		contentPane.add(canvas_107);
 		if(red_line_map.get("70085") != null || red_line_map.get("70095") != null){
 			canvas_107.setBackground(Color.BLACK);
@@ -1157,7 +1157,7 @@ public class TrainLocation extends JFrame {
 		
 		// braintree
 		Canvas canvas_121 = new Canvas();
-		canvas_121.setBounds(1010, 352, 34, 32);
+		canvas_121.setBounds(998, 352, 34, 32);
 		contentPane.add(canvas_121);
 		if(red_line_map.get("70105") != null){
 			canvas_116.setBackground(Color.BLACK);
