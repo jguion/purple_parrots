@@ -53,7 +53,7 @@ public class TrainLocation extends JFrame {
 	 */
 	public TrainLocation() throws JsonParseException, JsonMappingException, IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1100, 600);
+		setBounds(100, 100, 1100, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -1262,6 +1262,54 @@ public class TrainLocation extends JFrame {
 		JLabel lblBraintree = new JLabel("Braintree");
 		lblBraintree.setBounds(1029, 403, 61, 16);
 		contentPane.add(lblBraintree);
+		
+		JLabel lblBowdoin = new JLabel("Bowdoin");
+		lblBowdoin.setBounds(52, 566, 61, 16);
+		contentPane.add(lblBowdoin);
+		
+		JLabel lblGovernmentCenter = new JLabel("Government Center");
+		lblGovernmentCenter.setBounds(112, 594, 128, 16);
+		contentPane.add(lblGovernmentCenter);
+		
+		JLabel lblStateSt_1 = new JLabel("State St");
+		lblStateSt_1.setBounds(219, 566, 61, 16);
+		contentPane.add(lblStateSt_1);
+		
+		JLabel lblAquarium = new JLabel("Aquarium");
+		lblAquarium.setBounds(310, 594, 61, 16);
+		contentPane.add(lblAquarium);
+		
+		JLabel lblMaverick = new JLabel("Maverick");
+		lblMaverick.setBounds(390, 566, 61, 16);
+		contentPane.add(lblMaverick);
+		
+		JLabel lblAirport = new JLabel("Airport");
+		lblAirport.setBounds(481, 594, 61, 16);
+		contentPane.add(lblAirport);
+		
+		JLabel lblWoodIsland = new JLabel("Wood Island");
+		lblWoodIsland.setBounds(554, 566, 79, 16);
+		contentPane.add(lblWoodIsland);
+		
+		JLabel lblOrientHeights = new JLabel("Orient Heights");
+		lblOrientHeights.setBounds(639, 594, 96, 16);
+		contentPane.add(lblOrientHeights);
+		
+		JLabel lblSuffolkDowns = new JLabel("Suffolk Downs");
+		lblSuffolkDowns.setBounds(711, 566, 107, 16);
+		contentPane.add(lblSuffolkDowns);
+		
+		JLabel lblBeachmont = new JLabel("Beachmont");
+		lblBeachmont.setBounds(808, 594, 74, 16);
+		contentPane.add(lblBeachmont);
+		
+		JLabel lblRevereBeach = new JLabel("Revere Beach");
+		lblRevereBeach.setBounds(893, 566, 85, 16);
+		contentPane.add(lblRevereBeach);
+		
+		JLabel lblWonderland = new JLabel("Wonderland");
+		lblWonderland.setBounds(999, 594, 91, 16);
+		contentPane.add(lblWonderland);
 		
 		
 	}
