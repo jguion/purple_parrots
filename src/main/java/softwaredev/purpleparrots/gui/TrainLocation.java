@@ -1175,6 +1175,94 @@ public class TrainLocation extends JFrame {
 		blueLine.setBackground(Color.BLUE);
 		contentPane.add(blueLine);
 		
+		JLabel lblAlewife = new JLabel("Alewife");
+		lblAlewife.setBounds(6, 390, 61, 16);
+		contentPane.add(lblAlewife);
+		
+		JLabel lblDavis = new JLabel("Davis");
+		lblDavis.setBounds(45, 403, 61, 16);
+		contentPane.add(lblDavis);
+		
+		JLabel lblPorter = new JLabel("Porter");
+		lblPorter.setBounds(98, 390, 61, 16);
+		contentPane.add(lblPorter);
+		
+		JLabel lblHarvard = new JLabel("Harvard");
+		lblHarvard.setBounds(138, 403, 61, 16);
+		contentPane.add(lblHarvard);
+		
+		JLabel lblCentral = new JLabel("Central");
+		lblCentral.setBounds(197, 390, 61, 16);
+		contentPane.add(lblCentral);
+		
+		JLabel lblKendall = new JLabel("Kendall");
+		lblKendall.setBounds(254, 403, 61, 16);
+		contentPane.add(lblKendall);
+		
+		JLabel lblCharles = new JLabel("Charles");
+		lblCharles.setBounds(302, 390, 61, 16);
+		contentPane.add(lblCharles);
+		
+		JLabel lblPark = new JLabel("Park");
+		lblPark.setBounds(350, 403, 61, 16);
+		contentPane.add(lblPark);
+		
+		JLabel lblDowntown = new JLabel("Downtown");
+		lblDowntown.setBounds(392, 390, 70, 16);
+		contentPane.add(lblDowntown);
+		
+		JLabel lblSouthStation = new JLabel("South Station");
+		lblSouthStation.setBounds(443, 403, 87, 16);
+		contentPane.add(lblSouthStation);
+		
+		JLabel lblBroadway = new JLabel("Broadway");
+		lblBroadway.setBounds(494, 390, 61, 16);
+		contentPane.add(lblBroadway);
+		
+		JLabel lblAndrew = new JLabel("Andrew");
+		lblAndrew.setBounds(541, 403, 61, 16);
+		contentPane.add(lblAndrew);
+		
+		JLabel lblJfk = new JLabel("JFK");
+		lblJfk.setBounds(588, 390, 61, 16);
+		contentPane.add(lblJfk);
+		
+		JLabel lblSavinHill = new JLabel("Savin Hill");
+		lblSavinHill.setBounds(627, 403, 61, 16);
+		contentPane.add(lblSavinHill);
+		
+		JLabel lblFieldsCorner = new JLabel("Fields Corner");
+		lblFieldsCorner.setBounds(674, 390, 88, 16);
+		contentPane.add(lblFieldsCorner);
+		
+		JLabel lblShawmut = new JLabel("Shawmut");
+		lblShawmut.setBounds(728, 403, 61, 16);
+		contentPane.add(lblShawmut);
+		
+		JLabel lblAshmont = new JLabel("Ashmont");
+		lblAshmont.setBounds(781, 390, 61, 16);
+		contentPane.add(lblAshmont);
+		
+		JLabel lblNorthQuincy = new JLabel("North Quincy");
+		lblNorthQuincy.setBounds(826, 403, 86, 16);
+		contentPane.add(lblNorthQuincy);
+		
+		JLabel lblWollaston = new JLabel("Wollaston");
+		lblWollaston.setBounds(871, 390, 75, 16);
+		contentPane.add(lblWollaston);
+		
+		JLabel lblQuincyC = new JLabel("Quincy Center");
+		lblQuincyC.setBounds(920, 403, 97, 16);
+		contentPane.add(lblQuincyC);
+		
+		JLabel lblQuincyA = new JLabel("Quincy Adams");
+		lblQuincyA.setBounds(971, 390, 103, 16);
+		contentPane.add(lblQuincyA);
+		
+		JLabel lblBraintree = new JLabel("Braintree");
+		lblBraintree.setBounds(1029, 403, 61, 16);
+		contentPane.add(lblBraintree);
+		
 		
 	}
 }
