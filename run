@@ -1,1 +1,1 @@
-java -cp $(find src/main/resources/ -name '*.jar' | tr '\n' ':' | sed 's/:$/\n/'):target softwaredev.purpleparrots.MyMbta
+java -cp $(find src/main/resources/ -name '*.jar' | tr '\n' ':' | sed 's/:$/\n/'):target softwaredev.purpleparrots.gui.MyMBTAGui
