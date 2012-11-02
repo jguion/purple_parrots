@@ -15,11 +15,17 @@ import javax.swing.JLabel;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import java.awt.Color;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
 
 public class MyMBTAGui {
 
-	private JFrame frame;
-	private final Action action = new SwingAction();
+	private JFrame frmHome;
 
 
 	/**
@@ -30,7 +36,7 @@ public class MyMBTAGui {
 			public void run() {
 				try {
 					MyMBTAGui window = new MyMBTAGui();
-					window.frame.setVisible(true);
+					window.frmHome.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,21 +55,24 @@ public class MyMBTAGui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmHome = new JFrame();
+		frmHome.getContentPane().setBackground(new Color(148, 0, 211));
+		frmHome.setTitle("MyMBTA");
+		frmHome.setBounds(100, 100, 450, 300);
+		frmHome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblMyMbta = new JLabel("My MBTA");
-		lblMyMbta.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-		frame.getContentPane().add(lblMyMbta, BorderLayout.NORTH);
+		lblMyMbta.setForeground(new Color(255, 255, 0));
+		lblMyMbta.setFont(new Font("Dialog", Font.BOLD, 30));
 		
-		JButton btnNewButton = new JButton("Current Trains");
-		btnNewButton.setAction(action);
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton currentTrainsBtn = new JButton("View Current Train Locations");
+		currentTrainsBtn.setBackground(new Color(216, 191, 216));
+		currentTrainsBtn.setFont(new Font("Dialog", Font.PLAIN, 11));
+		currentTrainsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					//frame = new TrainInformation();
-					frame = new TrainLocation();
+					frmHome = new TrainLocation();
 				} catch (JsonParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -74,18 +83,31 @@ public class MyMBTAGui {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				frame.setVisible(true);
+				frmHome.setVisible(true);
 			}
 		});
-		frame.getContentPane().add(btnNewButton, BorderLayout.WEST);
+		GroupLayout groupLayout = new GroupLayout(frmHome.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(115)
+							.addComponent(currentTrainsBtn, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(150)
+							.addComponent(lblMyMbta)))
+					.addContainerGap(114, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(12)
+					.addComponent(lblMyMbta)
+					.addGap(59)
+					.addComponent(currentTrainsBtn, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addGap(110))
+		);
+		frmHome.getContentPane().setLayout(groupLayout);
 	}
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-		}
-	}
-
 }
