@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.EventQueue;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Canvas;
@@ -24,10 +26,16 @@ import java.awt.Label;
 import javax.swing.JToolBar;
 import javax.swing.JSeparator;
 import java.awt.FlowLayout;
+import javax.swing.border.LineBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TrainLocation extends JFrame {
 
-	private JPanel contentPane;
+	private MbtaMap mbtaMapPanel;
 
 	/**
 	 * Launch the application.
@@ -53,65 +61,63 @@ public class TrainLocation extends JFrame {
 	 */
 	public TrainLocation() throws JsonParseException, JsonMappingException, IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1100, 700);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		setBounds(-19, -12, 1100, 700);
+		mbtaMapPanel = new MbtaMap();
+		mbtaMapPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(mbtaMapPanel);
 		
 		HashMap<String, Train> blue_line_map = MyMbta.getCurrentLocationHash("blue");
-		contentPane.setLayout(null);
+		mbtaMapPanel.setLayout(null);
 		
 		// v first blue line stop
 		
-		Canvas blueLineStart = new Canvas();
-		blueLineStart.setBounds(52, 478, 34, 32);
-		blueLineStart.setBackground(Color.WHITE);
-		contentPane.add(blueLineStart);
+		Station bowdoin = new Station("Bowdoin");
+		bowdoin.setBounds(52, 478, 34, 32);
+		mbtaMapPanel.add(bowdoin);
 		
-		Canvas canvas_124 = new Canvas();
-		canvas_124.setBounds(138, 478, 34, 32);
-		contentPane.add(canvas_124);
+		Station governmentCenter = new Station("Government Center");
+		governmentCenter.setBounds(138, 478, 34, 32);
+		mbtaMapPanel.add(governmentCenter);
 		
-		Canvas canvas_125 = new Canvas();
-		canvas_125.setBounds(224, 478, 34, 32);
-		canvas_125.setBackground(Color.WHITE);
-		contentPane.add(canvas_125);
+		Station stateStBlue = new Station("State Street");
+		stateStBlue.setBounds(224, 478, 34, 32);
+		mbtaMapPanel.add(stateStBlue);
 		
-		Canvas canvas_126 = new Canvas();
-		canvas_126.setBounds(310, 478, 34, 32);
-		contentPane.add(canvas_126);
+		Station aquarium = new Station("Aquarium");
+		aquarium.setBounds(310, 478, 34, 32);
+		mbtaMapPanel.add(aquarium);
 		
-		Canvas canvas_127 = new Canvas();
-		canvas_127.setBounds(396, 478, 34, 32);
-		contentPane.add(canvas_127);
+		Station maverick = new Station("Maverick");
+		maverick.setBounds(396, 478, 34, 32);
+		mbtaMapPanel.add(maverick);
 		
-		Canvas canvas_128 = new Canvas();
-		canvas_128.setBounds(482, 478, 34, 32);
-		contentPane.add(canvas_128);
+		Station airport = new Station("Airport");
+		airport.setBounds(482, 478, 34, 32);
+		mbtaMapPanel.add(airport);
 		
-		Canvas canvas_129 = new Canvas();
-		canvas_129.setBounds(568, 478, 34, 32);
-		contentPane.add(canvas_129);
+		Station woodIsland = new Station("Wood Island");
+		woodIsland.setBounds(568, 478, 34, 32);
+		mbtaMapPanel.add(woodIsland);
 		
-		Canvas canvas_130 = new Canvas();
-		canvas_130.setBounds(654, 478, 34, 32);
-		contentPane.add(canvas_130);
+		Station orientHeight = new Station("Orient Height");
+		orientHeight.setBounds(654, 478, 34, 32);
+		mbtaMapPanel.add(orientHeight);
 		
-		Canvas canvas_131 = new Canvas();
-		canvas_131.setBounds(740, 478, 34, 32);
-		contentPane.add(canvas_131);
+		Station suffolkDowns = new Station("Suffolk Downs");
+		suffolkDowns.setBounds(740, 478, 34, 32);
+		mbtaMapPanel.add(suffolkDowns);
 		
-		Canvas canvas_132 = new Canvas();
-		canvas_132.setBounds(826, 478, 34, 32);
-		contentPane.add(canvas_132);
+		Station beachmont = new Station("Beachmont");
+		beachmont.setBounds(826, 478, 34, 32);
+		mbtaMapPanel.add(beachmont);
 		
-		Canvas canvas_133 = new Canvas();
-		canvas_133.setBounds(912, 478, 34, 32);
-		contentPane.add(canvas_133);
+		Station revereBeach = new Station("Revere Beach");
+		revereBeach.setBounds(912, 478, 34, 32);
+		mbtaMapPanel.add(revereBeach);
 		
-		Canvas blueLineEnd = new Canvas();
-		blueLineEnd.setBounds(998, 478, 34, 32);
-		contentPane.add(blueLineEnd);
+		Station wonderland = new Station("Wonderland");
+		wonderland.setBounds(998, 478, 34, 32);
+		mbtaMapPanel.add(wonderland);
 		
 		// ^ last blue line stop
 		
@@ -119,77 +125,77 @@ public class TrainLocation extends JFrame {
 		
 		Canvas canvas_145 = new Canvas();
 		canvas_145.setBounds(98, 425, 34, 32);
-		contentPane.add(canvas_145);
+		mbtaMapPanel.add(canvas_145);
 		if(blue_line_map.get("70037") != null){
 			canvas_145.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_144 = new Canvas();
 		canvas_144.setBounds(184, 425, 34, 32);
-		contentPane.add(canvas_144);
+		mbtaMapPanel.add(canvas_144);
 		if(blue_line_map.get("70039") != null){
 			canvas_144.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_143 = new Canvas();
 		canvas_143.setBounds(273, 425, 34, 32);
-		contentPane.add(canvas_143);
+		mbtaMapPanel.add(canvas_143);
 		if(blue_line_map.get("70041") != null){
 			canvas_143.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_142 = new Canvas();
 		canvas_142.setBounds(360, 425, 34, 32);
-		contentPane.add(canvas_142);
+		mbtaMapPanel.add(canvas_142);
 		if(blue_line_map.get("70043") != null){
 			canvas_142.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_141 = new Canvas();
 		canvas_141.setBounds(443, 425, 34, 32);
-		contentPane.add(canvas_141);
+		mbtaMapPanel.add(canvas_141);
 		if(blue_line_map.get("70045") != null){
 			canvas_141.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_140 = new Canvas();
 		canvas_140.setBounds(529, 425, 34, 32);
-		contentPane.add(canvas_140);
+		mbtaMapPanel.add(canvas_140);
 		if(blue_line_map.get("70047") != null){
 			canvas_140.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_139 = new Canvas();
 		canvas_139.setBounds(615, 425, 34, 32);
-		contentPane.add(canvas_139);
+		mbtaMapPanel.add(canvas_139);
 		if(blue_line_map.get("70049") != null){
 			canvas_139.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_138 = new Canvas();
 		canvas_138.setBounds(701, 425, 34, 32);
-		contentPane.add(canvas_138);
+		mbtaMapPanel.add(canvas_138);
 		if(blue_line_map.get("70051") != null){
 			canvas_138.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_137 = new Canvas();
 		canvas_137.setBounds(784, 425, 34, 32);
-		contentPane.add(canvas_137);
+		mbtaMapPanel.add(canvas_137);
 		if(blue_line_map.get("70053") != null){
 			canvas_137.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_136 = new Canvas();
 		canvas_136.setBounds(873, 425, 34, 32);
-		contentPane.add(canvas_136);
+		mbtaMapPanel.add(canvas_136);
 		if(blue_line_map.get("70055") != null){
 			canvas_136.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_135 = new Canvas();
 		canvas_135.setBounds(959, 425, 34, 32);
-		contentPane.add(canvas_135);
+		mbtaMapPanel.add(canvas_135);
 		if(blue_line_map.get("70057") != null){
 			canvas_135.setBackground(Color.BLACK);
 		}
@@ -200,77 +206,77 @@ public class TrainLocation extends JFrame {
 		
 		Canvas canvas_146 = new Canvas();
 		canvas_146.setBounds(98, 525, 34, 32);
-		contentPane.add(canvas_146);
+		mbtaMapPanel.add(canvas_146);
 		if(blue_line_map.get("70040") != null){
 			canvas_146.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_147 = new Canvas();
 		canvas_147.setBounds(184, 525, 34, 32);
-		contentPane.add(canvas_147);
+		mbtaMapPanel.add(canvas_147);
 		if(blue_line_map.get("70042") != null){
 			canvas_147.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_148 = new Canvas();
 		canvas_148.setBounds(273, 525, 34, 32);
-		contentPane.add(canvas_148);
+		mbtaMapPanel.add(canvas_148);
 		if(blue_line_map.get("70044") != null){
 			canvas_148.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_149 = new Canvas();
 		canvas_149.setBounds(360, 525, 34, 32);
-		contentPane.add(canvas_149);
+		mbtaMapPanel.add(canvas_149);
 		if(blue_line_map.get("70046") != null){
 			canvas_149.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_150 = new Canvas();
 		canvas_150.setBounds(443, 525, 34, 32);
-		contentPane.add(canvas_150);
+		mbtaMapPanel.add(canvas_150);
 		if(blue_line_map.get("70048") != null){
 			canvas_150.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_151 = new Canvas();
 		canvas_151.setBounds(529, 525, 34, 32);
-		contentPane.add(canvas_151);
+		mbtaMapPanel.add(canvas_151);
 		if(blue_line_map.get("70050") != null){
 			canvas_151.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_152 = new Canvas();
 		canvas_152.setBounds(615, 525, 34, 32);
-		contentPane.add(canvas_152);
+		mbtaMapPanel.add(canvas_152);
 		if(blue_line_map.get("70052") != null){
 			canvas_152.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_153 = new Canvas();
 		canvas_153.setBounds(701, 525, 34, 32);
-		contentPane.add(canvas_153);
+		mbtaMapPanel.add(canvas_153);
 		if(blue_line_map.get("70054") != null){
 			canvas_153.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_154 = new Canvas();
 		canvas_154.setBounds(784, 525, 34, 32);
-		contentPane.add(canvas_154);
+		mbtaMapPanel.add(canvas_154);
 		if(blue_line_map.get("70056") != null){
 			canvas_154.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_155 = new Canvas();
 		canvas_155.setBounds(873, 525, 34, 32);
-		contentPane.add(canvas_155);
+		mbtaMapPanel.add(canvas_155);
 		if(blue_line_map.get("70058") != null){
 			canvas_155.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_156 = new Canvas();
 		canvas_156.setBounds(959, 525, 34, 32);
-		contentPane.add(canvas_156);
+		mbtaMapPanel.add(canvas_156);
 		if(blue_line_map.get("70060") != null){
 			canvas_156.setBackground(Color.BLACK);
 		}
@@ -280,119 +286,101 @@ public class TrainLocation extends JFrame {
 		Canvas canvas_119 = new Canvas();
 		canvas_119.setBounds(821, 285, 5, 60);
 		canvas_119.setBackground(new Color(192, 192, 192));
-		contentPane.add(canvas_119);
+		mbtaMapPanel.add(canvas_119);
 		
 		Canvas canvas_118 = new Canvas();
 		canvas_118.setBounds(628, 285, 5, 60);
 		canvas_118.setBackground(new Color(192, 192, 192));
-		contentPane.add(canvas_118);
+		mbtaMapPanel.add(canvas_118);
 		
-		Canvas oakGrove = new Canvas();
+		Station oakGrove = new Station("Oak Grove");
 		oakGrove.setBounds(19, 63, 34, 32);
-		oakGrove.setBackground(Color.WHITE);
-		contentPane.add(oakGrove);
+		mbtaMapPanel.add(oakGrove);
 		
-		Canvas canvas_4 = new Canvas();
-		canvas_4.setBounds(72, 63, 34, 32);
-		canvas_4.setBackground(Color.WHITE);
-		contentPane.add(canvas_4);
+		Station maldenCenter = new Station("Malden Center");
+		maldenCenter.setBounds(72, 63, 34, 32);
+		mbtaMapPanel.add(maldenCenter);
 		
-		Canvas canvas_5 = new Canvas();
-		canvas_5.setBounds(125, 63, 34, 32);
-		canvas_5.setBackground(Color.WHITE);
-		contentPane.add(canvas_5);
+		Station wellington = new Station("Wellington");
+		wellington.setBounds(125, 63, 34, 32);
+		mbtaMapPanel.add(wellington);
 		
-		Canvas canvas_6 = new Canvas();
-		canvas_6.setBounds(178, 63, 34, 32);
-		canvas_6.setBackground(Color.WHITE);
-		contentPane.add(canvas_6);
+		Station sullivanSquare = new Station("Sullivan Square");
+		sullivanSquare.setBounds(178, 63, 34, 32);
+		mbtaMapPanel.add(sullivanSquare);
 		
-		Canvas canvas_7 = new Canvas();
-		canvas_7.setBounds(231, 63, 34, 32);
-		canvas_7.setBackground(Color.WHITE);
-		contentPane.add(canvas_7);
+		Station communityCollege = new Station("Community College");
+		communityCollege.setBounds(231, 63, 34, 32);
+		mbtaMapPanel.add(communityCollege);
 		
-		Canvas canvas_8 = new Canvas();
-		canvas_8.setBounds(284, 63, 34, 32);
-		canvas_8.setBackground(Color.WHITE);
-		contentPane.add(canvas_8);
+		Station northStaion = new Station("North Station");
+		northStaion.setBounds(284, 63, 34, 32);
+		mbtaMapPanel.add(northStaion);
 		
-		Canvas canvas_9 = new Canvas();
-		canvas_9.setBounds(337, 63, 34, 32);
-		canvas_9.setBackground(Color.WHITE);
-		contentPane.add(canvas_9);
+		Station haymarket = new Station("Haymarket");
+		haymarket.setBounds(337, 63, 34, 32);
+		mbtaMapPanel.add(haymarket);
 		
-		Canvas canvas_10 = new Canvas();
-		canvas_10.setBounds(390, 63, 34, 32);
-		canvas_10.setBackground(Color.WHITE);
-		contentPane.add(canvas_10);
+		Station stateSt = new Station("State St");
+		stateSt.setBounds(390, 63, 34, 32);
+		mbtaMapPanel.add(stateSt);
 		
-		Canvas canvas_11 = new Canvas();
-		canvas_11.setBounds(443, 63, 34, 32);
-		canvas_11.setBackground(Color.WHITE);
-		contentPane.add(canvas_11);
+		Station downtownCrossing = new Station("Downtown Crossing");
+		downtownCrossing.setBounds(443, 63, 34, 32);
+		mbtaMapPanel.add(downtownCrossing);
 		
-		Canvas canvas_12 = new Canvas();
-		canvas_12.setBounds(496, 63, 34, 32);
-		canvas_12.setBackground(Color.WHITE);
-		contentPane.add(canvas_12);
+		Station chinatown = new Station("Chinatown");
+		chinatown.setBounds(496, 63, 34, 32);
+		mbtaMapPanel.add(chinatown);
 		
-		Canvas canvas_13 = new Canvas();
-		canvas_13.setBounds(549, 63, 34, 32);
-		canvas_13.setBackground(Color.WHITE);
-		contentPane.add(canvas_13);
+		Station tufts = new Station("Tufts Medical Center");
+		tufts.setBounds(549, 63, 34, 32);
+		mbtaMapPanel.add(tufts);
 		
-		Canvas canvas_14 = new Canvas();
-		canvas_14.setBounds(602, 63, 34, 32);
-		canvas_14.setBackground(Color.WHITE);
-		contentPane.add(canvas_14);
+		Station backBay = new Station("Back Bay");
+		backBay.setBounds(602, 63, 34, 32);
+		mbtaMapPanel.add(backBay);
 		
-		Canvas canvas_15 = new Canvas();
-		canvas_15.setBounds(655, 63, 34, 32);
-		canvas_15.setBackground(Color.WHITE);
-		contentPane.add(canvas_15);
+		Station massAve = new Station("Mass Ave");
+		massAve.setBounds(655, 63, 34, 32);
+		mbtaMapPanel.add(massAve);
 		
-		Canvas canvas_16 = new Canvas();
-		canvas_16.setBounds(708, 63, 34, 32);
-		canvas_16.setBackground(Color.WHITE);
-		contentPane.add(canvas_16);
+		Station ruggles = new Station("Ruggles Station");
+		ruggles.setBounds(708, 63, 34, 32);
+		ruggles.setBackground(Color.WHITE);
+		mbtaMapPanel.add(ruggles);
 		
-		Canvas canvas_17 = new Canvas();
-		canvas_17.setBounds(761, 63, 34, 32);
-		canvas_17.setBackground(Color.WHITE);
-		contentPane.add(canvas_17);
+		Station roxburyCrossing = new Station("Roxbury Crossing");
+		roxburyCrossing.setBounds(761, 63, 34, 32);
+		mbtaMapPanel.add(roxburyCrossing);
 		
-		Canvas canvas_18 = new Canvas();
-		canvas_18.setBounds(814, 63, 34, 32);
-		canvas_18.setBackground(Color.WHITE);
-		contentPane.add(canvas_18);
+		Station jacksonSquare = new Station("Jackson Square");
+		jacksonSquare.setBounds(814, 63, 34, 32);
+		mbtaMapPanel.add(jacksonSquare);
 		
-		Canvas canvas_19 = new Canvas();
-		canvas_19.setBounds(867, 63, 34, 32);
-		canvas_19.setBackground(Color.WHITE);
-		contentPane.add(canvas_19);
+		Station stonyBrook = new Station("Stony Brook");
+		stonyBrook.setBounds(867, 63, 34, 32);
+		mbtaMapPanel.add(stonyBrook);
 		
-		Canvas canvas = new Canvas();
-		canvas.setBounds(920, 63, 34, 32);
-		canvas.setBackground(Color.WHITE);
-		contentPane.add(canvas);
+		Station greenSt = new Station("Green St");
+		greenSt.setBounds(920, 63, 34, 32);
+		mbtaMapPanel.add(greenSt);
 		
-		Canvas canvas_1 = new Canvas();
-		canvas_1.setBounds(973, 63, 34, 32);
-		canvas_1.setBackground(Color.WHITE);
-		contentPane.add(canvas_1);
+		Station forestHills = new Station("Forest Hills");
+		forestHills.setBounds(973, 63, 34, 32);
+		mbtaMapPanel.add(forestHills);
 		
 		Canvas orangeLineEnd = new Canvas();
 		orangeLineEnd.setBounds(1026, 63, 34, 32);
 		orangeLineEnd.setBackground(Color.WHITE);
-		contentPane.add(orangeLineEnd);
+		mbtaMapPanel.add(orangeLineEnd);
 		
 		//ORANGE LINE STOPS 20 - 51
 		HashMap<String, Train> orange_line_map = MyMbta.getCurrentLocationHash("orange");
 		
 		JPanel FH_OG_panel = new JPanel();
 		FH_OG_panel.setBounds(19, 10, 1041, 38);
-		contentPane.add(FH_OG_panel);
+		mbtaMapPanel.add(FH_OG_panel);
 		FH_OG_panel.setLayout(null);
 		
 		Canvas FH_OG_end = new Canvas();
@@ -530,329 +518,302 @@ public class TrainLocation extends JFrame {
 		
 		Canvas OG_FH_start = new Canvas();
 		OG_FH_start.setBounds(58, 120, 34, 32);
-		contentPane.add(OG_FH_start);
+		mbtaMapPanel.add(OG_FH_start);
 		if(orange_line_map.get("70036") != null){
 			OG_FH_start.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_53 = new Canvas();
 		canvas_53.setBounds(112, 120, 34, 32);
-		contentPane.add(canvas_53);
+		mbtaMapPanel.add(canvas_53);
 		if(orange_line_map.get("70034") != null){
 			canvas_53.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_54 = new Canvas();
 		canvas_54.setBounds(167, 120, 34, 32);
-		contentPane.add(canvas_54);
+		mbtaMapPanel.add(canvas_54);
 		if(orange_line_map.get("70032") != null){
 			canvas_54.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_39 = new Canvas();
 		canvas_39.setBounds(219, 120, 34, 32);
-		contentPane.add(canvas_39);
+		mbtaMapPanel.add(canvas_39);
 		if(orange_line_map.get("70030") != null){
 			canvas_39.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_40 = new Canvas();
 		canvas_40.setBounds(273, 120, 34, 32);
-		contentPane.add(canvas_40);
+		mbtaMapPanel.add(canvas_40);
 		if(orange_line_map.get("70028") != null){
 			canvas_40.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_41 = new Canvas();
 		canvas_41.setBounds(329, 120, 34, 32);
-		contentPane.add(canvas_41);
+		mbtaMapPanel.add(canvas_41);
 		if(orange_line_map.get("70026") != null){
 			canvas_41.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_42 = new Canvas();
 		canvas_42.setBounds(377, 120, 34, 32);
-		contentPane.add(canvas_42);
+		mbtaMapPanel.add(canvas_42);
 		if(orange_line_map.get("70024") != null){
 			canvas_42.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_43 = new Canvas();
 		canvas_43.setBounds(428, 120, 34, 32);
-		contentPane.add(canvas_43);
+		mbtaMapPanel.add(canvas_43);
 		if(orange_line_map.get("70022") != null){
 			canvas_43.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_44 = new Canvas();
 		canvas_44.setBounds(478, 120, 34, 32);
-		contentPane.add(canvas_44);
+		mbtaMapPanel.add(canvas_44);
 		if(orange_line_map.get("70020") != null){
 			canvas_44.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_45 = new Canvas();
 		canvas_45.setBounds(529, 120, 34, 32);
-		contentPane.add(canvas_45);
+		mbtaMapPanel.add(canvas_45);
 		if(orange_line_map.get("70018") != null){
 			canvas_45.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_46 = new Canvas();
 		canvas_46.setBounds(581, 120, 34, 32);
-		contentPane.add(canvas_46);
+		mbtaMapPanel.add(canvas_46);
 		if(orange_line_map.get("70016") != null){
 			canvas_46.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_47 = new Canvas();
 		canvas_47.setBounds(629, 120, 34, 32);
-		contentPane.add(canvas_47);
+		mbtaMapPanel.add(canvas_47);
 		if(orange_line_map.get("70014") != null){
 			canvas_47.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_48 = new Canvas();
 		canvas_48.setBounds(680, 120, 34, 32);
-		contentPane.add(canvas_48);
+		mbtaMapPanel.add(canvas_48);
 		if(orange_line_map.get("70012") != null){
 			canvas_48.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_49 = new Canvas();
 		canvas_49.setBounds(728, 120, 34, 32);
-		contentPane.add(canvas_49);
+		mbtaMapPanel.add(canvas_49);
 		if(orange_line_map.get("70010") != null){
 			canvas_49.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_50 = new Canvas();
 		canvas_50.setBounds(778, 120, 34, 32);
-		contentPane.add(canvas_50);
+		mbtaMapPanel.add(canvas_50);
 		if(orange_line_map.get("70008") != null){
 			canvas_50.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_51 = new Canvas();
 		canvas_51.setBounds(828, 120, 34, 32);
-		contentPane.add(canvas_51);
+		mbtaMapPanel.add(canvas_51);
 		if(orange_line_map.get("70006") != null){
 			canvas_51.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_55 = new Canvas();
 		canvas_55.setBounds(873, 120, 34, 32);
-		contentPane.add(canvas_55);
+		mbtaMapPanel.add(canvas_55);
 		if(orange_line_map.get("70004") != null){
 			canvas_55.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_56 = new Canvas();
 		canvas_56.setBounds(924, 120, 34, 32);
-		contentPane.add(canvas_56);
+		mbtaMapPanel.add(canvas_56);
 		if(orange_line_map.get("70002") != null){
 			canvas_56.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_57 = new Canvas();
 		canvas_57.setBounds(974, 120, 34, 32);
-		contentPane.add(canvas_57);
+		mbtaMapPanel.add(canvas_57);
 		if(orange_line_map.get("70000") != null){
 			canvas_57.setBackground(Color.BLACK);
 		}
 		
-		Canvas orangeLine = new Canvas();
-		orangeLine.setBounds(10, 48, 1080, 66);
-		orangeLine.setBackground(Color.ORANGE);
-		contentPane.add(orangeLine);
-		
 		JLabel lblOakGrove = new JLabel("Oak Grove");
 		lblOakGrove.setBounds(16, 163, 76, 16);
-		contentPane.add(lblOakGrove);
+		mbtaMapPanel.add(lblOakGrove);
 		
 		JLabel lblMaldenCenter = new JLabel("Malden Center");
 		lblMaldenCenter.setBounds(58, 191, 103, 16);
-		contentPane.add(lblMaldenCenter);
+		mbtaMapPanel.add(lblMaldenCenter);
 		
 		JLabel lblWellington = new JLabel("Wellington");
 		lblWellington.setBounds(122, 163, 76, 16);
-		contentPane.add(lblWellington);
+		mbtaMapPanel.add(lblWellington);
 		
 		JLabel lblSullivanSquare = new JLabel("Sullivan Square");
 		lblSullivanSquare.setBounds(167, 191, 95, 16);
-		contentPane.add(lblSullivanSquare);
+		mbtaMapPanel.add(lblSullivanSquare);
 		
 		JLabel lblCommunityCollege = new JLabel("Community College");
 		lblCommunityCollege.setBounds(202, 163, 134, 16);
-		contentPane.add(lblCommunityCollege);
+		mbtaMapPanel.add(lblCommunityCollege);
 		
 		JLabel lblNorthStation = new JLabel("North Station");
 		lblNorthStation.setBounds(273, 191, 96, 16);
-		contentPane.add(lblNorthStation);
+		mbtaMapPanel.add(lblNorthStation);
 		
 		JLabel lblHaymarket = new JLabel("Haymarket");
 		lblHaymarket.setBounds(339, 163, 69, 16);
-		contentPane.add(lblHaymarket);
+		mbtaMapPanel.add(lblHaymarket);
 		
 		JLabel lblStateSt = new JLabel("State St");
 		lblStateSt.setBounds(392, 191, 61, 16);
-		contentPane.add(lblStateSt);
+		mbtaMapPanel.add(lblStateSt);
 		
 		JLabel lblDowntownCrossing = new JLabel("Downtown Crossing");
 		lblDowntownCrossing.setBounds(420, 163, 135, 16);
-		contentPane.add(lblDowntownCrossing);
+		mbtaMapPanel.add(lblDowntownCrossing);
 		
 		JLabel lblChinatown = new JLabel("Chinatown");
 		lblChinatown.setBounds(489, 191, 85, 16);
-		contentPane.add(lblChinatown);
+		mbtaMapPanel.add(lblChinatown);
 		
 		JLabel lblTufts = new JLabel("Tufts");
 		lblTufts.setBounds(554, 163, 61, 16);
-		contentPane.add(lblTufts);
+		mbtaMapPanel.add(lblTufts);
 		
 		JLabel lblBackBay = new JLabel("Back Bay");
 		lblBackBay.setBounds(602, 191, 61, 16);
-		contentPane.add(lblBackBay);
+		mbtaMapPanel.add(lblBackBay);
 		
 		JLabel lblMassAve = new JLabel("Mass Ave");
 		lblMassAve.setBounds(639, 163, 61, 16);
-		contentPane.add(lblMassAve);
+		mbtaMapPanel.add(lblMassAve);
 		
 		JLabel lblRuggles = new JLabel("Ruggles");
 		lblRuggles.setBounds(701, 191, 61, 16);
-		contentPane.add(lblRuggles);
+		mbtaMapPanel.add(lblRuggles);
 		
 		JLabel lblRoxburyCrossing = new JLabel("Roxbury Crossing");
 		lblRoxburyCrossing.setBounds(728, 163, 134, 16);
-		contentPane.add(lblRoxburyCrossing);
+		mbtaMapPanel.add(lblRoxburyCrossing);
 		
 		JLabel lblJacksonSquare = new JLabel("Jackson Square");
 		lblJacksonSquare.setBounds(778, 191, 112, 16);
-		contentPane.add(lblJacksonSquare);
+		mbtaMapPanel.add(lblJacksonSquare);
 		
 		JLabel lblStonyBrook = new JLabel("Stony Brook");
 		lblStonyBrook.setBounds(856, 163, 76, 16);
-		contentPane.add(lblStonyBrook);
+		mbtaMapPanel.add(lblStonyBrook);
 		
 		JLabel lblGreenSt = new JLabel("Green St");
 		lblGreenSt.setBounds(897, 191, 61, 16);
-		contentPane.add(lblGreenSt);
+		mbtaMapPanel.add(lblGreenSt);
 		
 		JLabel lblForestHills = new JLabel("Forest Hills");
 		lblForestHills.setBounds(947, 163, 86, 16);
-		contentPane.add(lblForestHills);
+		mbtaMapPanel.add(lblForestHills);
 		
 		// First red line stop
 		
-		Canvas redLineStart = new Canvas();
-		redLineStart.setBounds(14, 295, 34, 32);
-		redLineStart.setBackground(Color.WHITE);
-		contentPane.add(redLineStart);
+		Station alewife = new Station("Alewife");
+		alewife.setBounds(14, 295, 34, 32);
+		mbtaMapPanel.add(alewife);
 		
-		Canvas canvas_58 = new Canvas();
-		canvas_58.setBounds(62, 295, 34, 32);
-		canvas_58.setBackground(Color.WHITE);
-		contentPane.add(canvas_58);
+		Station davis = new Station("Davis");
+		davis.setBounds(62, 295, 34, 32);
+		mbtaMapPanel.add(davis);
 		
-		Canvas canvas_59 = new Canvas();
-		canvas_59.setBounds(110, 295, 34, 32);
-		canvas_59.setBackground(Color.WHITE);
-		contentPane.add(canvas_59);
+		Station porter = new Station("Porter");
+		porter.setBounds(110, 295, 34, 32);
+		mbtaMapPanel.add(porter);
 		
-		Canvas canvas_60 = new Canvas();
-		canvas_60.setBounds(158, 295, 34, 32);
-		canvas_60.setBackground(Color.WHITE);
-		contentPane.add(canvas_60);
+		Station harvard = new Station("Harvard");
+		harvard.setBounds(158, 295, 34, 32);
+		mbtaMapPanel.add(harvard);
 		
-		Canvas canvas_61 = new Canvas();
-		canvas_61.setBounds(206, 295, 34, 32);
-		canvas_61.setBackground(Color.WHITE);
-		contentPane.add(canvas_61);
+		Station central = new Station("Central");
+		central.setBounds(206, 295, 34, 32);
+		mbtaMapPanel.add(central);
 		
-		Canvas canvas_62 = new Canvas();
-		canvas_62.setBounds(254, 295, 34, 32);
-		canvas_62.setBackground(Color.WHITE);
-		contentPane.add(canvas_62);
+		Station kendall = new Station("Kendall");
+		kendall.setBounds(254, 295, 34, 32);
+		mbtaMapPanel.add(kendall);
 		
-		Canvas canvas_63 = new Canvas();
-		canvas_63.setBounds(302, 295, 34, 32);
-		canvas_63.setBackground(Color.WHITE);
-		contentPane.add(canvas_63);
+		Station charles = new Station("Charles");
+		charles.setBounds(302, 295, 34, 32);
+		mbtaMapPanel.add(charles);
 		
-		Canvas canvas_64 = new Canvas();
-		canvas_64.setBounds(350, 295, 34, 32);
-		canvas_64.setBackground(Color.WHITE);
-		contentPane.add(canvas_64);
+		Station parkSt = new Station("Park St");
+		parkSt.setBounds(350, 295, 34, 32);
+		mbtaMapPanel.add(parkSt);
 		
-		Canvas canvas_65 = new Canvas();
-		canvas_65.setBounds(398, 295, 34, 32);
-		canvas_65.setBackground(Color.WHITE);
-		contentPane.add(canvas_65);
+		Station downtownCrossingRed = new Station("Downtown Crossing");
+		downtownCrossingRed.setBounds(398, 295, 34, 32);
+		mbtaMapPanel.add(downtownCrossingRed);
 		
-		Canvas canvas_66 = new Canvas();
-		canvas_66.setBounds(446, 295, 34, 32);
-		canvas_66.setBackground(Color.WHITE);
-		contentPane.add(canvas_66);
+		Station southStation = new Station("South Station");
+		southStation.setBounds(446, 295, 34, 32);
+		mbtaMapPanel.add(southStation);
 		
-		Canvas canvas_67 = new Canvas();
-		canvas_67.setBounds(494, 295, 34, 32);
-		canvas_67.setBackground(Color.WHITE);
-		contentPane.add(canvas_67);
+		Station broadway = new Station("Broadway");
+		broadway.setBounds(494, 295, 34, 32);
+		mbtaMapPanel.add(broadway);
 		
-		Canvas canvas_68 = new Canvas();
-		canvas_68.setBounds(542, 295, 34, 32);
-		canvas_68.setBackground(Color.WHITE);
-		contentPane.add(canvas_68);
+		Station andrew = new Station("Andrew");
+		andrew.setBounds(542, 295, 34, 32);
+		mbtaMapPanel.add(andrew);
 		
-		Canvas canvas_69 = new Canvas();
-		canvas_69.setBounds(590, 295, 34, 32);
-		canvas_69.setBackground(Color.WHITE);
-		contentPane.add(canvas_69);
+		Station jfk = new Station("JFK");
+		jfk.setBounds(590, 295, 34, 32);
+		mbtaMapPanel.add(jfk);
 		
-		Canvas canvas_70 = new Canvas();
-		canvas_70.setBounds(638, 295, 34, 32);
-		canvas_70.setBackground(Color.WHITE);
-		contentPane.add(canvas_70);
+		Station savinHill = new Station("Savin Hill");
+		savinHill.setBounds(638, 295, 34, 32);
+		mbtaMapPanel.add(savinHill);
 		
-		Canvas canvas_71 = new Canvas();
-		canvas_71.setBounds(686, 295, 34, 32);
-		canvas_71.setBackground(Color.WHITE);
-		contentPane.add(canvas_71);
+		Station fieldsCorner = new Station("Fields Corner");
+		fieldsCorner.setBounds(686, 295, 34, 32);
+		mbtaMapPanel.add(fieldsCorner);
 		
-		Canvas canvas_72 = new Canvas();
-		canvas_72.setBounds(734, 295, 34, 32);
-		canvas_72.setBackground(Color.WHITE);
-		contentPane.add(canvas_72);
+		Station shawmut = new Station("Shawmut");
+		shawmut.setBounds(734, 295, 34, 32);
+		mbtaMapPanel.add(shawmut);
 		
-		Canvas canvas_73 = new Canvas();
-		canvas_73.setBounds(782, 295, 34, 32);
-		canvas_73.setBackground(Color.WHITE);
-		contentPane.add(canvas_73);
+		Station ashmont = new Station("Ashmont");
+		ashmont.setBounds(782, 295, 34, 32);
+		mbtaMapPanel.add(ashmont);
 		
-		Canvas canvas_74 = new Canvas();
-		canvas_74.setBounds(830, 295, 34, 32);
-		canvas_74.setBackground(Color.WHITE);
-		contentPane.add(canvas_74);
+		Station northQuincy = new Station("North Quincy");
+		northQuincy.setBounds(830, 295, 34, 32);
+		mbtaMapPanel.add(northQuincy);
 		
-		Canvas canvas_75 = new Canvas();
-		canvas_75.setBounds(878, 295, 34, 32);
-		canvas_75.setBackground(Color.WHITE);
-		contentPane.add(canvas_75);
+		Station wollaston = new Station("Wollaston");
+		wollaston.setBounds(878, 295, 34, 32);
+		mbtaMapPanel.add(wollaston);
 		
-		Canvas canvas_76 = new Canvas();
-		canvas_76.setBounds(926, 295, 34, 32);
-		canvas_76.setBackground(Color.WHITE);
-		contentPane.add(canvas_76);
+		Station quincyCenter = new Station("Quincy Center");
+		quincyCenter.setBounds(926, 295, 34, 32);
+		mbtaMapPanel.add(quincyCenter);
 		
-		Canvas canvas_115 = new Canvas();
-		canvas_115.setBounds(974, 295, 34, 32);
-		canvas_115.setBackground(Color.WHITE);
-		contentPane.add(canvas_115);
+		Station quincyAdams = new Station("Quincy Adams");
+		quincyAdams.setBounds(974, 295, 34, 32);
+		mbtaMapPanel.add(quincyAdams);
 		
-		Canvas redLineEnd = new Canvas();
-		redLineEnd.setBounds(1022, 295, 34, 32);
-		redLineEnd.setBackground(Color.WHITE);
-		contentPane.add(redLineEnd);
+		Station braintree = new Station("Braintree");
+		braintree.setBounds(1022, 295, 34, 32);
+		mbtaMapPanel.add(braintree);
 		
 		// ^ Last red line stop
 		
@@ -862,147 +823,147 @@ public class TrainLocation extends JFrame {
 		
 		Canvas canvas_77 = new Canvas();
 		canvas_77.setBounds(34, 242, 34, 32);
-		contentPane.add(canvas_77);
+		mbtaMapPanel.add(canvas_77);
 		if(red_line_map.get("70061") != null){
 			canvas_77.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_78 = new Canvas();
 		canvas_78.setBounds(88, 242, 34, 32);
-		contentPane.add(canvas_78);
+		mbtaMapPanel.add(canvas_78);
 		if(red_line_map.get("70064") != null){
 			canvas_78.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_79 = new Canvas();
 		canvas_79.setBounds(138, 242, 34, 32);
-		contentPane.add(canvas_79);
+		mbtaMapPanel.add(canvas_79);
 		if(red_line_map.get("70066") != null){
 			canvas_79.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_80 = new Canvas();
 		canvas_80.setBounds(184, 242, 34, 32);
-		contentPane.add(canvas_80);
+		mbtaMapPanel.add(canvas_80);
 		if(red_line_map.get("70068") != null){
 			canvas_80.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_81 = new Canvas();
 		canvas_81.setBounds(231, 242, 34, 32);
-		contentPane.add(canvas_81);
+		mbtaMapPanel.add(canvas_81);
 		if(red_line_map.get("70070") != null){
 			canvas_81.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_82 = new Canvas();
 		canvas_82.setBounds(284, 242, 34, 32);
-		contentPane.add(canvas_82);
+		mbtaMapPanel.add(canvas_82);
 		if(red_line_map.get("70072") != null){
 			canvas_82.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_83 = new Canvas();
 		canvas_83.setBounds(329, 242, 34, 32);
-		contentPane.add(canvas_83);
+		mbtaMapPanel.add(canvas_83);
 		if(red_line_map.get("70074") != null){
 			canvas_83.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_84 = new Canvas();
 		canvas_84.setBounds(377, 242, 34, 32);
-		contentPane.add(canvas_84);
+		mbtaMapPanel.add(canvas_84);
 		if(red_line_map.get("70076") != null){
 			canvas_84.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_85 = new Canvas();
 		canvas_85.setBounds(428, 242, 34, 32);
-		contentPane.add(canvas_85);
+		mbtaMapPanel.add(canvas_85);
 		if(red_line_map.get("70078") != null){
 			canvas_85.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_86 = new Canvas();
 		canvas_86.setBounds(482, 242, 34, 32);
-		contentPane.add(canvas_86);
+		mbtaMapPanel.add(canvas_86);
 		if(red_line_map.get("70080") != null){
 			canvas_86.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_87 = new Canvas();
 		canvas_87.setBounds(529, 242, 34, 32);
-		contentPane.add(canvas_87);
+		mbtaMapPanel.add(canvas_87);
 		if(red_line_map.get("70082") != null){
 			canvas_87.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_88 = new Canvas();
 		canvas_88.setBounds(568, 242, 34, 32);
-		contentPane.add(canvas_88);
+		mbtaMapPanel.add(canvas_88);
 		if(red_line_map.get("70084") != null){
 			canvas_88.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_89 = new Canvas();
 		canvas_89.setBounds(615, 242, 34, 32);
-		contentPane.add(canvas_89);
+		mbtaMapPanel.add(canvas_89);
 		if(red_line_map.get("70086") != null){
 			canvas_89.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_90 = new Canvas();
 		canvas_90.setBounds(663, 242, 34, 32);
-		contentPane.add(canvas_90);
+		mbtaMapPanel.add(canvas_90);
 		if(red_line_map.get("70088") != null){
 			canvas_90.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_91 = new Canvas();
 		canvas_91.setBounds(713, 242, 34, 32);
-		contentPane.add(canvas_91);
+		mbtaMapPanel.add(canvas_91);
 		if(red_line_map.get("70090") != null){
 			canvas_91.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_92 = new Canvas();
 		canvas_92.setBounds(763, 242, 34, 32);
-		contentPane.add(canvas_92);
+		mbtaMapPanel.add(canvas_92);
 		if(red_line_map.get("70092") != null){
 			canvas_92.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_93 = new Canvas();
 		canvas_93.setBounds(808, 242, 34, 32);
-		contentPane.add(canvas_93);
+		mbtaMapPanel.add(canvas_93);
 		if(red_line_map.get("70096") != null){
 			canvas_93.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_94 = new Canvas();
 		canvas_94.setBounds(859, 242, 34, 32);
-		contentPane.add(canvas_94);
+		mbtaMapPanel.add(canvas_94);
 		if(red_line_map.get("70098") != null){
 			canvas_94.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_95 = new Canvas();
 		canvas_95.setBounds(909, 242, 34, 32);
-		contentPane.add(canvas_95);
+		mbtaMapPanel.add(canvas_95);
 		if(red_line_map.get("70100") != null){
 			canvas_95.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_117 = new Canvas();
 		canvas_117.setBounds(959, 242, 34, 32);
-		contentPane.add(canvas_117);
+		mbtaMapPanel.add(canvas_117);
 		if(red_line_map.get("70102") != null){
 			canvas_117.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_122 = new Canvas();
 		canvas_122.setBounds(999, 242, 34, 32);
-		contentPane.add(canvas_122);
+		mbtaMapPanel.add(canvas_122);
 		if(red_line_map.get("70104") != null){
 			canvas_122.setBackground(Color.BLACK);
 		}
@@ -1013,77 +974,77 @@ public class TrainLocation extends JFrame {
 		
 		Canvas canvas_96 = new Canvas();
 		canvas_96.setBounds(34, 352, 34, 32);
-		contentPane.add(canvas_96);
+		mbtaMapPanel.add(canvas_96);
 		if(red_line_map.get("70063") != null){
 			canvas_96.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_97 = new Canvas();
 		canvas_97.setBounds(88, 352, 34, 32);
-		contentPane.add(canvas_97);
+		mbtaMapPanel.add(canvas_97);
 		if(red_line_map.get("70065") != null){
 			canvas_97.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_98 = new Canvas();
 		canvas_98.setBounds(138, 352, 34, 32);
-		contentPane.add(canvas_98);
+		mbtaMapPanel.add(canvas_98);
 		if(red_line_map.get("70067") != null){
 			canvas_98.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_99 = new Canvas();
 		canvas_99.setBounds(184, 352, 34, 32);
-		contentPane.add(canvas_99);
+		mbtaMapPanel.add(canvas_99);
 		if(red_line_map.get("70069") != null){
 			canvas_99.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_100 = new Canvas();
 		canvas_100.setBounds(231, 352, 34, 32);
-		contentPane.add(canvas_100);
+		mbtaMapPanel.add(canvas_100);
 		if(red_line_map.get("70071") != null){
 			canvas_100.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_101 = new Canvas();
 		canvas_101.setBounds(284, 352, 34, 32);
-		contentPane.add(canvas_101);
+		mbtaMapPanel.add(canvas_101);
 		if(red_line_map.get("70073") != null){
 			canvas_101.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_102 = new Canvas();
 		canvas_102.setBounds(329, 352, 34, 32);
-		contentPane.add(canvas_102);
+		mbtaMapPanel.add(canvas_102);
 		if(red_line_map.get("70075") != null){
 			canvas_102.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_103 = new Canvas();
 		canvas_103.setBounds(377, 352, 34, 32);
-		contentPane.add(canvas_103);
+		mbtaMapPanel.add(canvas_103);
 		if(red_line_map.get("70077") != null){
 			canvas_103.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_104 = new Canvas();
 		canvas_104.setBounds(428, 352, 34, 32);
-		contentPane.add(canvas_104);
+		mbtaMapPanel.add(canvas_104);
 		if(red_line_map.get("70079") != null){
 			canvas_104.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_105 = new Canvas();
 		canvas_105.setBounds(478, 352, 34, 32);
-		contentPane.add(canvas_105);
+		mbtaMapPanel.add(canvas_105);
 		if(red_line_map.get("70081") != null){
 			canvas_105.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_106 = new Canvas();
 		canvas_106.setBounds(526, 352, 34, 32);
-		contentPane.add(canvas_106);
+		mbtaMapPanel.add(canvas_106);
 		if(red_line_map.get("70083") != null){
 			canvas_106.setBackground(Color.BLACK);
 		}
@@ -1091,7 +1052,7 @@ public class TrainLocation extends JFrame {
 		// JFK split line
 		Canvas canvas_107 = new Canvas();
 		canvas_107.setBounds(568, 352, 34, 32);
-		contentPane.add(canvas_107);
+		mbtaMapPanel.add(canvas_107);
 		if(red_line_map.get("70085") != null || red_line_map.get("70095") != null){
 			canvas_107.setBackground(Color.BLACK);
 		}
@@ -1099,21 +1060,21 @@ public class TrainLocation extends JFrame {
 		// Savin hill
 		Canvas canvas_108 = new Canvas();
 		canvas_108.setBounds(615, 352, 34, 32);
-		contentPane.add(canvas_108);
+		mbtaMapPanel.add(canvas_108);
 		if(red_line_map.get("70087") != null){
 			canvas_108.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_109 = new Canvas();
 		canvas_109.setBounds(663, 352, 34, 32);
-		contentPane.add(canvas_109);
+		mbtaMapPanel.add(canvas_109);
 		if(red_line_map.get("70089") != null){
 			canvas_109.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_110 = new Canvas();
 		canvas_110.setBounds(713, 352, 34, 32);
-		contentPane.add(canvas_110);
+		mbtaMapPanel.add(canvas_110);
 		if(red_line_map.get("70091") != null){
 			canvas_110.setBackground(Color.BLACK);
 		}
@@ -1121,7 +1082,7 @@ public class TrainLocation extends JFrame {
 		// Ashmont
 		Canvas canvas_111 = new Canvas();
 		canvas_111.setBounds(763, 352, 34, 32);
-		contentPane.add(canvas_111);
+		mbtaMapPanel.add(canvas_111);
 		if(red_line_map.get("70093") != null){
 			canvas_111.setBackground(Color.BLACK);
 		}
@@ -1129,28 +1090,28 @@ public class TrainLocation extends JFrame {
 		// North quincy
 		Canvas canvas_112 = new Canvas();
 		canvas_112.setBounds(808, 352, 34, 32);
-		contentPane.add(canvas_112);
+		mbtaMapPanel.add(canvas_112);
 		if(red_line_map.get("70097") != null){
 			canvas_112.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_113 = new Canvas();
 		canvas_113.setBounds(859, 352, 34, 32);
-		contentPane.add(canvas_113);
+		mbtaMapPanel.add(canvas_113);
 		if(red_line_map.get("70099") != null){
 			canvas_113.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_114 = new Canvas();
 		canvas_114.setBounds(909, 352, 34, 32);
-		contentPane.add(canvas_114);
+		mbtaMapPanel.add(canvas_114);
 		if(red_line_map.get("70101") != null){
 			canvas_114.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_116 = new Canvas();
 		canvas_116.setBounds(959, 352, 34, 32);
-		contentPane.add(canvas_116);
+		mbtaMapPanel.add(canvas_116);
 		if(red_line_map.get("70103") != null){
 			canvas_116.setBackground(Color.BLACK);
 		}
@@ -1158,158 +1119,187 @@ public class TrainLocation extends JFrame {
 		// braintree
 		Canvas canvas_121 = new Canvas();
 		canvas_121.setBounds(998, 352, 34, 32);
-		contentPane.add(canvas_121);
+		mbtaMapPanel.add(canvas_121);
 		if(red_line_map.get("70105") != null){
 			canvas_116.setBackground(Color.BLACK);
 		}
 		
-		// ^ last ---> red line train
-		
-		Canvas redLine = new Canvas();
-		redLine.setBounds(10, 290, 1080, 49);
-		redLine.setBackground(Color.RED);
-		contentPane.add(redLine);
-		
-		Canvas blueLine = new Canvas();
-		blueLine.setBounds(10, 470, 1080, 49);
-		blueLine.setBackground(Color.BLUE);
-		contentPane.add(blueLine);
-		
 		JLabel lblAlewife = new JLabel("Alewife");
 		lblAlewife.setBounds(6, 390, 61, 16);
-		contentPane.add(lblAlewife);
+		mbtaMapPanel.add(lblAlewife);
 		
 		JLabel lblDavis = new JLabel("Davis");
 		lblDavis.setBounds(45, 403, 61, 16);
-		contentPane.add(lblDavis);
+		mbtaMapPanel.add(lblDavis);
 		
 		JLabel lblPorter = new JLabel("Porter");
 		lblPorter.setBounds(98, 390, 61, 16);
-		contentPane.add(lblPorter);
+		mbtaMapPanel.add(lblPorter);
 		
 		JLabel lblHarvard = new JLabel("Harvard");
 		lblHarvard.setBounds(138, 403, 61, 16);
-		contentPane.add(lblHarvard);
+		mbtaMapPanel.add(lblHarvard);
 		
 		JLabel lblCentral = new JLabel("Central");
 		lblCentral.setBounds(197, 390, 61, 16);
-		contentPane.add(lblCentral);
+		mbtaMapPanel.add(lblCentral);
 		
 		JLabel lblKendall = new JLabel("Kendall");
 		lblKendall.setBounds(254, 403, 61, 16);
-		contentPane.add(lblKendall);
+		mbtaMapPanel.add(lblKendall);
 		
 		JLabel lblCharles = new JLabel("Charles");
 		lblCharles.setBounds(302, 390, 61, 16);
-		contentPane.add(lblCharles);
+		mbtaMapPanel.add(lblCharles);
 		
 		JLabel lblPark = new JLabel("Park");
 		lblPark.setBounds(350, 403, 61, 16);
-		contentPane.add(lblPark);
+		mbtaMapPanel.add(lblPark);
 		
 		JLabel lblDowntown = new JLabel("Downtown");
 		lblDowntown.setBounds(392, 390, 70, 16);
-		contentPane.add(lblDowntown);
+		mbtaMapPanel.add(lblDowntown);
 		
 		JLabel lblSouthStation = new JLabel("South Station");
 		lblSouthStation.setBounds(443, 403, 87, 16);
-		contentPane.add(lblSouthStation);
+		mbtaMapPanel.add(lblSouthStation);
 		
 		JLabel lblBroadway = new JLabel("Broadway");
 		lblBroadway.setBounds(494, 390, 61, 16);
-		contentPane.add(lblBroadway);
+		mbtaMapPanel.add(lblBroadway);
 		
 		JLabel lblAndrew = new JLabel("Andrew");
 		lblAndrew.setBounds(541, 403, 61, 16);
-		contentPane.add(lblAndrew);
+		mbtaMapPanel.add(lblAndrew);
 		
 		JLabel lblJfk = new JLabel("JFK");
 		lblJfk.setBounds(588, 390, 61, 16);
-		contentPane.add(lblJfk);
+		mbtaMapPanel.add(lblJfk);
 		
 		JLabel lblSavinHill = new JLabel("Savin Hill");
 		lblSavinHill.setBounds(627, 403, 61, 16);
-		contentPane.add(lblSavinHill);
+		mbtaMapPanel.add(lblSavinHill);
 		
 		JLabel lblFieldsCorner = new JLabel("Fields Corner");
 		lblFieldsCorner.setBounds(674, 390, 88, 16);
-		contentPane.add(lblFieldsCorner);
+		mbtaMapPanel.add(lblFieldsCorner);
 		
 		JLabel lblShawmut = new JLabel("Shawmut");
 		lblShawmut.setBounds(728, 403, 61, 16);
-		contentPane.add(lblShawmut);
+		mbtaMapPanel.add(lblShawmut);
 		
 		JLabel lblAshmont = new JLabel("Ashmont");
 		lblAshmont.setBounds(781, 390, 61, 16);
-		contentPane.add(lblAshmont);
+		mbtaMapPanel.add(lblAshmont);
 		
 		JLabel lblNorthQuincy = new JLabel("North Quincy");
 		lblNorthQuincy.setBounds(826, 403, 86, 16);
-		contentPane.add(lblNorthQuincy);
+		mbtaMapPanel.add(lblNorthQuincy);
 		
 		JLabel lblWollaston = new JLabel("Wollaston");
 		lblWollaston.setBounds(871, 390, 75, 16);
-		contentPane.add(lblWollaston);
+		mbtaMapPanel.add(lblWollaston);
 		
 		JLabel lblQuincyC = new JLabel("Quincy Center");
 		lblQuincyC.setBounds(920, 403, 97, 16);
-		contentPane.add(lblQuincyC);
+		mbtaMapPanel.add(lblQuincyC);
 		
 		JLabel lblQuincyA = new JLabel("Quincy Adams");
 		lblQuincyA.setBounds(971, 390, 103, 16);
-		contentPane.add(lblQuincyA);
+		mbtaMapPanel.add(lblQuincyA);
 		
 		JLabel lblBraintree = new JLabel("Braintree");
 		lblBraintree.setBounds(1029, 403, 61, 16);
-		contentPane.add(lblBraintree);
+		mbtaMapPanel.add(lblBraintree);
 		
 		JLabel lblBowdoin = new JLabel("Bowdoin");
 		lblBowdoin.setBounds(52, 566, 61, 16);
-		contentPane.add(lblBowdoin);
+		mbtaMapPanel.add(lblBowdoin);
 		
 		JLabel lblGovernmentCenter = new JLabel("Government Center");
 		lblGovernmentCenter.setBounds(112, 594, 128, 16);
-		contentPane.add(lblGovernmentCenter);
+		mbtaMapPanel.add(lblGovernmentCenter);
 		
 		JLabel lblStateSt_1 = new JLabel("State St");
 		lblStateSt_1.setBounds(219, 566, 61, 16);
-		contentPane.add(lblStateSt_1);
+		mbtaMapPanel.add(lblStateSt_1);
 		
 		JLabel lblAquarium = new JLabel("Aquarium");
 		lblAquarium.setBounds(310, 594, 61, 16);
-		contentPane.add(lblAquarium);
+		mbtaMapPanel.add(lblAquarium);
 		
 		JLabel lblMaverick = new JLabel("Maverick");
 		lblMaverick.setBounds(390, 566, 61, 16);
-		contentPane.add(lblMaverick);
+		mbtaMapPanel.add(lblMaverick);
 		
 		JLabel lblAirport = new JLabel("Airport");
 		lblAirport.setBounds(481, 594, 61, 16);
-		contentPane.add(lblAirport);
+		mbtaMapPanel.add(lblAirport);
 		
 		JLabel lblWoodIsland = new JLabel("Wood Island");
 		lblWoodIsland.setBounds(554, 566, 79, 16);
-		contentPane.add(lblWoodIsland);
+		mbtaMapPanel.add(lblWoodIsland);
 		
 		JLabel lblOrientHeights = new JLabel("Orient Heights");
 		lblOrientHeights.setBounds(639, 594, 96, 16);
-		contentPane.add(lblOrientHeights);
+		mbtaMapPanel.add(lblOrientHeights);
 		
 		JLabel lblSuffolkDowns = new JLabel("Suffolk Downs");
 		lblSuffolkDowns.setBounds(711, 566, 107, 16);
-		contentPane.add(lblSuffolkDowns);
+		mbtaMapPanel.add(lblSuffolkDowns);
 		
 		JLabel lblBeachmont = new JLabel("Beachmont");
 		lblBeachmont.setBounds(808, 594, 74, 16);
-		contentPane.add(lblBeachmont);
+		mbtaMapPanel.add(lblBeachmont);
 		
 		JLabel lblRevereBeach = new JLabel("Revere Beach");
 		lblRevereBeach.setBounds(893, 566, 85, 16);
-		contentPane.add(lblRevereBeach);
+		mbtaMapPanel.add(lblRevereBeach);
 		
 		JLabel lblWonderland = new JLabel("Wonderland");
 		lblWonderland.setBounds(999, 594, 91, 16);
-		contentPane.add(lblWonderland);
+		mbtaMapPanel.add(lblWonderland);
+		
+		JRadioButton rdbtnStationMode = new JRadioButton("Station Mode");
+		rdbtnStationMode.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mbtaMapPanel.setMode(Mode.STATION);
+			}
+		});
+		rdbtnStationMode.setBounds(16, 649, 116, 23); 
+		mbtaMapPanel.add(rdbtnStationMode);
+		
+		JRadioButton rdbtnRouteMode = new JRadioButton("Route Mode");
+		rdbtnRouteMode.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mbtaMapPanel.setMode(Mode.ORDERED_ROUTE);
+			}
+		});
+		rdbtnRouteMode.setBounds(147, 649, 112, 23);
+		mbtaMapPanel.add(rdbtnRouteMode);
+		
+		JRadioButton rdbtnUnorderedRouteMode = new JRadioButton("Unordered Route Mode");
+		rdbtnUnorderedRouteMode.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mbtaMapPanel.setMode(Mode.UNORDERED_ROUTE);
+			}
+		});
+		rdbtnUnorderedRouteMode.setBounds(273, 649, 191, 23);
+		mbtaMapPanel.add(rdbtnUnorderedRouteMode);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnStationMode);
+		group.add(rdbtnRouteMode);
+		group.add(rdbtnUnorderedRouteMode);
+		
+		JButton btnGetDirections = new JButton("Get Directions");
+		btnGetDirections.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(mbtaMapPanel, "Directions! \n "+mbtaMapPanel.getRoute());
+			}
+		});
+		btnGetDirections.setBounds(581, 648, 117, 29);
+		mbtaMapPanel.add(btnGetDirections);
 		
 		
 	}
