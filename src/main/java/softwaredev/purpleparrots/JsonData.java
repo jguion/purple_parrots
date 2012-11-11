@@ -91,7 +91,6 @@ public class JsonData {
         try {
             if (file != null && file.isFile()) {
                 re = new String(Files.readAllBytes(Paths.get(file.toURI())));
-                System.out.println(re);
             }
         } catch (Exception e) {
             log(e);
