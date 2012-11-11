@@ -1,4 +1,9 @@
 *~
 \#*\#
+.\#*
+lib
+project
 target
+.ensime
+.ensime_lucene
 .settings
