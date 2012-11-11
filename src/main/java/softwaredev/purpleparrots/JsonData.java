@@ -137,7 +137,6 @@ public class JsonData {
                 }
             }
         }
-        System.out.println(re);
         return re;
     }
 
