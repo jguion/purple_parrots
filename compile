@@ -1,1 +1,6 @@
-javac -d target -cp $(find src/main/resources/ -name '*.jar' | tr '\n' ':' | sed 's/:$/\n/') $(find ./src/main -name '*.java' | tr '\n' ' ') -Xlint:unchecked
+#!/bin/bash
+
+# For those who use and love zsh:
+# javac -d target -cp $(find src/main/resources/ -name '*.jar' | tr '\n' ':' | sed 's/:$/\n/') $(find ./src/main/java -name '*.java' | tr '\n' ' ') -Xlint:unchecked
+
+javac -d target -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar src/main/java/softwaredev/purpleparrots/*.java src/main/java/softwaredev/purpleparrots/gui/*.java
