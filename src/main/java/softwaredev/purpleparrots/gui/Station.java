@@ -12,14 +12,16 @@ import javax.swing.border.LineBorder;
 
 public class Station extends JPanel implements MouseListener{
 	String name;
+	String line;
 	int x;
 	int y;
 	int width;
 	int height;
 	boolean station_information;
 	
-	public Station(String name) {
+	public Station(String name, String line) {
 		this.name = name;
+		this.line = line;
 		this.setBackground(Color.white);
 		this.setBorder(new LineBorder(Color.BLACK));
 		this.setToolTipText(name);
@@ -37,21 +39,21 @@ public class Station extends JPanel implements MouseListener{
 			case ORDERED_ROUTE:
 				if(this.getBackground() == Color.WHITE){
 					this.setBackground(Color.YELLOW);
-					map.addStation(this.name);
+					map.addStation(this);
 					break;
 				}else{
 					this.setBackground(Color.WHITE);
-					map.removeStation(this.name);
+					map.removeStation(this);
 					break;
 				}
 			case UNORDERED_ROUTE:
 				if(this.getBackground() == Color.WHITE){
 					this.setBackground(Color.YELLOW);
-					map.addStation(this.name);
+					map.addStation(this);
 					break;
 				}else{
 					this.setBackground(Color.WHITE);
-					map.removeStation(this.name);
+					map.removeStation(this);
 					break;
 				}
 		}
@@ -73,6 +75,20 @@ public class Station extends JPanel implements MouseListener{
 		// TODO Auto-generated method stub
 	}
 	
-	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLine() {
+		return line;
+	}
+
+	public void setLine(String line) {
+		this.line = line;
+	}
 	
 }

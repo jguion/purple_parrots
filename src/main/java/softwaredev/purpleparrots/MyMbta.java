@@ -3,15 +3,18 @@ package softwaredev.purpleparrots;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+
+import softwaredev.purpleparrots.gui.MbtaMap;
+import softwaredev.purpleparrots.gui.Mode;
+import softwaredev.purpleparrots.gui.Station;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
 
 public class MyMbta {
 	
+	public static Map tMap = new Map();
 	
 	public static void getCurrentLocationOfAllTrains() throws JsonParseException, JsonMappingException, IOException{
 		ArrayList<Line> lines = new ArrayList();
@@ -59,6 +62,93 @@ public class MyMbta {
 		}
 		
 		return dict;
+	}
+	
+	
+	public static Route getRoute(MbtaMap map){
+		if(map.getMode().equals(Mode.ORDERED_ROUTE)){
+			return getOrderedRoute(map.getRoute());
+		}
+		else if (map.getMode().equals(Mode.UNORDERED_ROUTE)){
+			return getUnorderedRoute(map.getRoute());
+		}
+		else return new Route();
+	}
+	
+	public static Route getOrderedRoute(ArrayList<Station> trip){
+		int numberOfStops = trip.size();
+		Route route = new Route();
+		ArrayList<String> stopsPassed = new ArrayList<String>();
+		for(int i = 0; i < numberOfStops - 1; i++){
+			getAtoB(trip.get(i), trip.get(i+1), route, stopsPassed);
+		}
+		route.setStops(stopsPassed);
+		return route;
+	}
+	
+	public static void getAtoB(Station start, Station next, Route route, ArrayList<String> stopsPassed){
+		Line currentLine = tMap.getLine(start.getLine());
+		Line endLine = tMap.getLine(next.getLine());
+		List<String> stops = currentLine.getStops();
+		if(currentLine.equals(endLine)){
+			int iStart = stops.indexOf(start.getName());
+			int iNext = stops.indexOf(next.getName());
+			if(iStart < iNext){
+				for(int index = iStart; index <= iNext; index++){
+					stopsPassed.add(stops.get(index));
+				}
+			}
+			else{
+				for(int index = iNext; index >= iStart; index--){
+					stopsPassed.add(stops.get(index));
+				}
+			}
+		}
+		else {
+			getRouteBetweenLines(start, currentLine, next, endLine, route, stopsPassed);
+		}
+	}
+	
+	public static void getRouteBetweenLines(Station start, Line current, Station next, Line end, Route route, ArrayList<String> stopsPassed){
+		Station orangeDtnCrossing = new Station("Downtown Crossing", "orange");
+		Station reddtnCrossing = new Station("Downtown Crossing", "red");
+		Station blueStateSt = new Station("State St", "blue");
+		Station orangeStateSt = new Station("State St", "orange");
+		
+		if(current.getName().equalsIgnoreCase("red") && end.getName().equalsIgnoreCase("blue")){
+			getAtoB(start, orangeDtnCrossing, route, stopsPassed);
+			getAtoB(reddtnCrossing, next, route, stopsPassed);
+			route.addTransfers();
+		}
+		if(current.getName().equalsIgnoreCase("blue") && end.getName().equalsIgnoreCase("red")){
+			getAtoB(start, reddtnCrossing, route, stopsPassed);
+			getAtoB(orangeDtnCrossing, next, route, stopsPassed);
+			route.addTransfers();
+		}
+		else if(current.getName().equalsIgnoreCase("orange") && end.getName().equalsIgnoreCase("blue")){
+			getAtoB(start, orangeStateSt, route, stopsPassed);
+			getAtoB(blueStateSt, next, route, stopsPassed);
+			route.addTransfers();
+		}
+		else if(current.getName().equalsIgnoreCase("blue") && end.getName().equalsIgnoreCase("orange")){
+			getAtoB(start, blueStateSt, route, stopsPassed);
+			getAtoB(orangeStateSt, next, route, stopsPassed);
+			route.addTransfers();
+		}
+		else if(current.getName().equalsIgnoreCase("orange") && end.getName().equalsIgnoreCase("red")){
+			getAtoB(start, orangeDtnCrossing, route, stopsPassed);
+			getAtoB(reddtnCrossing, next, route, stopsPassed);
+			route.addTransfers();
+		}
+		else if(start.getName().equalsIgnoreCase("red") && end.getName().equalsIgnoreCase("orange")){
+			getAtoB(start, reddtnCrossing, route, stopsPassed);
+			getAtoB(orangeDtnCrossing, next, route, stopsPassed);
+			route.addTransfers();
+		}
+	}
+	
+	public static Route getUnorderedRoute(List<Station> route){
+		return new Route();
 	}
 	
 	

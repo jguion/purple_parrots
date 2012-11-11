@@ -21,6 +21,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import softwaredev.purpleparrots.MyMbta;
+import softwaredev.purpleparrots.Route;
 import softwaredev.purpleparrots.Train;
 import java.awt.Label;
 import javax.swing.JToolBar;
@@ -36,6 +37,9 @@ import java.awt.event.ActionEvent;
 public class TrainLocation extends JFrame {
 
 	private MbtaMap mbtaMapPanel;
+	private String ORANGE = "orange";
+	private String RED = "red";
+	private String BLUE = "blue";
 
 	/**
 	 * Launch the application.
@@ -71,51 +75,51 @@ public class TrainLocation extends JFrame {
 		
 		// v first blue line stop
 		
-		Station bowdoin = new Station("Bowdoin");
+		Station bowdoin = new Station("Bowdoin", BLUE);
 		bowdoin.setBounds(52, 478, 34, 32);
 		mbtaMapPanel.add(bowdoin);
 		
-		Station governmentCenter = new Station("Government Center");
+		Station governmentCenter = new Station("Government Center", BLUE);
 		governmentCenter.setBounds(138, 478, 34, 32);
 		mbtaMapPanel.add(governmentCenter);
 		
-		Station stateStBlue = new Station("State Street");
+		Station stateStBlue = new Station("State Street", BLUE);
 		stateStBlue.setBounds(224, 478, 34, 32);
 		mbtaMapPanel.add(stateStBlue);
 		
-		Station aquarium = new Station("Aquarium");
+		Station aquarium = new Station("Aquarium", BLUE);
 		aquarium.setBounds(310, 478, 34, 32);
 		mbtaMapPanel.add(aquarium);
 		
-		Station maverick = new Station("Maverick");
+		Station maverick = new Station("Maverick", BLUE);
 		maverick.setBounds(396, 478, 34, 32);
 		mbtaMapPanel.add(maverick);
 		
-		Station airport = new Station("Airport");
+		Station airport = new Station("Airport", BLUE);
 		airport.setBounds(482, 478, 34, 32);
 		mbtaMapPanel.add(airport);
 		
-		Station woodIsland = new Station("Wood Island");
+		Station woodIsland = new Station("Wood Island", BLUE);
 		woodIsland.setBounds(568, 478, 34, 32);
 		mbtaMapPanel.add(woodIsland);
 		
-		Station orientHeight = new Station("Orient Height");
+		Station orientHeight = new Station("Orient Height", BLUE);
 		orientHeight.setBounds(654, 478, 34, 32);
 		mbtaMapPanel.add(orientHeight);
 		
-		Station suffolkDowns = new Station("Suffolk Downs");
+		Station suffolkDowns = new Station("Suffolk Downs", BLUE);
 		suffolkDowns.setBounds(740, 478, 34, 32);
 		mbtaMapPanel.add(suffolkDowns);
 		
-		Station beachmont = new Station("Beachmont");
+		Station beachmont = new Station("Beachmont", BLUE);
 		beachmont.setBounds(826, 478, 34, 32);
 		mbtaMapPanel.add(beachmont);
 		
-		Station revereBeach = new Station("Revere Beach");
+		Station revereBeach = new Station("Revere Beach", BLUE);
 		revereBeach.setBounds(912, 478, 34, 32);
 		mbtaMapPanel.add(revereBeach);
 		
-		Station wonderland = new Station("Wonderland");
+		Station wonderland = new Station("Wonderland", BLUE);
 		wonderland.setBounds(998, 478, 34, 32);
 		mbtaMapPanel.add(wonderland);
 		
@@ -293,80 +297,80 @@ public class TrainLocation extends JFrame {
 		canvas_118.setBackground(new Color(192, 192, 192));
 		mbtaMapPanel.add(canvas_118);
 		
-		Station oakGrove = new Station("Oak Grove");
+		Station oakGrove = new Station("Oak Grove", ORANGE);
 		oakGrove.setBounds(19, 63, 34, 32);
 		mbtaMapPanel.add(oakGrove);
 		
-		Station maldenCenter = new Station("Malden Center");
+		Station maldenCenter = new Station("Malden Center", ORANGE);
 		maldenCenter.setBounds(72, 63, 34, 32);
 		mbtaMapPanel.add(maldenCenter);
 		
-		Station wellington = new Station("Wellington");
+		Station wellington = new Station("Wellington", ORANGE);
 		wellington.setBounds(125, 63, 34, 32);
 		mbtaMapPanel.add(wellington);
 		
-		Station sullivanSquare = new Station("Sullivan Square");
+		Station sullivanSquare = new Station("Sullivan Square", ORANGE);
 		sullivanSquare.setBounds(178, 63, 34, 32);
 		mbtaMapPanel.add(sullivanSquare);
 		
-		Station communityCollege = new Station("Community College");
+		Station communityCollege = new Station("Community College", ORANGE);
 		communityCollege.setBounds(231, 63, 34, 32);
 		mbtaMapPanel.add(communityCollege);
 		
-		Station northStaion = new Station("North Station");
+		Station northStaion = new Station("North Station", ORANGE);
 		northStaion.setBounds(284, 63, 34, 32);
 		mbtaMapPanel.add(northStaion);
 		
-		Station haymarket = new Station("Haymarket");
+		Station haymarket = new Station("Haymarket", ORANGE);
 		haymarket.setBounds(337, 63, 34, 32);
 		mbtaMapPanel.add(haymarket);
 		
-		Station stateSt = new Station("State St");
+		Station stateSt = new Station("State St", ORANGE);
 		stateSt.setBounds(390, 63, 34, 32);
 		mbtaMapPanel.add(stateSt);
 		
-		Station downtownCrossing = new Station("Downtown Crossing");
+		Station downtownCrossing = new Station("Downtown Crossing", ORANGE);
 		downtownCrossing.setBounds(443, 63, 34, 32);
 		mbtaMapPanel.add(downtownCrossing);
 		
-		Station chinatown = new Station("Chinatown");
+		Station chinatown = new Station("Chinatown", ORANGE);
 		chinatown.setBounds(496, 63, 34, 32);
 		mbtaMapPanel.add(chinatown);
 		
-		Station tufts = new Station("Tufts Medical Center");
+		Station tufts = new Station("Tufts Medical Center", ORANGE);
 		tufts.setBounds(549, 63, 34, 32);
 		mbtaMapPanel.add(tufts);
 		
-		Station backBay = new Station("Back Bay");
+		Station backBay = new Station("Back Bay", ORANGE);
 		backBay.setBounds(602, 63, 34, 32);
 		mbtaMapPanel.add(backBay);
 		
-		Station massAve = new Station("Mass Ave");
+		Station massAve = new Station("Mass Ave", ORANGE);
 		massAve.setBounds(655, 63, 34, 32);
 		mbtaMapPanel.add(massAve);
 		
-		Station ruggles = new Station("Ruggles Station");
+		Station ruggles = new Station("Ruggles Station", ORANGE);
 		ruggles.setBounds(708, 63, 34, 32);
 		ruggles.setBackground(Color.WHITE);
 		mbtaMapPanel.add(ruggles);
 		
-		Station roxburyCrossing = new Station("Roxbury Crossing");
+		Station roxburyCrossing = new Station("Roxbury Crossing", ORANGE);
 		roxburyCrossing.setBounds(761, 63, 34, 32);
 		mbtaMapPanel.add(roxburyCrossing);
 		
-		Station jacksonSquare = new Station("Jackson Square");
+		Station jacksonSquare = new Station("Jackson Square", ORANGE);
 		jacksonSquare.setBounds(814, 63, 34, 32);
 		mbtaMapPanel.add(jacksonSquare);
 		
-		Station stonyBrook = new Station("Stony Brook");
+		Station stonyBrook = new Station("Stony Brook", ORANGE);
 		stonyBrook.setBounds(867, 63, 34, 32);
 		mbtaMapPanel.add(stonyBrook);
 		
-		Station greenSt = new Station("Green St");
+		Station greenSt = new Station("Green St", ORANGE);
 		greenSt.setBounds(920, 63, 34, 32);
 		mbtaMapPanel.add(greenSt);
 		
-		Station forestHills = new Station("Forest Hills");
+		Station forestHills = new Station("Forest Hills", ORANGE);
 		forestHills.setBounds(973, 63, 34, 32);
 		mbtaMapPanel.add(forestHills);
 		
@@ -727,91 +731,91 @@ public class TrainLocation extends JFrame {
 		
 		// First red line stop
 		
-		Station alewife = new Station("Alewife");
+		Station alewife = new Station("Alewife", RED);
 		alewife.setBounds(14, 295, 34, 32);
 		mbtaMapPanel.add(alewife);
 		
-		Station davis = new Station("Davis");
+		Station davis = new Station("Davis", RED);
 		davis.setBounds(62, 295, 34, 32);
 		mbtaMapPanel.add(davis);
 		
-		Station porter = new Station("Porter");
+		Station porter = new Station("Porter", RED);
 		porter.setBounds(110, 295, 34, 32);
 		mbtaMapPanel.add(porter);
 		
-		Station harvard = new Station("Harvard");
+		Station harvard = new Station("Harvard", RED);
 		harvard.setBounds(158, 295, 34, 32);
 		mbtaMapPanel.add(harvard);
 		
-		Station central = new Station("Central");
+		Station central = new Station("Central", RED);
 		central.setBounds(206, 295, 34, 32);
 		mbtaMapPanel.add(central);
 		
-		Station kendall = new Station("Kendall");
+		Station kendall = new Station("Kendall", RED);
 		kendall.setBounds(254, 295, 34, 32);
 		mbtaMapPanel.add(kendall);
 		
-		Station charles = new Station("Charles");
+		Station charles = new Station("Charles", RED);
 		charles.setBounds(302, 295, 34, 32);
 		mbtaMapPanel.add(charles);
 		
-		Station parkSt = new Station("Park St");
+		Station parkSt = new Station("Park St", RED);
 		parkSt.setBounds(350, 295, 34, 32);
 		mbtaMapPanel.add(parkSt);
 		
-		Station downtownCrossingRed = new Station("Downtown Crossing");
+		Station downtownCrossingRed = new Station("Downtown Crossing", RED);
 		downtownCrossingRed.setBounds(398, 295, 34, 32);
 		mbtaMapPanel.add(downtownCrossingRed);
 		
-		Station southStation = new Station("South Station");
+		Station southStation = new Station("South Station", RED);
 		southStation.setBounds(446, 295, 34, 32);
 		mbtaMapPanel.add(southStation);
 		
-		Station broadway = new Station("Broadway");
+		Station broadway = new Station("Broadway", RED);
 		broadway.setBounds(494, 295, 34, 32);
 		mbtaMapPanel.add(broadway);
 		
-		Station andrew = new Station("Andrew");
+		Station andrew = new Station("Andrew", RED);
 		andrew.setBounds(542, 295, 34, 32);
 		mbtaMapPanel.add(andrew);
 		
-		Station jfk = new Station("JFK");
+		Station jfk = new Station("JFK", RED);
 		jfk.setBounds(590, 295, 34, 32);
 		mbtaMapPanel.add(jfk);
 		
-		Station savinHill = new Station("Savin Hill");
+		Station savinHill = new Station("Savin Hill", RED);
 		savinHill.setBounds(638, 295, 34, 32);
 		mbtaMapPanel.add(savinHill);
 		
-		Station fieldsCorner = new Station("Fields Corner");
+		Station fieldsCorner = new Station("Fields Corner", RED);
 		fieldsCorner.setBounds(686, 295, 34, 32);
 		mbtaMapPanel.add(fieldsCorner);
 		
-		Station shawmut = new Station("Shawmut");
+		Station shawmut = new Station("Shawmut", RED);
 		shawmut.setBounds(734, 295, 34, 32);
 		mbtaMapPanel.add(shawmut);
 		
-		Station ashmont = new Station("Ashmont");
+		Station ashmont = new Station("Ashmont", RED);
 		ashmont.setBounds(782, 295, 34, 32);
 		mbtaMapPanel.add(ashmont);
 		
-		Station northQuincy = new Station("North Quincy");
+		Station northQuincy = new Station("North Quincy", RED);
 		northQuincy.setBounds(830, 295, 34, 32);
 		mbtaMapPanel.add(northQuincy);
 		
-		Station wollaston = new Station("Wollaston");
+		Station wollaston = new Station("Wollaston", RED);
 		wollaston.setBounds(878, 295, 34, 32);
 		mbtaMapPanel.add(wollaston);
 		
-		Station quincyCenter = new Station("Quincy Center");
+		Station quincyCenter = new Station("Quincy Center", RED);
 		quincyCenter.setBounds(926, 295, 34, 32);
 		mbtaMapPanel.add(quincyCenter);
 		
-		Station quincyAdams = new Station("Quincy Adams");
+		Station quincyAdams = new Station("Quincy Adams", RED);
 		quincyAdams.setBounds(974, 295, 34, 32);
 		mbtaMapPanel.add(quincyAdams);
 		
-		Station braintree = new Station("Braintree");
+		Station braintree = new Station("Braintree", RED);
 		braintree.setBounds(1022, 295, 34, 32);
 		mbtaMapPanel.add(braintree);
 		
@@ -1261,6 +1265,7 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(lblWonderland);
 		
 		JRadioButton rdbtnStationMode = new JRadioButton("Station Mode");
+		rdbtnStationMode.setSelected(true);
 		rdbtnStationMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mbtaMapPanel.setMode(Mode.STATION);
@@ -1295,7 +1300,8 @@ public class TrainLocation extends JFrame {
 		JButton btnGetDirections = new JButton("Get Directions");
 		btnGetDirections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(mbtaMapPanel, "Directions! \n "+mbtaMapPanel.getRoute());
+			    Route route = MyMbta.getRoute(mbtaMapPanel);
+				JOptionPane.showMessageDialog(mbtaMapPanel, "Directions! \n "+ route.getStops());
 			}
 		});
 		btnGetDirections.setBounds(581, 648, 117, 29);

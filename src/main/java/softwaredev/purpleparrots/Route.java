@@ -10,6 +10,10 @@ public class Route {
 	private Integer transfers;
 	private Integer time;
 	
+	public Route(){
+	    this.transfers = 0;
+	};
+	
 	public Route(List<String> trainIds, List<String> stops, List<Integer> schedule, Integer transfers, Integer time) {
 		this.trainIds = trainIds;
 		this.stops = stops;
@@ -48,6 +52,10 @@ public class Route {
 
 	public void setTransfers(Integer transfers) {
 		this.transfers = transfers;
+	}
+	
+	public void addTransfers() {
+		this.transfers++;
 	}
 
 	public Integer getTime() {
