@@ -21,89 +21,89 @@ import javax.swing.GroupLayout.Alignment;
 
 public class MyMBTAGui {
 
-	private JFrame frmHome;
+    private JFrame frmHome;
 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MyMBTAGui window = new MyMBTAGui();
-					window.frmHome.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        MyMBTAGui window = new MyMBTAGui();
+                        window.frmHome.setVisible(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+    }
 
-	/**
-	 * Create the application.
-	 */
-	public MyMBTAGui() {
-		initialize();
-	}
+    /**
+     * Create the application.
+     */
+    public MyMBTAGui() {
+        initialize();
+    }
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmHome = new JFrame();
-		frmHome.getContentPane().setBackground(new Color(148, 0, 211));
-		frmHome.setTitle("MyMBTA");
-		frmHome.setBounds(100, 100, 450, 300);
-		frmHome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JLabel lblMyMbta = new JLabel("My MBTA");
-		lblMyMbta.setForeground(new Color(255, 255, 0));
-		lblMyMbta.setFont(new Font("Dialog", Font.BOLD, 30));
-		
-		JButton currentTrainsBtn = new JButton("View Current Train Locations");
-		currentTrainsBtn.setBackground(new Color(216, 191, 216));
-		currentTrainsBtn.setFont(new Font("Dialog", Font.PLAIN, 11));
-		currentTrainsBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					//frame = new TrainInformation();
-					frmHome = new TrainLocation();
-				} catch (JsonParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (JsonMappingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				frmHome.setVisible(true);
-			}
-		});
-		GroupLayout groupLayout = new GroupLayout(frmHome.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(115)
-							.addComponent(currentTrainsBtn, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(150)
-							.addComponent(lblMyMbta)))
-					.addContainerGap(114, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(12)
-					.addComponent(lblMyMbta)
-					.addGap(59)
-					.addComponent(currentTrainsBtn, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-					.addGap(110))
-		);
-		frmHome.getContentPane().setLayout(groupLayout);
-	}
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() {
+        frmHome = new JFrame();
+        frmHome.getContentPane().setBackground(new Color(148, 0, 211));
+        frmHome.setTitle("MyMBTA");
+        frmHome.setBounds(100, 100, 450, 300);
+        frmHome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JLabel lblMyMbta = new JLabel("My MBTA");
+        lblMyMbta.setForeground(new Color(255, 255, 0));
+        lblMyMbta.setFont(new Font("Dialog", Font.BOLD, 30));
+
+        JButton currentTrainsBtn = new JButton("View Current Train Locations");
+        currentTrainsBtn.setBackground(new Color(216, 191, 216));
+        currentTrainsBtn.setFont(new Font("Dialog", Font.PLAIN, 11));
+        currentTrainsBtn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent arg0) {
+                    try {
+                        //frame = new TrainInformation();
+                        frmHome = new TrainLocation();
+                    } catch (JsonParseException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (JsonMappingException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    frmHome.setVisible(true);
+                }
+            });
+        GroupLayout groupLayout = new GroupLayout(frmHome.getContentPane());
+        groupLayout.setHorizontalGroup(
+                                       groupLayout.createParallelGroup(Alignment.LEADING)
+                                       .addGroup(groupLayout.createSequentialGroup()
+                                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                                                           .addGroup(groupLayout.createSequentialGroup()
+                                                                     .addGap(115)
+                                                                     .addComponent(currentTrainsBtn, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE))
+                                                           .addGroup(groupLayout.createSequentialGroup()
+                                                                     .addGap(150)
+                                                                     .addComponent(lblMyMbta)))
+                                                 .addContainerGap(114, Short.MAX_VALUE))
+                                       );
+        groupLayout.setVerticalGroup(
+                                     groupLayout.createParallelGroup(Alignment.LEADING)
+                                     .addGroup(groupLayout.createSequentialGroup()
+                                               .addGap(12)
+                                               .addComponent(lblMyMbta)
+                                               .addGap(59)
+                                               .addComponent(currentTrainsBtn, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+                                               .addGap(110))
+                                     );
+        frmHome.getContentPane().setLayout(groupLayout);
+    }
 }

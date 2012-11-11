@@ -1,0 +1,19 @@
+This is the MyMBTA prototype, submitted per the requirements listed in assignment five.
+
+We are the Purple Parrots!
+- Leighann Astolfi (astolfi.l@husky.neu.edu)
+- Ryan Bigelow     (bigelow.r@husky.neu.edu)
+- Jeff Guion       (guion.j@husky.neu.edu)
+- Nicholas Labich  (labichn@ccs.neu.edu)
+
+Compilation:
+  From the root of our project (where this file is located), run the following command to compile our program:
+  > javac -d target -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar src/main/java/softwaredev/purpleparrots/*.java src/main/java/softwaredev/purpleparrots/gui/*.java
+  (or just use the compile script, also in the root directory)
+
+Execution:
+  From the root of our project (where this file is located), run the following command to run our GUI prototype:
+  > java -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar:target softwaredev.purpleparrots.gui.MyMBTAGui
+  (or just use the run script, also in the root directory)
+  You should see a purple Swing window pop up (has been tested both locally and X-forwarded from login.ccs.neu.edu).
+  Click the only button on the main window, and you'll see the live locations of the trains on the orange, red, and blue lines.
