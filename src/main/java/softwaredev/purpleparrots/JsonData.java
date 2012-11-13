@@ -115,7 +115,7 @@ public class JsonData {
      */
     private static String getPath(Line line, String root) {
         if (root != null && root.startsWith("http://")) {
-            return root+line.getName()+".json";
+            return root+line.getName().toLowerCase()+".json";
         } else {
             return getPath(line, new File(root));
         }
@@ -137,7 +137,7 @@ public class JsonData {
                 String tmp = "";
                 for (int i=0; i< files.length; i++) {
                     tmp = files[i];
-                    if (tmp.toLowerCase().contains(line.getName()) && tmp.endsWith(".json")) {
+                    if (tmp.toLowerCase().contains(line.getName().toLowerCase()) && tmp.endsWith(".json")) {
                         re = ""+dir.getPath()+"/"+tmp;
                     }
                 }
