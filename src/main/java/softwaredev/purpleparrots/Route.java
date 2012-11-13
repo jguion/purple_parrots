@@ -54,7 +54,7 @@ public class Route {
 		this.transfers = transfers;
 	}
 	
-	public void addTransfers() {
+	public void addTransfer() {
 		this.transfers++;
 	}
 
