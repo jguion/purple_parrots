@@ -29,6 +29,12 @@ public class Map {
 		createMap();
 	}
 	
+	/**
+	 * Creates instances of each station mapped to appropriate line and 
+	 * adds station names to correct Line's list of station names
+	 * 
+	 * @author leighannastolfi
+	 */
 	public void createMap(){
 		
 		ArrayList<String> orangeLineStations = new ArrayList<String>();	
@@ -176,7 +182,14 @@ public class Map {
     }
 	
 	
-	
+	/**
+	 * Returns the Line object for the given color
+	 * 
+	 * @param color - color of the line to look up
+	 * @return Line object
+	 * 
+	 * @author leighannastolfi
+	 */
 	public Line getLine(String color){
 		if(color.equals("Orange")){
 			return orangeLine;
@@ -187,6 +200,13 @@ public class Map {
 		else return blueLine;
 	}
 	
+	/**
+	 * Finds the line for a desired station
+	 * 
+	 * @return Line object
+	 * 
+	 * @author jeffreyguion
+	 */
 	public HashMap<String, ArrayList<String>> getStationToLineMap(){
 	    return this.stationToLine;
 	}
