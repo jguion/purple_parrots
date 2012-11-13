@@ -125,7 +125,7 @@ public class MyMbta {
         if(currentLine.equals(endLine)){
             int iStart = stops.indexOf(start.getName());
             int iNext = stops.indexOf(next.getName());
-            if(currentLine.getName().equalsIgnoreCase("red")){
+            if(currentLine.getName().equalsIgnoreCase("Red")){
                 redLineBranch(stops, start, next, route, stopsPassed);
             }
             else if(iStart < iNext){
@@ -157,15 +157,15 @@ public class MyMbta {
     public static void getRouteBetweenLines(Station start, Line current, Station next, Line end, Route route, ArrayList<String> stopsPassed){
         Station orangeDtnCrossing = new Station("Downtown Crossing", "Orange");
         Station reddtnCrossing = new Station("Downtown Crossing", "Red");
-        Station blueStateSt = new Station("State St", "Blue");
-        Station orangeStateSt = new Station("State St", "Orange");
+        Station blueStateSt = new Station("State Street", "Blue");
+        Station orangeStateSt = new Station("State Street", "Orange");
         
         if(current.getName().equalsIgnoreCase("Red") && end.getName().equalsIgnoreCase("Blue")){
             getAtoB(start, reddtnCrossing, route, stopsPassed);
             getAtoB(orangeDtnCrossing, next, route, stopsPassed);
             route.addTransfer();
         }
-        if(current.getName().equalsIgnoreCase("blue") && end.getName().equalsIgnoreCase("red")){
+        if(current.getName().equalsIgnoreCase("Blue") && end.getName().equalsIgnoreCase("Red")){
             getAtoB(start, orangeDtnCrossing, route, stopsPassed);
             getAtoB(reddtnCrossing, next, route, stopsPassed);
             route.addTransfer();
@@ -201,7 +201,7 @@ public class MyMbta {
      * @param stopsPassed - stops that have been passed on the route
      */
     public static void redLineBranch(List<String> stops, Station start, Station next, Route route, ArrayList<String> stopsPassed){
-        Station jfk = new Station("JFK", "red");
+        Station jfk = new Station("JFK/UMass", "Red");
         int jfkIndex = 12;
         int iStart = stops.indexOf(start.getName());
         int iNext = stops.indexOf(next.getName());

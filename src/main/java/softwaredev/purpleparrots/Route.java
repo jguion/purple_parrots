@@ -30,7 +30,7 @@ public class Route {
         List<Train> blue_trains = JsonData.getTrains(tMap.blueLine, location);
         
         int travelTime = 0;
-        int fastestTime;
+        int fastestTime = -1;
         ArrayList<ArrayList<String>> possibleTrains = new ArrayList<ArrayList<String>>();
         possibleTrains.add(new ArrayList<String>());
         int numTransfers = 0;
@@ -66,6 +66,9 @@ public class Route {
                         Prediction prediction = train.predictions.get(k);
                         if(prediction.stop.equals(currentStation) && prediction.seconds >= travelTime){
                             possibleTrains.get(numTransfers).add(train.id);
+                            if(fastestTime == -1 || prediction.seconds < fastestTime){
+                                fastestTime = prediction.seconds;
+                            }
                             break;
                         }
                     }
@@ -78,6 +81,25 @@ public class Route {
         System.out.println(possibleTrains);
         
         
+	}
+	
+	private int findTimeToStation(List<Train> trains, String destination, String currentStation, int travelTime){
+	    int fastestTime = -1;
+	    for(int j = 0; j<trains.size(); j++){
+            Train train = trains.get(j);
+            if(train.destination.equals(destination)){
+                for(int k = 0; k < train.predictions.size(); k++){
+                    Prediction prediction = train.predictions.get(k);
+                    if(prediction.stop.equals(currentStation) && prediction.seconds >= travelTime){
+                        if(fastestTime == -1 || prediction.seconds < fastestTime){
+                            fastestTime = prediction.seconds;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+	    return fastestTime;
 	}
 	
 	private List<Train> getTrainsForColor(String color, List<Train> orange_trains, List<Train> red_trains, List<Train> blue_trains ){
