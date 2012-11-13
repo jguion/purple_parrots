@@ -115,7 +115,7 @@ public class JsonData {
      */
     private static String getPath(Line line, String root) {
         if (root != null && root.startsWith("http://")) {
-            return root+line.getName()+".json";
+            return root+line.getName().toLowerCase()+".json";
         } else {
             return getPath(line, new File(root));
         }

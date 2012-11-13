@@ -10,7 +10,7 @@ public class MbtaMap extends JPanel{
 	
 	MbtaMap(){
 		this.route = new ArrayList<Station>();
-		this.mode = Mode.STATION;
+		this.mode = Mode.ORDERED_ROUTE;
 	}
 	
 	public ArrayList<Station> getRoute(){

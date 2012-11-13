@@ -37,9 +37,9 @@ import java.awt.event.ActionEvent;
 public class TrainLocation extends JFrame {
 
 	private MbtaMap mbtaMapPanel;
-	private String ORANGE = "orange";
-	private String RED = "red";
-	private String BLUE = "blue";
+	private String ORANGE = "Orange";
+	private String RED = "Red";
+	private String BLUE = "Blue";
 
 	/**
 	 * Launch the application.
@@ -70,7 +70,7 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(mbtaMapPanel);
 		
-		HashMap<String, Train> blue_line_map = MyMbta.getCurrentLocationHash("blue");
+		HashMap<String, Train> blue_line_map = MyMbta.getCurrentLocationHash("Blue", MyMbta.http);
 		mbtaMapPanel.setLayout(null);
 		
 		// v first blue line stop
@@ -309,7 +309,7 @@ public class TrainLocation extends JFrame {
 		wellington.setBounds(125, 63, 34, 32);
 		mbtaMapPanel.add(wellington);
 		
-		Station sullivanSquare = new Station("Sullivan Square", ORANGE);
+		Station sullivanSquare = new Station("Sullivan", ORANGE);
 		sullivanSquare.setBounds(178, 63, 34, 32);
 		mbtaMapPanel.add(sullivanSquare);
 		
@@ -325,7 +325,7 @@ public class TrainLocation extends JFrame {
 		haymarket.setBounds(337, 63, 34, 32);
 		mbtaMapPanel.add(haymarket);
 		
-		Station stateSt = new Station("State St", ORANGE);
+		Station stateSt = new Station("State Street", ORANGE);
 		stateSt.setBounds(390, 63, 34, 32);
 		mbtaMapPanel.add(stateSt);
 		
@@ -337,7 +337,7 @@ public class TrainLocation extends JFrame {
 		chinatown.setBounds(496, 63, 34, 32);
 		mbtaMapPanel.add(chinatown);
 		
-		Station tufts = new Station("Tufts Medical Center", ORANGE);
+		Station tufts = new Station("Tufts Medical", ORANGE);
 		tufts.setBounds(549, 63, 34, 32);
 		mbtaMapPanel.add(tufts);
 		
@@ -349,7 +349,7 @@ public class TrainLocation extends JFrame {
 		massAve.setBounds(655, 63, 34, 32);
 		mbtaMapPanel.add(massAve);
 		
-		Station ruggles = new Station("Ruggles Station", ORANGE);
+		Station ruggles = new Station("Ruggles", ORANGE);
 		ruggles.setBounds(708, 63, 34, 32);
 		ruggles.setBackground(Color.WHITE);
 		mbtaMapPanel.add(ruggles);
@@ -366,7 +366,7 @@ public class TrainLocation extends JFrame {
 		stonyBrook.setBounds(867, 63, 34, 32);
 		mbtaMapPanel.add(stonyBrook);
 		
-		Station greenSt = new Station("Green St", ORANGE);
+		Station greenSt = new Station("Green Street", ORANGE);
 		greenSt.setBounds(920, 63, 34, 32);
 		mbtaMapPanel.add(greenSt);
 		
@@ -380,7 +380,7 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(orangeLineEnd);
 		
 		//ORANGE LINE STOPS 20 - 51
-		HashMap<String, Train> orange_line_map = MyMbta.getCurrentLocationHash("orange");
+		HashMap<String, Train> orange_line_map = MyMbta.getCurrentLocationHash("Orange", MyMbta.http);
 		
 		JPanel FH_OG_panel = new JPanel();
 		FH_OG_panel.setBounds(19, 10, 1041, 38);
@@ -739,27 +739,27 @@ public class TrainLocation extends JFrame {
 		davis.setBounds(62, 295, 34, 32);
 		mbtaMapPanel.add(davis);
 		
-		Station porter = new Station("Porter", RED);
+		Station porter = new Station("Porter Square", RED);
 		porter.setBounds(110, 295, 34, 32);
 		mbtaMapPanel.add(porter);
 		
-		Station harvard = new Station("Harvard", RED);
+		Station harvard = new Station("Harvard Square", RED);
 		harvard.setBounds(158, 295, 34, 32);
 		mbtaMapPanel.add(harvard);
 		
-		Station central = new Station("Central", RED);
+		Station central = new Station("Central Square", RED);
 		central.setBounds(206, 295, 34, 32);
 		mbtaMapPanel.add(central);
 		
-		Station kendall = new Station("Kendall", RED);
+		Station kendall = new Station("Kendall/MIT", RED);
 		kendall.setBounds(254, 295, 34, 32);
 		mbtaMapPanel.add(kendall);
 		
-		Station charles = new Station("Charles", RED);
+		Station charles = new Station("Charles/MGH", RED);
 		charles.setBounds(302, 295, 34, 32);
 		mbtaMapPanel.add(charles);
 		
-		Station parkSt = new Station("Park St", RED);
+		Station parkSt = new Station("Park Street", RED);
 		parkSt.setBounds(350, 295, 34, 32);
 		mbtaMapPanel.add(parkSt);
 		
@@ -779,7 +779,7 @@ public class TrainLocation extends JFrame {
 		andrew.setBounds(542, 295, 34, 32);
 		mbtaMapPanel.add(andrew);
 		
-		Station jfk = new Station("JFK", RED);
+		Station jfk = new Station("JFK/UMass", RED);
 		jfk.setBounds(590, 295, 34, 32);
 		mbtaMapPanel.add(jfk);
 		
@@ -823,7 +823,7 @@ public class TrainLocation extends JFrame {
 		
 		// v First <---- red line train
 		
-		HashMap<String, Train> red_line_map = MyMbta.getCurrentLocationHash("red");
+		HashMap<String, Train> red_line_map = MyMbta.getCurrentLocationHash("Red", MyMbta.http);
 		
 		Canvas canvas_77 = new Canvas();
 		canvas_77.setBounds(34, 242, 34, 32);
@@ -1265,7 +1265,6 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(lblWonderland);
 		
 		JRadioButton rdbtnStationMode = new JRadioButton("Station Mode");
-		rdbtnStationMode.setSelected(true);
 		rdbtnStationMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mbtaMapPanel.setMode(Mode.STATION);
@@ -1275,6 +1274,7 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(rdbtnStationMode);
 		
 		JRadioButton rdbtnRouteMode = new JRadioButton("Route Mode");
+		rdbtnRouteMode.setSelected(true);
 		rdbtnRouteMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mbtaMapPanel.setMode(Mode.ORDERED_ROUTE);

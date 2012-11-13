@@ -14,17 +14,17 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class MyMbta {
 
-    private static String http = "http://developer.mbta.com/lib/rthr/";
-    private static String test = "src/test/resources/mbta-test-data/2012_10_19/";
+    public static String http = "http://developer.mbta.com/lib/rthr/";
+    public static String test = "src/test/resources/mbta-test-data/2012_10_19/";
     private static String def = test;
     public static Map tMap = new Map();
 
     public static void getCurrentLocationOfAllTrains() {
         ArrayList<Line> lines = new ArrayList<Line>();
         ArrayList<String> stations = new ArrayList<String>();
-        Line orange = new Line("orange", stations);
-        Line red = new Line("red", stations);
-        Line blue = new Line("blue", stations);
+        Line orange = new Line("Orange", stations);
+        Line red = new Line("Red", stations);
+        Line blue = new Line("Blue", stations);
         List<Train> orange_trains = JsonData.getTrains(orange, test);
         List<Train> red_trains = JsonData.getTrains(red, test);
         List<Train> blue_trains = JsonData.getTrains(blue, test);
@@ -49,10 +49,10 @@ public class MyMbta {
         return trains.toString();
     }
 
-    public static HashMap<String, Train> getCurrentLocationHash(String color) {
+    public static HashMap<String, Train> getCurrentLocationHash(String color, String location) {
         ArrayList<String> stations = new ArrayList<String>();
         Line line = new Line(color, stations);
-        ArrayList<Train> trains = JsonData.getTrains(line, test);
+        ArrayList<Train> trains = JsonData.getTrains(line, location);
         HashMap<String, Train> dict = new HashMap<String, Train>();
         Train t;
         Prediction p = null;
@@ -94,6 +94,7 @@ public class MyMbta {
             getAtoB(trip.get(i), trip.get(i+1), route, stopsPassed);
         }
         route.setStops(stopsPassed);
+        route.applyJson(tMap, http);
         return route;
     }
     
@@ -121,37 +122,37 @@ public class MyMbta {
     }
     
     public static void getRouteBetweenLines(Station start, Line current, Station next, Line end, Route route, ArrayList<String> stopsPassed){
-        Station orangeDtnCrossing = new Station("Downtown Crossing", "orange");
-        Station reddtnCrossing = new Station("Downtown Crossing", "red");
-        Station blueStateSt = new Station("State St", "blue");
-        Station orangeStateSt = new Station("State St", "orange");
+        Station orangeDtnCrossing = new Station("Downtown Crossing", "Orange");
+        Station reddtnCrossing = new Station("Downtown Crossing", "Red");
+        Station blueStateSt = new Station("State St", "Blue");
+        Station orangeStateSt = new Station("State St", "Orange");
         
-        if(current.getName().equalsIgnoreCase("red") && end.getName().equalsIgnoreCase("blue")){
+        if(current.getName().equalsIgnoreCase("Red") && end.getName().equalsIgnoreCase("Blue")){
             getAtoB(start, orangeDtnCrossing, route, stopsPassed);
             getAtoB(reddtnCrossing, next, route, stopsPassed);
             route.addTransfers();
         }
-        if(current.getName().equalsIgnoreCase("blue") && end.getName().equalsIgnoreCase("red")){
+        if(current.getName().equalsIgnoreCase("Blue") && end.getName().equalsIgnoreCase("Red")){
             getAtoB(start, reddtnCrossing, route, stopsPassed);
             getAtoB(orangeDtnCrossing, next, route, stopsPassed);
             route.addTransfers();
         }
-        else if(current.getName().equalsIgnoreCase("orange") && end.getName().equalsIgnoreCase("blue")){
+        else if(current.getName().equalsIgnoreCase("Orange") && end.getName().equalsIgnoreCase("Blue")){
             getAtoB(start, orangeStateSt, route, stopsPassed);
             getAtoB(blueStateSt, next, route, stopsPassed);
             route.addTransfers();
         }
-        else if(current.getName().equalsIgnoreCase("blue") && end.getName().equalsIgnoreCase("orange")){
+        else if(current.getName().equalsIgnoreCase("Blue") && end.getName().equalsIgnoreCase("Orange")){
             getAtoB(start, blueStateSt, route, stopsPassed);
             getAtoB(orangeStateSt, next, route, stopsPassed);
             route.addTransfers();
         }
-        else if(current.getName().equalsIgnoreCase("orange") && end.getName().equalsIgnoreCase("red")){
+        else if(current.getName().equalsIgnoreCase("Orange") && end.getName().equalsIgnoreCase("Red")){
             getAtoB(start, orangeDtnCrossing, route, stopsPassed);
             getAtoB(reddtnCrossing, next, route, stopsPassed);
             route.addTransfers();
         }
-        else if(start.getName().equalsIgnoreCase("red") && end.getName().equalsIgnoreCase("orange")){
+        else if(start.getName().equalsIgnoreCase("Red") && end.getName().equalsIgnoreCase("Orange")){
             getAtoB(start, reddtnCrossing, route, stopsPassed);
             getAtoB(orangeDtnCrossing, next, route, stopsPassed);
             route.addTransfers();
