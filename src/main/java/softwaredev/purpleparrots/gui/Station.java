@@ -29,6 +29,11 @@ public class Station extends JPanel implements MouseListener{
 		
 	}
 
+	/**
+	 * Click event for a station on the gui. 
+	 * 
+	 * @author jeffreyguion
+	 */
 	public void mouseClicked(MouseEvent arg0) {
 		Mode mode =  ((MbtaMap) this.getParent()).getMode();
 		MbtaMap map = (MbtaMap) this.getParent();

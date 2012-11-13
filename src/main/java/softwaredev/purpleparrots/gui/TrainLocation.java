@@ -58,10 +58,12 @@ public class TrainLocation extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the frame and places all stations in it. 
 	 * @throws IOException 
 	 * @throws JsonMappingException 
 	 * @throws JsonParseException 
+	 * 
+	 * @author jeffreyguion
 	 */
 	public TrainLocation() throws JsonParseException, JsonMappingException, IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -1301,7 +1303,7 @@ public class TrainLocation extends JFrame {
 		btnGetDirections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			    Route route = MyMbta.getRoute(mbtaMapPanel);
-				JOptionPane.showMessageDialog(mbtaMapPanel, "Directions! \n "+ route.getStops());
+				JOptionPane.showMessageDialog(mbtaMapPanel, "Directions! \n "+ route);
 			}
 		});
 		btnGetDirections.setBounds(581, 648, 117, 29);

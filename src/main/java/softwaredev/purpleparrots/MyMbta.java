@@ -43,12 +43,29 @@ public class MyMbta {
         return JsonData.getTrains(line, def);
     }
 
+    /**
+     * Gets incoming trains for a line
+     * 
+     * @param color
+     * @return
+     * 
+     * @author jeffreyguion
+     */
     public static String getCurrentLocationOfTrains(String color) {
         ArrayList<String> stations = new ArrayList<String>();
         List<Train> trains = getTrains(new Line(color, stations));
         return trains.toString();
     }
 
+    /**
+     * Gets the current location of all trains so they can be mapped to a station and direction
+     * 
+     * @param color
+     * @param location
+     * @return
+     * 
+     * @author jeffreyguion
+     */
     public static HashMap<String, Train> getCurrentLocationHash(String color, String location) {
         ArrayList<String> stations = new ArrayList<String>();
         Line line = new Line(color, stations);
@@ -106,7 +123,7 @@ public class MyMbta {
             getAtoB(trip.get(i), trip.get(i+1), route, stopsPassed);
         }
         route.setStops(stopsPassed);
-        route.applyJson(tMap, http);
+        route.applyJsonToOrderedRoute(tMap, test);
         return route;
     }
 
