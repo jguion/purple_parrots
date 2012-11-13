@@ -82,14 +82,14 @@ public class MyMbta {
      * @param map - instance of the GUI map
      * @return Route object, ordered or unordered, based on on the user's selection
      */
-    public static Route getRoute(MbtaMap map) throws Exception{
+    public static Route getRoute(MbtaMap map){
         if(map.getMode().equals(Mode.ORDERED_ROUTE)){
             return getOrderedRoute(map.getRoute());
         }
         else if (map.getMode().equals(Mode.UNORDERED_ROUTE)){
             return getUnorderedRoute(map.getRoute());
         }
-        else throw new Exception("Route mode not selected");
+        else return new Route();//throw new Exception("Route mode not selected");
     }
 
     /**
