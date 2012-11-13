@@ -40,6 +40,7 @@ public class TrainLocation extends JFrame {
 	private String ORANGE = "Orange";
 	private String RED = "Red";
 	private String BLUE = "Blue";
+	private String location;
 
 	/**
 	 * Launch the application.
@@ -66,13 +67,15 @@ public class TrainLocation extends JFrame {
 	 * @author jeffreyguion
 	 */
 	public TrainLocation() throws JsonParseException, JsonMappingException, IOException {
+	    this.location = MyMbta.http;
+	    
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(-19, -12, 1100, 700);
 		mbtaMapPanel = new MbtaMap();
 		mbtaMapPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(mbtaMapPanel);
 		
-		HashMap<String, Train> blue_line_map = MyMbta.getCurrentLocationHash("Blue", MyMbta.http);
+		HashMap<String, Train> blue_line_map = MyMbta.getCurrentLocationHash("Blue", this.location);
 		mbtaMapPanel.setLayout(null);
 		
 		// v first blue line stop
@@ -382,7 +385,7 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(orangeLineEnd);
 		
 		//ORANGE LINE STOPS 20 - 51
-		HashMap<String, Train> orange_line_map = MyMbta.getCurrentLocationHash("Orange", MyMbta.http);
+		HashMap<String, Train> orange_line_map = MyMbta.getCurrentLocationHash("Orange", this.location);
 		
 		JPanel FH_OG_panel = new JPanel();
 		FH_OG_panel.setBounds(19, 10, 1041, 38);
@@ -825,7 +828,7 @@ public class TrainLocation extends JFrame {
 		
 		// v First <---- red line train
 		
-		HashMap<String, Train> red_line_map = MyMbta.getCurrentLocationHash("Red", MyMbta.http);
+		HashMap<String, Train> red_line_map = MyMbta.getCurrentLocationHash("Red", this.location);
 		
 		Canvas canvas_77 = new Canvas();
 		canvas_77.setBounds(34, 242, 34, 32);
@@ -1302,7 +1305,7 @@ public class TrainLocation extends JFrame {
 		JButton btnGetDirections = new JButton("Get Directions");
 		btnGetDirections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			    Route route = MyMbta.getRoute(mbtaMapPanel);
+			    Route route = MyMbta.getRoute(mbtaMapPanel, location);
 				JOptionPane.showMessageDialog(mbtaMapPanel, "Directions! \n "+ route);
 			}
 		});
