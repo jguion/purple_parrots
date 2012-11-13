@@ -180,7 +180,7 @@ public class Route {
                         l.setEndTime(prediction.seconds);
                     }
                 }
-                if(l.startTime > 0){
+                if(l.startTime > 0 && startTime != -1){
                     legs.add(l);
                 }
                 
