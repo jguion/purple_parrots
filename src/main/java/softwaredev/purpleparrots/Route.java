@@ -44,6 +44,7 @@ public class Route {
             String line = "";
             if(currentStation.equals(nextStation)){
                 numTransfers++;
+                possibleTrains.add(new ArrayList<String>());
                 continue;
             }
             if(currentLines.size() == 1){
@@ -136,7 +137,7 @@ public class Route {
 		this.transfers = transfers;
 	}
 	
-	public void addTransfers() {
+	public void addTransfer() {
 		this.transfers++;
 	}
 

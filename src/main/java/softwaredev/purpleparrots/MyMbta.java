@@ -75,7 +75,13 @@ public class MyMbta {
 
         return dict;
     }
-    
+
+    /**
+     * Creates a route object through the stops selected by the user
+     * 
+     * @param map - instance of the GUI map
+     * @return Route object, ordered or unordered, based on on the user's selection
+     */
     public static Route getRoute(MbtaMap map){
         if(map.getMode().equals(Mode.ORDERED_ROUTE)){
             return getOrderedRoute(map.getRoute());
@@ -83,9 +89,15 @@ public class MyMbta {
         else if (map.getMode().equals(Mode.UNORDERED_ROUTE)){
             return getUnorderedRoute(map.getRoute());
         }
-        else return new Route();
+        else return new Route();//throw new Exception("Route mode not selected");
     }
-    
+
+    /**
+     * Creates a route object through the stops in the order selected by the user
+     * 
+     * @param trip - list of stops selected by the user
+     * @return Route object with list of stops passed through in order selected by the user and amount of transfers
+     */
     public static Route getOrderedRoute(ArrayList<Station> trip){
         int numberOfStops = trip.size();
         Route route = new Route();
@@ -97,7 +109,15 @@ public class MyMbta {
         route.applyJson(tMap, http);
         return route;
     }
-    
+
+    /**
+     * Creates the list of stops that are passed through getting from one stop to another
+     * 
+     * @param start - beginning stop
+     * @param next - next stop to get to
+     * @param route - route being created
+     * @param stopsPassed - stops that have been passed on the route
+     */
     public static void getAtoB(Station start, Station next, Route route, ArrayList<String> stopsPassed){
         Line currentLine = tMap.getLine(start.getLine());
         Line endLine = tMap.getLine(next.getLine());
@@ -105,13 +125,16 @@ public class MyMbta {
         if(currentLine.equals(endLine)){
             int iStart = stops.indexOf(start.getName());
             int iNext = stops.indexOf(next.getName());
-            if(iStart < iNext){
+            if(currentLine.getName().equalsIgnoreCase("red")){
+                redLineBranch(stops, start, next, route, stopsPassed);
+            }
+            else if(iStart < iNext){
                 for(int index = iStart; index <= iNext; index++){
                     stopsPassed.add(stops.get(index));
                 }
             }
             else{
-                for(int index = iNext; index >= iStart; index--){
+                for(int index = iStart; index >= iNext; index--){
                     stopsPassed.add(stops.get(index));
                 }
             }
@@ -120,7 +143,17 @@ public class MyMbta {
             getRouteBetweenLines(start, currentLine, next, endLine, route, stopsPassed);
         }
     }
-    
+
+    /**
+     * Handles transfers between lines
+     * 
+     * @param start - beginning stop
+     * @param current - line containing the beginning stop
+     * @param next - next stop to get to
+     * @param end - line containing the next stop
+     * @param route - route being created
+     * @param stopsPassed - stops that have been passed on the route
+     */
     public static void getRouteBetweenLines(Station start, Line current, Station next, Line end, Route route, ArrayList<String> stopsPassed){
         Station orangeDtnCrossing = new Station("Downtown Crossing", "Orange");
         Station reddtnCrossing = new Station("Downtown Crossing", "Red");
@@ -128,37 +161,96 @@ public class MyMbta {
         Station orangeStateSt = new Station("State St", "Orange");
         
         if(current.getName().equalsIgnoreCase("Red") && end.getName().equalsIgnoreCase("Blue")){
-            getAtoB(start, orangeDtnCrossing, route, stopsPassed);
-            getAtoB(reddtnCrossing, next, route, stopsPassed);
-            route.addTransfers();
-        }
-        if(current.getName().equalsIgnoreCase("Blue") && end.getName().equalsIgnoreCase("Red")){
             getAtoB(start, reddtnCrossing, route, stopsPassed);
             getAtoB(orangeDtnCrossing, next, route, stopsPassed);
-            route.addTransfers();
+            route.addTransfer();
+        }
+        if(current.getName().equalsIgnoreCase("blue") && end.getName().equalsIgnoreCase("red")){
+            getAtoB(start, orangeDtnCrossing, route, stopsPassed);
+            getAtoB(reddtnCrossing, next, route, stopsPassed);
+            route.addTransfer();
         }
         else if(current.getName().equalsIgnoreCase("Orange") && end.getName().equalsIgnoreCase("Blue")){
             getAtoB(start, orangeStateSt, route, stopsPassed);
             getAtoB(blueStateSt, next, route, stopsPassed);
-            route.addTransfers();
+            route.addTransfer();
         }
         else if(current.getName().equalsIgnoreCase("Blue") && end.getName().equalsIgnoreCase("Orange")){
             getAtoB(start, blueStateSt, route, stopsPassed);
             getAtoB(orangeStateSt, next, route, stopsPassed);
-            route.addTransfers();
+            route.addTransfer();
         }
         else if(current.getName().equalsIgnoreCase("Orange") && end.getName().equalsIgnoreCase("Red")){
             getAtoB(start, orangeDtnCrossing, route, stopsPassed);
             getAtoB(reddtnCrossing, next, route, stopsPassed);
-            route.addTransfers();
+            route.addTransfer();
         }
         else if(start.getName().equalsIgnoreCase("Red") && end.getName().equalsIgnoreCase("Orange")){
             getAtoB(start, reddtnCrossing, route, stopsPassed);
             getAtoB(orangeDtnCrossing, next, route, stopsPassed);
-            route.addTransfers();
+            route.addTransfer();
         }
     }
-    
+
+    /**
+     * 
+     * @param stops - stops on the Red line
+     * @param start - beginning stop
+     * @param next - next stop to get to
+     * @param route - route being created
+     * @param stopsPassed - stops that have been passed on the route
+     */
+    public static void redLineBranch(List<String> stops, Station start, Station next, Route route, ArrayList<String> stopsPassed){
+        Station jfk = new Station("JFK", "red");
+        int jfkIndex = 12;
+        int iStart = stops.indexOf(start.getName());
+        int iNext = stops.indexOf(next.getName());
+        int startDiff = iStart - jfkIndex;
+        int nextDiff = iNext - jfkIndex;
+        Station branch2 = new Station("North Quincy", "Red");
+        //for when both start and end stops are on the same branch or original branch
+        if((startDiff > 4 && nextDiff > 4) || (startDiff <= 4 && nextDiff <= 4)){
+            if(iStart < iNext){  
+                for(int index = iStart; index <= iNext; index++){
+                    stopsPassed.add(stops.get(index));
+                }
+            }
+            else{
+                for(int index = iStart; index >= iNext; index--){
+                    stopsPassed.add(stops.get(index));
+                }
+            }
+        }
+        //for when start and end stops are on different branches(original, branch 1, branch 2)
+        else {
+            if(startDiff > 4){
+                redLineBranch(stops, start, branch2, route, stopsPassed);
+                if(nextDiff > 0){
+                    stopsPassed.add(stops.get(jfkIndex));
+                    //transfer to train going other direction
+                    route.addTransfer();
+                }
+                redLineBranch(stops, jfk, next, route, stopsPassed);
+            }
+            else if(nextDiff > 4){
+                redLineBranch(stops, start, jfk, route, stopsPassed);
+                if(startDiff > 0){
+                    stopsPassed.add(stops.get(jfkIndex));
+                    //transfer to train going other direction
+                    route.addTransfer();
+                }
+                redLineBranch(stops, branch2, next, route, stopsPassed);
+            }
+        }
+
+    }
+
+    /**
+     * Creates an unordered route object through the stops selected by the user
+     * 
+     * @param trip - list of stops selected by the user
+     * @return Route object with list of stops passed through and amount of transfers
+     */
     public static Route getUnorderedRoute(List<Station> route){
         return new Route();
     }
