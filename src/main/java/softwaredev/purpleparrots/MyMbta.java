@@ -101,12 +101,12 @@ public class MyMbta {
      * 
      * @author leighannastolfi
      */
-    public static Route getRoute(MbtaMap map){
+    public static Route getRoute(MbtaMap map, String location){
         if(map.getMode().equals(Mode.ORDERED_ROUTE)){
-            return getOrderedRoute(map.getRoute());
+            return getOrderedRoute(map.getRoute(), location);
         }
         else if (map.getMode().equals(Mode.UNORDERED_ROUTE)){
-            return getUnorderedRoute(map.getRoute());
+            return getUnorderedRoute(map.getRoute(), location);
         }
         else return new Route();//throw new Exception("Route mode not selected");
     }
@@ -119,15 +119,18 @@ public class MyMbta {
      * 
      * @author leighannastolfi
      */
-    public static Route getOrderedRoute(ArrayList<Station> trip){
+    public static Route getOrderedRoute(ArrayList<Station> trip, String location){
         int numberOfStops = trip.size();
         Route route = new Route();
         ArrayList<String> stopsPassed = new ArrayList<String>();
         for(int i = 0; i < numberOfStops - 1; i++){
             getAtoB(trip.get(i), trip.get(i+1), route, stopsPassed);
+            if(i < numberOfStops - 2){
+                route.addTransfer();
+            }
         }
         route.setStops(stopsPassed);
-        route.applyJsonToOrderedRoute(tMap, test);
+        route.applyJsonToOrderedRoute(tMap, location);
         return route;
     }
 
@@ -279,7 +282,7 @@ public class MyMbta {
      * @return Route object with list of stops passed through and amount of transfers
      */
     //TODO: not yet implemented
-    public static Route getUnorderedRoute(List<Station> route){
+    public static Route getUnorderedRoute(List<Station> route, String location){
         return new Route();
     }
 
