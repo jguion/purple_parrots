@@ -98,6 +98,8 @@ public class MyMbta {
      * 
      * @param map - instance of the GUI map
      * @return Route object, ordered or unordered, based on on the user's selection
+     * 
+     * @author leighannastolfi
      */
     public static Route getRoute(MbtaMap map, String location){
         if(map.getMode().equals(Mode.ORDERED_ROUTE)){
@@ -114,6 +116,8 @@ public class MyMbta {
      * 
      * @param trip - list of stops selected by the user
      * @return Route object with list of stops passed through in order selected by the user and amount of transfers
+     * 
+     * @author leighannastolfi
      */
     public static Route getOrderedRoute(ArrayList<Station> trip, String location){
         int numberOfStops = trip.size();
@@ -137,6 +141,8 @@ public class MyMbta {
      * @param next - next stop to get to
      * @param route - route being created
      * @param stopsPassed - stops that have been passed on the route
+     * 
+     * @author leighannastolfi
      */
     public static void getAtoB(Station start, Station next, Route route, ArrayList<String> stopsPassed){
         Line currentLine = tMap.getLine(start.getLine());
@@ -173,6 +179,8 @@ public class MyMbta {
      * @param end - line containing the next stop
      * @param route - route being created
      * @param stopsPassed - stops that have been passed on the route
+     * 
+     * @author leighannastolfi
      */
     public static void getRouteBetweenLines(Station start, Line current, Station next, Line end, Route route, ArrayList<String> stopsPassed){
         Station orangeDtnCrossing = new Station("Downtown Crossing", "Orange");
@@ -219,6 +227,8 @@ public class MyMbta {
      * @param next - next stop to get to
      * @param route - route being created
      * @param stopsPassed - stops that have been passed on the route
+     * 
+     * @author leighannastolfi
      */
     public static void redLineBranch(List<String> stops, Station start, Station next, Route route, ArrayList<String> stopsPassed){
         Station jfk = new Station("JFK/UMass", "Red");
@@ -271,6 +281,7 @@ public class MyMbta {
      * @param trip - list of stops selected by the user
      * @return Route object with list of stops passed through and amount of transfers
      */
+    //TODO: not yet implemented
     public static Route getUnorderedRoute(List<Station> route, String location){
         return new Route();
     }
