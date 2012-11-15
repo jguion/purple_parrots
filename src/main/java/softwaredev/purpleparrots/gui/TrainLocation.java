@@ -133,77 +133,77 @@ public class TrainLocation extends JFrame {
 		// v first <--- blue line train (yes, I know they're reverse ordered)
 		
 		Canvas canvas_145 = new Canvas();
-		canvas_145.setBounds(98, 425, 34, 32);
+		canvas_145.setBounds(98, 425, 20, 20);
 		mbtaMapPanel.add(canvas_145);
 		if(blue_line_map.get("70037") != null){
 			canvas_145.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_144 = new Canvas();
-		canvas_144.setBounds(184, 425, 34, 32);
+		canvas_144.setBounds(184, 425, 20, 20);
 		mbtaMapPanel.add(canvas_144);
 		if(blue_line_map.get("70039") != null){
 			canvas_144.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_143 = new Canvas();
-		canvas_143.setBounds(273, 425, 34, 32);
+		canvas_143.setBounds(273, 425, 20, 20);
 		mbtaMapPanel.add(canvas_143);
 		if(blue_line_map.get("70041") != null){
 			canvas_143.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_142 = new Canvas();
-		canvas_142.setBounds(360, 425, 34, 32);
+		canvas_142.setBounds(360, 425, 20, 20);
 		mbtaMapPanel.add(canvas_142);
 		if(blue_line_map.get("70043") != null){
 			canvas_142.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_141 = new Canvas();
-		canvas_141.setBounds(443, 425, 34, 32);
+		canvas_141.setBounds(443, 425, 20, 20);
 		mbtaMapPanel.add(canvas_141);
 		if(blue_line_map.get("70045") != null){
 			canvas_141.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_140 = new Canvas();
-		canvas_140.setBounds(529, 425, 34, 32);
+		canvas_140.setBounds(529, 425, 20, 20);
 		mbtaMapPanel.add(canvas_140);
 		if(blue_line_map.get("70047") != null){
 			canvas_140.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_139 = new Canvas();
-		canvas_139.setBounds(615, 425, 34, 32);
+		canvas_139.setBounds(615, 425, 20, 20);
 		mbtaMapPanel.add(canvas_139);
 		if(blue_line_map.get("70049") != null){
 			canvas_139.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_138 = new Canvas();
-		canvas_138.setBounds(701, 425, 34, 32);
+		canvas_138.setBounds(701, 425, 20, 20);
 		mbtaMapPanel.add(canvas_138);
 		if(blue_line_map.get("70051") != null){
 			canvas_138.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_137 = new Canvas();
-		canvas_137.setBounds(784, 425, 34, 32);
+		canvas_137.setBounds(784, 425, 20, 20);
 		mbtaMapPanel.add(canvas_137);
 		if(blue_line_map.get("70053") != null){
 			canvas_137.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_136 = new Canvas();
-		canvas_136.setBounds(873, 425, 34, 32);
+		canvas_136.setBounds(873, 425, 20, 20);
 		mbtaMapPanel.add(canvas_136);
 		if(blue_line_map.get("70055") != null){
 			canvas_136.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_135 = new Canvas();
-		canvas_135.setBounds(959, 425, 34, 32);
+		canvas_135.setBounds(959, 425, 20, 20);
 		mbtaMapPanel.add(canvas_135);
 		if(blue_line_map.get("70057") != null){
 			canvas_135.setBackground(Color.BLACK);
@@ -214,77 +214,77 @@ public class TrainLocation extends JFrame {
 		// v first ---> blue line train
 		
 		Canvas canvas_146 = new Canvas();
-		canvas_146.setBounds(98, 525, 34, 32);
+		canvas_146.setBounds(98, 525, 20, 20);
 		mbtaMapPanel.add(canvas_146);
 		if(blue_line_map.get("70040") != null){
 			canvas_146.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_147 = new Canvas();
-		canvas_147.setBounds(184, 525, 34, 32);
+		canvas_147.setBounds(184, 525, 20, 20);
 		mbtaMapPanel.add(canvas_147);
 		if(blue_line_map.get("70042") != null){
 			canvas_147.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_148 = new Canvas();
-		canvas_148.setBounds(273, 525, 34, 32);
+		canvas_148.setBounds(273, 525, 20, 20);
 		mbtaMapPanel.add(canvas_148);
 		if(blue_line_map.get("70044") != null){
 			canvas_148.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_149 = new Canvas();
-		canvas_149.setBounds(360, 525, 34, 32);
+		canvas_149.setBounds(360, 525, 20, 20);
 		mbtaMapPanel.add(canvas_149);
 		if(blue_line_map.get("70046") != null){
 			canvas_149.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_150 = new Canvas();
-		canvas_150.setBounds(443, 525, 34, 32);
+		canvas_150.setBounds(443, 525, 20, 20);
 		mbtaMapPanel.add(canvas_150);
 		if(blue_line_map.get("70048") != null){
 			canvas_150.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_151 = new Canvas();
-		canvas_151.setBounds(529, 525, 34, 32);
+		canvas_151.setBounds(529, 525, 20, 20);
 		mbtaMapPanel.add(canvas_151);
 		if(blue_line_map.get("70050") != null){
 			canvas_151.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_152 = new Canvas();
-		canvas_152.setBounds(615, 525, 34, 32);
+		canvas_152.setBounds(615, 525, 20, 20);
 		mbtaMapPanel.add(canvas_152);
 		if(blue_line_map.get("70052") != null){
 			canvas_152.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_153 = new Canvas();
-		canvas_153.setBounds(701, 525, 34, 32);
+		canvas_153.setBounds(701, 525, 20, 20);
 		mbtaMapPanel.add(canvas_153);
 		if(blue_line_map.get("70054") != null){
 			canvas_153.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_154 = new Canvas();
-		canvas_154.setBounds(784, 525, 34, 32);
+		canvas_154.setBounds(784, 525, 20, 20);
 		mbtaMapPanel.add(canvas_154);
 		if(blue_line_map.get("70056") != null){
 			canvas_154.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_155 = new Canvas();
-		canvas_155.setBounds(873, 525, 34, 32);
+		canvas_155.setBounds(873, 525, 20, 20);
 		mbtaMapPanel.add(canvas_155);
 		if(blue_line_map.get("70058") != null){
 			canvas_155.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_156 = new Canvas();
-		canvas_156.setBounds(959, 525, 34, 32);
+		canvas_156.setBounds(959, 525, 20, 20);
 		mbtaMapPanel.add(canvas_156);
 		if(blue_line_map.get("70060") != null){
 			canvas_156.setBackground(Color.BLACK);
@@ -393,266 +393,266 @@ public class TrainLocation extends JFrame {
 		FH_OG_panel.setLayout(null);
 		
 		Canvas FH_OG_end = new Canvas();
-		FH_OG_end.setBounds(19, 5, 36, 32);
+		FH_OG_end.setBounds(19, 5, 20, 20);
 		FH_OG_panel.add(FH_OG_end);
 		if(orange_line_map.get("70036") != null){
 			FH_OG_end.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_21 = new Canvas();
-		canvas_21.setBounds(74, 5, 34, 32);
+		canvas_21.setBounds(74, 5, 20, 20);
 		FH_OG_panel.add(canvas_21);
 		if(orange_line_map.get("70035") != null){
 			canvas_21.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_22 = new Canvas();
-		canvas_22.setBounds(127, 5, 34, 32);
+		canvas_22.setBounds(127, 5, 20, 20);
 		FH_OG_panel.add(canvas_22);
 		if(orange_line_map.get("70033") != null){
 			canvas_22.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_23 = new Canvas();
-		canvas_23.setBounds(180, 5, 34, 32);
+		canvas_23.setBounds(180, 5, 20, 20);
 		FH_OG_panel.add(canvas_23);
 		if(orange_line_map.get("70031") != null){
 			canvas_23.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_24 = new Canvas();
-		canvas_24.setBounds(233, 5, 34, 32);
+		canvas_24.setBounds(233, 5, 20, 20);
 		FH_OG_panel.add(canvas_24);
 		if(orange_line_map.get("70029") != null){
 			canvas_24.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_25 = new Canvas();
-		canvas_25.setBounds(286, 5, 34, 32);
+		canvas_25.setBounds(286, 5, 20, 20);
 		FH_OG_panel.add(canvas_25);
 		if(orange_line_map.get("70027") != null){
 			canvas_25.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_26 = new Canvas();
-		canvas_26.setBounds(339, 5, 34, 32);
+		canvas_26.setBounds(339, 5, 20, 20);
 		FH_OG_panel.add(canvas_26);
 		if(orange_line_map.get("70025") != null){
 			canvas_26.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_27 = new Canvas();
-		canvas_27.setBounds(392, 5, 34, 32);
+		canvas_27.setBounds(392, 5, 20, 20);
 		FH_OG_panel.add(canvas_27);
 		if(orange_line_map.get("70023") != null){
 			canvas_27.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_28 = new Canvas();
-		canvas_28.setBounds(445, 5, 34, 32);
+		canvas_28.setBounds(445, 5, 20, 20);
 		FH_OG_panel.add(canvas_28);
 		if(orange_line_map.get("70021") != null){
 			canvas_28.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_29 = new Canvas();
-		canvas_29.setBounds(498, 5, 34, 32);
+		canvas_29.setBounds(498, 5, 20, 20);
 		FH_OG_panel.add(canvas_29);
 		if(orange_line_map.get("70019") != null){
 			canvas_29.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_30 = new Canvas();
-		canvas_30.setBounds(551, 5, 34, 32);
+		canvas_30.setBounds(551, 5, 20, 20);
 		FH_OG_panel.add(canvas_30);
 		if(orange_line_map.get("70017") != null){
 			canvas_30.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_31 = new Canvas();
-		canvas_31.setBounds(604, 5, 34, 32);
+		canvas_31.setBounds(604, 5, 20, 20);
 		FH_OG_panel.add(canvas_31);
 		if(orange_line_map.get("70015") != null){
 			canvas_31.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_32 = new Canvas();
-		canvas_32.setBounds(657, 5, 34, 32);
+		canvas_32.setBounds(657, 5, 20, 20);
 		FH_OG_panel.add(canvas_32);
 		if(orange_line_map.get("70013") != null){
 			canvas_32.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_33 = new Canvas();
-		canvas_33.setBounds(710, 5, 34, 32);
+		canvas_33.setBounds(710, 5, 20, 20);
 		FH_OG_panel.add(canvas_33);
 		if(orange_line_map.get("70011") != null){
 			canvas_33.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_34 = new Canvas();
-		canvas_34.setBounds(763, 5, 34, 32);
+		canvas_34.setBounds(763, 5, 20, 20);
 		FH_OG_panel.add(canvas_34);
 		if(orange_line_map.get("70009") != null){
 			canvas_34.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_35 = new Canvas();
-		canvas_35.setBounds(816, 5, 34, 32);
+		canvas_35.setBounds(816, 5, 20, 20);
 		FH_OG_panel.add(canvas_35);
 		if(orange_line_map.get("70007") != null){
 			canvas_35.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_36 = new Canvas();
-		canvas_36.setBounds(869, 5, 34, 32);
+		canvas_36.setBounds(869, 5, 20, 20);
 		FH_OG_panel.add(canvas_36);
 		if(orange_line_map.get("70005") != null){
 			canvas_36.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_37 = new Canvas();
-		canvas_37.setBounds(922, 5, 34, 32);
+		canvas_37.setBounds(922, 5, 20, 20);
 		FH_OG_panel.add(canvas_37);
 		if(orange_line_map.get("70003") != null){
 			canvas_37.setBackground(Color.BLACK);
 		}
 		
 		Canvas FH_OG_start = new Canvas();
-		FH_OG_start.setBounds(975, 5, 34, 32);
+		FH_OG_start.setBounds(975, 5, 20, 20);
 		FH_OG_panel.add(FH_OG_start);
 		if(orange_line_map.get("70001") != null){
 			FH_OG_start.setBackground(Color.BLACK);
 		}
 		
 		Canvas OG_FH_start = new Canvas();
-		OG_FH_start.setBounds(58, 120, 34, 32);
+		OG_FH_start.setBounds(58, 120, 20, 20);
 		mbtaMapPanel.add(OG_FH_start);
 		if(orange_line_map.get("70036") != null){
 			OG_FH_start.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_53 = new Canvas();
-		canvas_53.setBounds(112, 120, 34, 32);
+		canvas_53.setBounds(112, 120, 20, 20);
 		mbtaMapPanel.add(canvas_53);
 		if(orange_line_map.get("70034") != null){
 			canvas_53.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_54 = new Canvas();
-		canvas_54.setBounds(167, 120, 34, 32);
+		canvas_54.setBounds(167, 120, 20, 20);
 		mbtaMapPanel.add(canvas_54);
 		if(orange_line_map.get("70032") != null){
 			canvas_54.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_39 = new Canvas();
-		canvas_39.setBounds(219, 120, 34, 32);
+		canvas_39.setBounds(219, 120, 20, 20);
 		mbtaMapPanel.add(canvas_39);
 		if(orange_line_map.get("70030") != null){
 			canvas_39.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_40 = new Canvas();
-		canvas_40.setBounds(273, 120, 34, 32);
+		canvas_40.setBounds(273, 120, 20, 20);
 		mbtaMapPanel.add(canvas_40);
 		if(orange_line_map.get("70028") != null){
 			canvas_40.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_41 = new Canvas();
-		canvas_41.setBounds(329, 120, 34, 32);
+		canvas_41.setBounds(329, 120, 20, 20);
 		mbtaMapPanel.add(canvas_41);
 		if(orange_line_map.get("70026") != null){
 			canvas_41.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_42 = new Canvas();
-		canvas_42.setBounds(377, 120, 34, 32);
+		canvas_42.setBounds(377, 120, 20, 20);
 		mbtaMapPanel.add(canvas_42);
 		if(orange_line_map.get("70024") != null){
 			canvas_42.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_43 = new Canvas();
-		canvas_43.setBounds(428, 120, 34, 32);
+		canvas_43.setBounds(428, 120, 20, 20);
 		mbtaMapPanel.add(canvas_43);
 		if(orange_line_map.get("70022") != null){
 			canvas_43.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_44 = new Canvas();
-		canvas_44.setBounds(478, 120, 34, 32);
+		canvas_44.setBounds(478, 120, 20, 20);
 		mbtaMapPanel.add(canvas_44);
 		if(orange_line_map.get("70020") != null){
 			canvas_44.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_45 = new Canvas();
-		canvas_45.setBounds(529, 120, 34, 32);
+		canvas_45.setBounds(529, 120, 20, 20);
 		mbtaMapPanel.add(canvas_45);
 		if(orange_line_map.get("70018") != null){
 			canvas_45.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_46 = new Canvas();
-		canvas_46.setBounds(581, 120, 34, 32);
+		canvas_46.setBounds(581, 120, 20, 20);
 		mbtaMapPanel.add(canvas_46);
 		if(orange_line_map.get("70016") != null){
 			canvas_46.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_47 = new Canvas();
-		canvas_47.setBounds(629, 120, 34, 32);
+		canvas_47.setBounds(629, 120, 20, 20);
 		mbtaMapPanel.add(canvas_47);
 		if(orange_line_map.get("70014") != null){
 			canvas_47.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_48 = new Canvas();
-		canvas_48.setBounds(680, 120, 34, 32);
+		canvas_48.setBounds(680, 120, 20, 20);
 		mbtaMapPanel.add(canvas_48);
 		if(orange_line_map.get("70012") != null){
 			canvas_48.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_49 = new Canvas();
-		canvas_49.setBounds(728, 120, 34, 32);
+		canvas_49.setBounds(728, 120, 20, 20);
 		mbtaMapPanel.add(canvas_49);
 		if(orange_line_map.get("70010") != null){
 			canvas_49.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_50 = new Canvas();
-		canvas_50.setBounds(778, 120, 34, 32);
+		canvas_50.setBounds(778, 120, 20, 20);
 		mbtaMapPanel.add(canvas_50);
 		if(orange_line_map.get("70008") != null){
 			canvas_50.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_51 = new Canvas();
-		canvas_51.setBounds(828, 120, 34, 32);
+		canvas_51.setBounds(828, 120, 20, 20);
 		mbtaMapPanel.add(canvas_51);
 		if(orange_line_map.get("70006") != null){
 			canvas_51.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_55 = new Canvas();
-		canvas_55.setBounds(873, 120, 34, 32);
+		canvas_55.setBounds(873, 120, 20, 20);
 		mbtaMapPanel.add(canvas_55);
 		if(orange_line_map.get("70004") != null){
 			canvas_55.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_56 = new Canvas();
-		canvas_56.setBounds(924, 120, 34, 32);
+		canvas_56.setBounds(924, 120, 20, 20);
 		mbtaMapPanel.add(canvas_56);
 		if(orange_line_map.get("70002") != null){
 			canvas_56.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_57 = new Canvas();
-		canvas_57.setBounds(974, 120, 34, 32);
+		canvas_57.setBounds(974, 120, 20, 20);
 		mbtaMapPanel.add(canvas_57);
 		if(orange_line_map.get("70000") != null){
 			canvas_57.setBackground(Color.BLACK);
@@ -831,147 +831,147 @@ public class TrainLocation extends JFrame {
 		HashMap<String, Train> red_line_map = MyMbta.getCurrentLocationHash("Red", this.location);
 		
 		Canvas canvas_77 = new Canvas();
-		canvas_77.setBounds(34, 242, 34, 32);
+		canvas_77.setBounds(34, 242, 20, 20);
 		mbtaMapPanel.add(canvas_77);
 		if(red_line_map.get("70061") != null){
 			canvas_77.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_78 = new Canvas();
-		canvas_78.setBounds(88, 242, 34, 32);
+		canvas_78.setBounds(88, 242, 20, 20);
 		mbtaMapPanel.add(canvas_78);
 		if(red_line_map.get("70064") != null){
 			canvas_78.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_79 = new Canvas();
-		canvas_79.setBounds(138, 242, 34, 32);
+		canvas_79.setBounds(138, 242, 20, 20);
 		mbtaMapPanel.add(canvas_79);
 		if(red_line_map.get("70066") != null){
 			canvas_79.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_80 = new Canvas();
-		canvas_80.setBounds(184, 242, 34, 32);
+		canvas_80.setBounds(184, 242, 20, 20);
 		mbtaMapPanel.add(canvas_80);
 		if(red_line_map.get("70068") != null){
 			canvas_80.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_81 = new Canvas();
-		canvas_81.setBounds(231, 242, 34, 32);
+		canvas_81.setBounds(231, 242, 20, 20);
 		mbtaMapPanel.add(canvas_81);
 		if(red_line_map.get("70070") != null){
 			canvas_81.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_82 = new Canvas();
-		canvas_82.setBounds(284, 242, 34, 32);
+		canvas_82.setBounds(284, 242, 20, 20);
 		mbtaMapPanel.add(canvas_82);
 		if(red_line_map.get("70072") != null){
 			canvas_82.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_83 = new Canvas();
-		canvas_83.setBounds(329, 242, 34, 32);
+		canvas_83.setBounds(329, 242, 20, 20);
 		mbtaMapPanel.add(canvas_83);
 		if(red_line_map.get("70074") != null){
 			canvas_83.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_84 = new Canvas();
-		canvas_84.setBounds(377, 242, 34, 32);
+		canvas_84.setBounds(377, 242, 20, 20);
 		mbtaMapPanel.add(canvas_84);
 		if(red_line_map.get("70076") != null){
 			canvas_84.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_85 = new Canvas();
-		canvas_85.setBounds(428, 242, 34, 32);
+		canvas_85.setBounds(428, 242, 20, 20);
 		mbtaMapPanel.add(canvas_85);
 		if(red_line_map.get("70078") != null){
 			canvas_85.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_86 = new Canvas();
-		canvas_86.setBounds(482, 242, 34, 32);
+		canvas_86.setBounds(482, 242, 20, 20);
 		mbtaMapPanel.add(canvas_86);
 		if(red_line_map.get("70080") != null){
 			canvas_86.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_87 = new Canvas();
-		canvas_87.setBounds(529, 242, 34, 32);
+		canvas_87.setBounds(529, 242, 20, 20);
 		mbtaMapPanel.add(canvas_87);
 		if(red_line_map.get("70082") != null){
 			canvas_87.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_88 = new Canvas();
-		canvas_88.setBounds(568, 242, 34, 32);
+		canvas_88.setBounds(568, 242, 20, 20);
 		mbtaMapPanel.add(canvas_88);
 		if(red_line_map.get("70084") != null){
 			canvas_88.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_89 = new Canvas();
-		canvas_89.setBounds(615, 242, 34, 32);
+		canvas_89.setBounds(615, 242, 20, 20);
 		mbtaMapPanel.add(canvas_89);
 		if(red_line_map.get("70086") != null){
 			canvas_89.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_90 = new Canvas();
-		canvas_90.setBounds(663, 242, 34, 32);
+		canvas_90.setBounds(663, 242, 20, 20);
 		mbtaMapPanel.add(canvas_90);
 		if(red_line_map.get("70088") != null){
 			canvas_90.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_91 = new Canvas();
-		canvas_91.setBounds(713, 242, 34, 32);
+		canvas_91.setBounds(713, 242, 20, 20);
 		mbtaMapPanel.add(canvas_91);
 		if(red_line_map.get("70090") != null){
 			canvas_91.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_92 = new Canvas();
-		canvas_92.setBounds(763, 242, 34, 32);
+		canvas_92.setBounds(763, 242, 20, 20);
 		mbtaMapPanel.add(canvas_92);
 		if(red_line_map.get("70092") != null){
 			canvas_92.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_93 = new Canvas();
-		canvas_93.setBounds(808, 242, 34, 32);
+		canvas_93.setBounds(808, 242, 20, 20);
 		mbtaMapPanel.add(canvas_93);
 		if(red_line_map.get("70096") != null){
 			canvas_93.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_94 = new Canvas();
-		canvas_94.setBounds(859, 242, 34, 32);
+		canvas_94.setBounds(859, 242, 20, 20);
 		mbtaMapPanel.add(canvas_94);
 		if(red_line_map.get("70098") != null){
 			canvas_94.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_95 = new Canvas();
-		canvas_95.setBounds(909, 242, 34, 32);
+		canvas_95.setBounds(909, 242, 20, 20);
 		mbtaMapPanel.add(canvas_95);
 		if(red_line_map.get("70100") != null){
 			canvas_95.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_117 = new Canvas();
-		canvas_117.setBounds(959, 242, 34, 32);
+		canvas_117.setBounds(959, 242, 20, 20);
 		mbtaMapPanel.add(canvas_117);
 		if(red_line_map.get("70102") != null){
 			canvas_117.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_122 = new Canvas();
-		canvas_122.setBounds(999, 242, 34, 32);
+		canvas_122.setBounds(999, 242, 20, 20);
 		mbtaMapPanel.add(canvas_122);
 		if(red_line_map.get("70104") != null){
 			canvas_122.setBackground(Color.BLACK);
@@ -982,77 +982,77 @@ public class TrainLocation extends JFrame {
 		// v First ---> red line train
 		
 		Canvas canvas_96 = new Canvas();
-		canvas_96.setBounds(34, 352, 34, 32);
+		canvas_96.setBounds(34, 352, 20, 20);
 		mbtaMapPanel.add(canvas_96);
 		if(red_line_map.get("70063") != null){
 			canvas_96.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_97 = new Canvas();
-		canvas_97.setBounds(88, 352, 34, 32);
+		canvas_97.setBounds(88, 352, 20, 20);
 		mbtaMapPanel.add(canvas_97);
 		if(red_line_map.get("70065") != null){
 			canvas_97.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_98 = new Canvas();
-		canvas_98.setBounds(138, 352, 34, 32);
+		canvas_98.setBounds(138, 352, 20, 20);
 		mbtaMapPanel.add(canvas_98);
 		if(red_line_map.get("70067") != null){
 			canvas_98.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_99 = new Canvas();
-		canvas_99.setBounds(184, 352, 34, 32);
+		canvas_99.setBounds(184, 352, 20, 20);
 		mbtaMapPanel.add(canvas_99);
 		if(red_line_map.get("70069") != null){
 			canvas_99.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_100 = new Canvas();
-		canvas_100.setBounds(231, 352, 34, 32);
+		canvas_100.setBounds(231, 352, 20, 20);
 		mbtaMapPanel.add(canvas_100);
 		if(red_line_map.get("70071") != null){
 			canvas_100.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_101 = new Canvas();
-		canvas_101.setBounds(284, 352, 34, 32);
+		canvas_101.setBounds(284, 352, 20, 20);
 		mbtaMapPanel.add(canvas_101);
 		if(red_line_map.get("70073") != null){
 			canvas_101.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_102 = new Canvas();
-		canvas_102.setBounds(329, 352, 34, 32);
+		canvas_102.setBounds(329, 352, 20, 20);
 		mbtaMapPanel.add(canvas_102);
 		if(red_line_map.get("70075") != null){
 			canvas_102.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_103 = new Canvas();
-		canvas_103.setBounds(377, 352, 34, 32);
+		canvas_103.setBounds(377, 352, 20, 20);
 		mbtaMapPanel.add(canvas_103);
 		if(red_line_map.get("70077") != null){
 			canvas_103.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_104 = new Canvas();
-		canvas_104.setBounds(428, 352, 34, 32);
+		canvas_104.setBounds(428, 352, 20, 20);
 		mbtaMapPanel.add(canvas_104);
 		if(red_line_map.get("70079") != null){
 			canvas_104.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_105 = new Canvas();
-		canvas_105.setBounds(478, 352, 34, 32);
+		canvas_105.setBounds(478, 352, 20, 20);
 		mbtaMapPanel.add(canvas_105);
 		if(red_line_map.get("70081") != null){
 			canvas_105.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_106 = new Canvas();
-		canvas_106.setBounds(526, 352, 34, 32);
+		canvas_106.setBounds(526, 352, 20, 20);
 		mbtaMapPanel.add(canvas_106);
 		if(red_line_map.get("70083") != null){
 			canvas_106.setBackground(Color.BLACK);
@@ -1060,7 +1060,7 @@ public class TrainLocation extends JFrame {
 		
 		// JFK split line
 		Canvas canvas_107 = new Canvas();
-		canvas_107.setBounds(568, 352, 34, 32);
+		canvas_107.setBounds(568, 352, 20, 20);
 		mbtaMapPanel.add(canvas_107);
 		if(red_line_map.get("70085") != null || red_line_map.get("70095") != null){
 			canvas_107.setBackground(Color.BLACK);
@@ -1068,21 +1068,21 @@ public class TrainLocation extends JFrame {
 		
 		// Savin hill
 		Canvas canvas_108 = new Canvas();
-		canvas_108.setBounds(615, 352, 34, 32);
+		canvas_108.setBounds(615, 352, 20, 20);
 		mbtaMapPanel.add(canvas_108);
 		if(red_line_map.get("70087") != null){
 			canvas_108.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_109 = new Canvas();
-		canvas_109.setBounds(663, 352, 34, 32);
+		canvas_109.setBounds(663, 352, 20, 20);
 		mbtaMapPanel.add(canvas_109);
 		if(red_line_map.get("70089") != null){
 			canvas_109.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_110 = new Canvas();
-		canvas_110.setBounds(713, 352, 34, 32);
+		canvas_110.setBounds(713, 352, 20, 20);
 		mbtaMapPanel.add(canvas_110);
 		if(red_line_map.get("70091") != null){
 			canvas_110.setBackground(Color.BLACK);
@@ -1090,7 +1090,7 @@ public class TrainLocation extends JFrame {
 		
 		// Ashmont
 		Canvas canvas_111 = new Canvas();
-		canvas_111.setBounds(763, 352, 34, 32);
+		canvas_111.setBounds(763, 352, 20, 20);
 		mbtaMapPanel.add(canvas_111);
 		if(red_line_map.get("70093") != null){
 			canvas_111.setBackground(Color.BLACK);
@@ -1098,28 +1098,28 @@ public class TrainLocation extends JFrame {
 		
 		// North quincy
 		Canvas canvas_112 = new Canvas();
-		canvas_112.setBounds(808, 352, 34, 32);
+		canvas_112.setBounds(808, 352, 20, 20);
 		mbtaMapPanel.add(canvas_112);
 		if(red_line_map.get("70097") != null){
 			canvas_112.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_113 = new Canvas();
-		canvas_113.setBounds(859, 352, 34, 32);
+		canvas_113.setBounds(859, 352, 20, 20);
 		mbtaMapPanel.add(canvas_113);
 		if(red_line_map.get("70099") != null){
 			canvas_113.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_114 = new Canvas();
-		canvas_114.setBounds(909, 352, 34, 32);
+		canvas_114.setBounds(909, 352, 20, 20);
 		mbtaMapPanel.add(canvas_114);
 		if(red_line_map.get("70101") != null){
 			canvas_114.setBackground(Color.BLACK);
 		}
 		
 		Canvas canvas_116 = new Canvas();
-		canvas_116.setBounds(959, 352, 34, 32);
+		canvas_116.setBounds(959, 352, 20, 20);
 		mbtaMapPanel.add(canvas_116);
 		if(red_line_map.get("70103") != null){
 			canvas_116.setBackground(Color.BLACK);
@@ -1127,7 +1127,7 @@ public class TrainLocation extends JFrame {
 		
 		// braintree
 		Canvas canvas_121 = new Canvas();
-		canvas_121.setBounds(998, 352, 34, 32);
+		canvas_121.setBounds(998, 352, 20, 20);
 		mbtaMapPanel.add(canvas_121);
 		if(red_line_map.get("70105") != null){
 			canvas_116.setBackground(Color.BLACK);
