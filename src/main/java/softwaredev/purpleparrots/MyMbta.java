@@ -58,6 +58,54 @@ public class MyMbta {
     }
 
     /**
+     * Gets a filtered list of trains--those which currently have predictions for the given stop ID.
+     * @param trains  the list of trains to filter
+     * @param stopId  the stop ID which the trains must have in their predictions list
+     * @return        the list of trains which include predictions toward the given stop ID
+     * @author        labichn
+     */
+    public static List<Train> getTrainsForStop(List<Train> trains, String stopId) {
+        List<Train> re = new ArrayList<Train>();
+        if (stopId != null && trains != null) {
+            Train tmp = null;
+            for (int i=0; i<trains.size(); i++) {
+                tmp = trains.get(i);
+                if (tmp.hasPredFor(stopId)) re.add(tmp);
+            }
+            re = sort(re, stopId);
+        }
+        return re;
+    }
+
+    /**
+     * Slowly sorts the given list of trains. Calls to getPredFor are safe because
+     * we've already filtered on the existance of a prediction with the given stop ID.
+     * @param trains  the trains to sort
+     * @return        the trains, sorted from earliest arrival to latest to the stop
+     *                denoted by the given stop ID.
+     * @author        labichn
+     */
+    private static List<Train> sort(List<Train> trains, String stopId) {
+        List<Train> re = new ArrayList<Train>();
+        Train lowest, test;
+        while (re.size()<trains.size()) {
+            lowest = null;
+            test = null;
+            for (int i=0; i<trains.size(); i++) {
+                test = trains.get(i);
+                if (!re.contains(test)) {
+                    if (lowest == null
+                     || test.getPredFor(stopId).seconds < lowest.getPredFor(stopId).seconds) {
+                        lowest = test;
+                    }
+                }
+            }
+            re.add(lowest);
+        }
+        return re;
+    }
+
+    /**
      * Gets the current location of all trains so they can be mapped to a station and direction
      * 
      * @param color
@@ -288,7 +336,8 @@ public class MyMbta {
 
 
     public static void main(String [] args) {
-        getCurrentLocationOfAllTrains();
+        //        getCurrentLocationOfAllTrains();
+        System.out.println(getTrainsForStop(getTrains(new Line("Blue", new ArrayList<String>())), "70040").toString());
     }
 
 }
