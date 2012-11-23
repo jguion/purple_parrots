@@ -213,7 +213,7 @@ public class MyMbta {
             getAtoB(reddtnCrossing, next, route, stopsPassed);
             route.addTransfer();
         }
-        else if(start.getName().equalsIgnoreCase("Red") && end.getName().equalsIgnoreCase("Orange")){
+        else if(current.getName().equalsIgnoreCase("Red") && end.getName().equalsIgnoreCase("Orange")){
             getAtoB(start, reddtnCrossing, route, stopsPassed);
             getAtoB(orangeDtnCrossing, next, route, stopsPassed);
             route.addTransfer();
