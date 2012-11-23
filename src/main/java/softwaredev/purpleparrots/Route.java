@@ -17,6 +17,7 @@ public class Route {
 	public Route(){
 	    this.errorText = "";
 	    this.transfers = 0;
+	    this.legs = new ArrayList<Leg>();
 	};
 	
 	public Route(ArrayList<String> trainIds, ArrayList<String> stops, ArrayList<Integer> schedule, Integer transfers, Integer time) {
@@ -61,7 +62,6 @@ public class Route {
         ArrayList<Leg> bestTrains = new ArrayList<Leg>();
         HashMap<String, ArrayList<String>> stationToLine = tMap.getStationToLineMap();
         ArrayList<String> stationsToTravel = this.stops;
-        System.out.println("Number of transfers "+this.transfers);
         //For each transfer
         for(int i = 0; i <= this.transfers; i++){
             String currentStation = stationsToTravel.get(0);
@@ -111,14 +111,10 @@ public class Route {
             }else{
                 bestLeg = findBestLeg(possibleLegs);
             }
-            System.out.println("Best Leg "+bestLeg);
             travelTime = bestLeg.endTime;
             bestTrains.add(bestLeg);
         }
         this.legs = bestTrains;
-        System.out.println(possibleTrains);
-        System.out.println(bestTrains);
-        
         
     }
 	

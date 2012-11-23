@@ -3,7 +3,9 @@ package softwaredev.purpleparrots;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import softwaredev.purpleparrots.gui.MbtaMap;
 import softwaredev.purpleparrots.gui.Mode;
@@ -154,7 +156,7 @@ public class MyMbta {
             return getOrderedRoute(map.getRoute(), location);
         }
         else if (map.getMode().equals(Mode.UNORDERED_ROUTE)){
-            return getUnorderedRoute(map.getRoute(), location);
+            return getUnorderedRouteV1(map.getRoute(), location);
         }
         else return new Route();//throw new Exception("Route mode not selected");
     }
@@ -216,6 +218,22 @@ public class MyMbta {
         else {
             getRouteBetweenLines(start, currentLine, next, endLine, route, stopsPassed);
         }
+    }
+    
+    /**
+     * Same as getAtoB method but returns the list of stops passed
+     * 
+     * @param start
+     * @param next
+     * @param route
+     * @return
+     * 
+     * @author jeffreyguion
+     */
+    public static ArrayList<String> getAtoBList(Station start, Station next, Route route){
+        ArrayList<String> stopsPassed = new ArrayList<String>();
+        getAtoB(start, next, route, stopsPassed);
+        return stopsPassed;
     }
 
     /**
@@ -322,16 +340,96 @@ public class MyMbta {
         }
 
     }
-
+    
     /**
      * Creates an unordered route object through the stops selected by the user
      * 
      * @param trip - list of stops selected by the user
      * @return Route object with list of stops passed through and amount of transfers
+     * 
+     * @author jeffreyguion
      */
-    //TODO: not yet implemented
-    public static Route getUnorderedRoute(List<Station> route, String location){
-        return new Route();
+    public static Route getUnorderedRouteV1(ArrayList<Station> route, String location){
+        int numStops = route.size();
+        HashMap<String,ArrayList<String>> stationToShortestPath = new HashMap<String,ArrayList<String>>();
+        Set<String> visitedStations = new HashSet<String>();
+        Station currentStation = route.get(0);
+        int totalTransfers = 0;
+        //for each stop in the input list mark it as visited
+        for(int i = 0; i < numStops - 1; i++){
+            int transfers = 0;
+            visitedStations.add(currentStation.getName());
+            //for each stop, if it has not already been visited, find the closest stop to it
+            for(int j = 0; j < numStops; j++){
+                Station destinationStation = route.get(j);
+                if(visitedStations.contains(destinationStation.getName())){
+                    continue;
+                }
+                Route r = new Route();
+                ArrayList<String> currentPath = getAtoBList(currentStation, destinationStation, r);
+                ArrayList<String> shortestPath = stationToShortestPath.get(currentStation.getName());
+                if(shortestPath == null || shortestPath.size() > currentPath.size()){
+                    stationToShortestPath.put(currentStation.getName(), currentPath);
+                    transfers = r.getTransfers();
+                }
+            }
+            //Get the last station in a path between stations and mark that as the new current station
+            ArrayList<String> shortestPath = stationToShortestPath.get(currentStation.getName());
+            String lastStation = shortestPath.get(shortestPath.size() - 1);
+            currentStation = findStationWithName(lastStation, route);
+            totalTransfers += transfers + 1;
+        }
+        
+        //Generate the actual list of stops passed from a HashMap
+        Station firstStop = route.get(0);
+        ArrayList<String> stopsPassed = generatePath(firstStop, stationToShortestPath);
+
+        //Create the route
+        Route finalRoute = new Route();
+        finalRoute.setStops(stopsPassed);
+        finalRoute.setTransfers(totalTransfers - 1);
+        finalRoute.applyJsonToOrderedRoute(tMap, location);
+        return finalRoute;
+    }
+    
+    /**
+     * Returns the station object that matches the input name
+     * 
+     * @param name - name of stations
+     * @param stations - list of all station objects
+     * @return
+     * 
+     * @author jeffreyguion
+     */
+    public static Station findStationWithName(String name, ArrayList<Station> stations){
+        for(int i = 0; i < stations.size(); i++){
+            Station station = stations.get(i);
+            if(station.getName() == name){
+                return station;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Generates a list of stops passed from a HashMap of stations to paths given a start station
+     * 
+     * @param startStation - the station to begin at
+     * @param stationToShortestPath - map of stations to path to next station
+     * @return
+     * 
+     * @author jeffreyguion
+     */
+    public static ArrayList<String> generatePath(Station startStation, HashMap<String,ArrayList<String>> stationToShortestPath){
+        ArrayList<String> stops = new ArrayList<String>();
+        ArrayList<String> path = stationToShortestPath.get(startStation.getName());
+        String lastStop = "";
+        while(path != null){
+            stops.addAll(path);
+            lastStop = path.get(path.size() - 1);
+            path = stationToShortestPath.get(lastStop);
+        }
+        return stops;
     }
 
 

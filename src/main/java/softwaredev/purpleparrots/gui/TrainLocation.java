@@ -67,7 +67,7 @@ public class TrainLocation extends JFrame {
 	 * @author jeffreyguion
 	 */
 	public TrainLocation() throws JsonParseException, JsonMappingException, IOException {
-	    this.location = MyMbta.http;
+	    this.location = MyMbta.test;
 	    
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(-19, -12, 1100, 700);
@@ -1311,6 +1311,30 @@ public class TrainLocation extends JFrame {
 		});
 		btnGetDirections.setBounds(581, 648, 117, 29);
 		mbtaMapPanel.add(btnGetDirections);
+		
+		
+		JRadioButton rdbtnTest = new JRadioButton("Test");
+		rdbtnTest.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                location = MyMbta.test;
+            }
+        });
+		rdbtnTest.setSelected(true);
+		rdbtnTest.setBounds(814, 649, 61, 23);
+		mbtaMapPanel.add(rdbtnTest);
+		
+		JRadioButton rdbtnLive = new JRadioButton("Live");
+		rdbtnLive.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                location = MyMbta.http;
+            }
+        });
+		rdbtnLive.setBounds(897, 649, 57, 23);
+		mbtaMapPanel.add(rdbtnLive);
+		
+		ButtonGroup dataGroup = new ButtonGroup();
+        dataGroup.add(rdbtnTest);
+        dataGroup.add(rdbtnLive);
 		
 		
 	}
