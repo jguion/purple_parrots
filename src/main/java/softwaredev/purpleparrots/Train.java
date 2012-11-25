@@ -3,30 +3,31 @@ package softwaredev.purpleparrots;
 import java.util.List;
 
 public class Train {
-    String id;
-    String line;
-    String destination;
-    List<Prediction> predictions;
+    private String id;
+    private String line;
+    private String destination;
+    private List<Prediction> predictions;
 
     public Train(String id, String line, String destination,
                  List<Prediction> predictions) {
-        this.id = id;
+        this.setId(id);
         this.line = line;
-        this.destination = destination;
-        this.predictions = predictions;
+        this.setDestination(destination);
+        this.setPredictions(predictions);
     }
 
     public Train(String id, String line, String destination) {
-        this.id = id;
+        this.setId(id);
         this.line = line;
-        this.destination = destination;
+        this.setDestination(destination);
     }
 
     public String toString(){
-        Prediction next_stop = this.predictions.get(0);
-        return "Train "+this.id+" is on the "+this.line+" line "+
-            next_stop.toString() +
-            " headed to "+this.destination+".\n";
+        Prediction nextStop = this.getPredictions().get(0);
+        if(nextStop.seconds < 0 && this.getPredictions().size() > 1){
+            nextStop = this.getPredictions().get(1);
+        }
+        return "A train will arrive at "+nextStop.stop +" in "+nextStop.seconds+" seconds.";
     }
 
     /**
@@ -38,10 +39,10 @@ public class Train {
      */
     public boolean hasPredFor(String stopId) {
         boolean re = false;
-        if (stopId != null && predictions != null) {
+        if (stopId != null && getPredictions() != null) {
             Prediction tmp = null;
-            for (int i=0; i<predictions.size(); i++) {
-                tmp = predictions.get(i);
+            for (int i=0; i<getPredictions().size(); i++) {
+                tmp = getPredictions().get(i);
                 if (tmp.stopId.equals(stopId)) {
                     re = true;
                     break;
@@ -61,9 +62,9 @@ public class Train {
      */
     public Prediction getPredFor(String stopId) {
         if (stopId != null) {
-            for (int i=0; i< predictions.size(); i++) {
-                if (predictions.get(i).stopId.equals(stopId)) {
-                    return predictions.get(i);
+            for (int i=0; i< getPredictions().size(); i++) {
+                if (getPredictions().get(i).stopId.equals(stopId)) {
+                    return getPredictions().get(i);
                 }
             }
         }
@@ -96,7 +97,31 @@ public class Train {
      */
     public boolean equals(Train that) {
         return that != null
-            && (this.id == null ? that.id == null : this.id.equals(that.id));
+            && (this.getId() == null ? that.getId() == null : this.getId().equals(that.getId()));
+    }
+
+    public List<Prediction> getPredictions() {
+        return predictions;
+    }
+
+    public void setPredictions(List<Prediction> predictions) {
+        this.predictions = predictions;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 }
