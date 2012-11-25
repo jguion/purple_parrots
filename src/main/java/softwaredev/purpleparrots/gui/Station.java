@@ -11,13 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class Station extends JPanel implements MouseListener{
-	String name;
-	String line;
-	int x;
-	int y;
-	int width;
-	int height;
-	boolean station_information;
+	private String name;
+	private String line;
 	
 	public Station(String name, String line) {
 		this.name = name;

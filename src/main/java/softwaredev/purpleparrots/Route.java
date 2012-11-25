@@ -161,15 +161,15 @@ public class Route {
 
 	    for(int i = 0; i < trains.size(); i++){
 	        Train train = trains.get(i);
-            if(train.destination.equals(destination)){
+            if(train.getDestination().equals(destination)){
                 Leg l = new Leg();
-                l.setTrainId(train.id);
+                l.setTrainId(train.getId());
                 l.setStartStation(startStation);
                 l.setEndStation(endStation);
                 l.setLine(line);
                 l.setLineDestination(destination);
-                for(int k = 0; k < train.predictions.size(); k++){
-                    Prediction prediction = train.predictions.get(k);
+                for(int k = 0; k < train.getPredictions().size(); k++){
+                    Prediction prediction = train.getPredictions().get(k);
                     if(prediction.stop.equals(startStation) && prediction.seconds >= startTime){
                         l.setStartTime(prediction.seconds);
                     }else if(prediction.stop.equals(endStation) && prediction.seconds >= l.startTime){
@@ -249,65 +249,6 @@ public class Route {
 	    }
 	    return null;
 	}
-	
-	/** Kept around incase we need it later
-    public void applyJson1(Map tMap, String location){
-        ArrayList<Train> orange_trains = JsonData.getTrains(tMap.orangeLine, location);
-        ArrayList<Train> red_trains = JsonData.getTrains(tMap.redLine, location);
-        ArrayList<Train> blue_trains = JsonData.getTrains(tMap.blueLine, location);
-        
-        int travelTime = 0;
-        int fastestTime = -1;
-        ArrayList<ArrayList<String>> possibleTrains = new ArrayList<ArrayList<String>>();
-        possibleTrains.add(new ArrayList<String>());
-        int numTransfers = 0;
-        String lastDestination = "";
-        for(int i = 0; i < this.stops.size() - 1; i++){
-            HashMap<String, ArrayList<String>> stationToLine = tMap.getStationToLineMap();
-            String currentStation = this.stops.get(i);
-            String nextStation = this.stops.get(i+1);
-            ArrayList<String> currentLines = stationToLine.get(currentStation);
-            ArrayList<String> nextLines = stationToLine.get(nextStation);
-            String line = "";
-            if(currentStation.equals(nextStation)){
-                numTransfers++;
-                possibleTrains.add(new ArrayList<String>());
-                continue;
-            }
-            if(currentLines.size() == 1){
-                line = currentLines.get(0);
-            }else {
-                line = nextLines.get(0);
-            }
-
-            String destination = this.getTrainDestination(currentStation, nextStation, tMap.getLine(line));
-            //you have already created a list of possible trains and are headed in the same direction
-            if(destination.equals(lastDestination)){
-                continue;
-            }
-            ArrayList<Train> trains = getTrainsForColor(line, orange_trains, red_trains, blue_trains);
-            for(int j = 0; j<trains.size(); j++){
-                Train train = trains.get(j);
-                if(train.destination.equals(destination)){
-                    for(int k = 0; k < train.predictions.size(); k++){
-                        Prediction prediction = train.predictions.get(k);
-                        if(prediction.stop.equals(currentStation) && prediction.seconds >= travelTime){
-                            possibleTrains.get(numTransfers).add(train.id);
-                            if(fastestTime == -1 || prediction.seconds < fastestTime){
-                                fastestTime = prediction.seconds;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-            lastDestination = destination;
-
-        }
-        
-        System.out.println(possibleTrains);
-    }
-    */
 
 	public ArrayList<String> getTrainIds() {
 		return trainIds;

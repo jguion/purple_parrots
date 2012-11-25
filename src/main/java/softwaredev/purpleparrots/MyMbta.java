@@ -125,9 +125,9 @@ public class MyMbta {
         Prediction p = null;
         for(int i = 0; i < trains.size(); i++){
             t = trains.get(i);
-            if (t.predictions != null) {
-                for (int j = 0; j < t.predictions.size(); j++) {
-                    p = t.predictions.get(j);
+            if (t.getPredictions() != null) {
+                for (int j = 0; j < t.getPredictions().size(); j++) {
+                    p = t.getPredictions().get(j);
                     if (p.seconds < 0) {
                         p = null;
                     } else {
