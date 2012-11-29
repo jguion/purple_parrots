@@ -343,6 +343,7 @@ public class MyMbta {
     
     /**
      * Creates an unordered route object through the stops selected by the user
+     * It does this by finding the shortest distance between each stop
      * 
      * @param trip - list of stops selected by the user
      * @return Route object with list of stops passed through and amount of transfers
@@ -430,12 +431,6 @@ public class MyMbta {
             path = stationToShortestPath.get(lastStop);
         }
         return stops;
-    }
-
-
-    public static void main(String [] args) {
-        //        getCurrentLocationOfAllTrains();
-        System.out.println(getTrainsForStop(getTrains(new Line("Blue", new ArrayList<String>())), "70040").toString());
     }
 
 }

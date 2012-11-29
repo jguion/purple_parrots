@@ -1,6 +1,7 @@
 package softwaredev.purpleparrots;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -205,8 +206,11 @@ public class Route {
 	   }
 	}
 	
+	
 	/**
-	 * Returns the destination of a train on a line given a start and transfer station
+	 * Returns the destination of a train on a line given a start and transfer station by 
+	 * returning the last stop, the first stop, or Ashmont for the red line case where the line
+	 * breaks.
 	 * 
 	 * @param startStation
 	 * @param transferStation
@@ -216,6 +220,10 @@ public class Route {
 	 */
 	private String getTrainDestination(String startStation, String transferStation, Line line){
         int numStops = line.getStops().size();
+        List<String> redLineIsNotStraight = Arrays.asList("Savin Hill","Fields Corner", "Shawmut", "Ashmont");
+        if(redLineIsNotStraight.contains(transferStation)){
+            return "Ashmont";
+        }
         for(int i = 0; i<numStops - 1 ; i++){
             String currentStop = line.getStops().get(i);            
             if(currentStop == startStation){
