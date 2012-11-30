@@ -973,6 +973,10 @@ public class TrainLocation extends JFrame {
 		dataGroup.add(rdbtnTest);
 		dataGroup.add(rdbtnLive);
 		
+		/**
+		 * @author - ryanbigelow
+		 */
+		
 		final List list = new List();
 		list.setBounds(1100, 50, 214, 550);
 

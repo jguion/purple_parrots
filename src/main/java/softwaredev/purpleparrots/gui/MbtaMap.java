@@ -32,7 +32,10 @@ public class MbtaMap extends JPanel{
 			e.printStackTrace();
 		}
     }
-
+	
+	/**
+	 * @author - ryanbigelow
+	 */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -89,12 +92,18 @@ public class MbtaMap extends JPanel{
         this.timeOfTripIndex = timeOfTripIndex;
     }
     
+    /**
+	 * @author - ryanbigelow
+	 */
 	public void removeLastStation(){
 		if (this.route.size() == 0) {}
 		else 
 			this.route.remove(this.route.size() - 1);
 	}
 	
+	/**
+	 * @author - ryanbigelow
+	 */
 	public void clearScreen(){
 		
 		for(Station s : this.route){
@@ -109,6 +118,9 @@ public class MbtaMap extends JPanel{
 		}
 	}
 	
+	/**
+	 * @author - ryanbigelow
+	 */
 	public void setAllWhite(){
 		for(Station s : this.route){
 			s.setBackground(Color.white);
