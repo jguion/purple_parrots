@@ -467,7 +467,7 @@ public class TrainLocation extends JFrame {
 		orangeLineTrains.add(canvas_36);
 
 		UITrain canvas_37 = new UITrain("70003");
-		canvas_37.setBounds(937, 5, 18, 18);
+		canvas_37.setBounds(959, 37, 18, 18);
 		FH_OG_panel.add(canvas_37);
 		orangeLineTrains.add(canvas_37);
 
@@ -477,97 +477,97 @@ public class TrainLocation extends JFrame {
 		orangeLineTrains.add(FH_OG_start);
 
 		UITrain OG_FH_start = new UITrain("70036");
-		OG_FH_start.setBounds(63, 103, 18, 18);
+		OG_FH_start.setBounds(10, 103, 18, 18);
 		mbtaMapPanel.add(OG_FH_start);
 		orangeLineTrains.add(OG_FH_start);
 
 		UITrain canvas_53 = new UITrain("70034");
-		canvas_53.setBounds(118, 103, 18, 18);
+		canvas_53.setBounds(63, 103, 18, 18);
 		mbtaMapPanel.add(canvas_53);
 		orangeLineTrains.add(canvas_53);
 
 		UITrain canvas_54 = new UITrain("70032");
-		canvas_54.setBounds(173, 103, 18, 18);
+		canvas_54.setBounds(118, 103, 18, 18);
 		mbtaMapPanel.add(canvas_54);
 		orangeLineTrains.add(canvas_54);
 
 		UITrain canvas_39 = new UITrain("70030");
-		canvas_39.setBounds(222, 103, 18, 18);
+		canvas_39.setBounds(173, 103, 18, 18);
 		mbtaMapPanel.add(canvas_39);
 		orangeLineTrains.add(canvas_39);
 
 		UITrain canvas_40 = new UITrain("70028");
-		canvas_40.setBounds(273, 103, 18, 18);
+		canvas_40.setBounds(222, 103, 18, 18);
 		mbtaMapPanel.add(canvas_40);
 		orangeLineTrains.add(canvas_40);
 
 		UITrain canvas_41 = new UITrain("70026");
-		canvas_41.setBounds(329, 103, 18, 18);
+		canvas_41.setBounds(273, 103, 18, 18);
 		mbtaMapPanel.add(canvas_41);
 		orangeLineTrains.add(canvas_41);
 
 		UITrain canvas_42 = new UITrain("70024");
-		canvas_42.setBounds(382, 103, 18, 18);
+		canvas_42.setBounds(329, 103, 18, 18);
 		mbtaMapPanel.add(canvas_42);
 		orangeLineTrains.add(canvas_42);
 
 		UITrain canvas_43 = new UITrain("70022");
-		canvas_43.setBounds(432, 103, 18, 18);
+		canvas_43.setBounds(382, 103, 18, 18);
 		mbtaMapPanel.add(canvas_43);
 		orangeLineTrains.add(canvas_43);
 
 		UITrain canvas_44 = new UITrain("70020");
-		canvas_44.setBounds(485, 103, 18, 18);
+		canvas_44.setBounds(432, 103, 18, 18);
 		mbtaMapPanel.add(canvas_44);
 		orangeLineTrains.add(canvas_44);
 
 		UITrain canvas_45 = new UITrain("70018");
-		canvas_45.setBounds(540, 103, 18, 18);
+		canvas_45.setBounds(485, 103, 18, 18);
 		mbtaMapPanel.add(canvas_45);
 		orangeLineTrains.add(canvas_45);
 
 		UITrain canvas_46 = new UITrain("70016");
-		canvas_46.setBounds(590, 103, 18, 18);
+		canvas_46.setBounds(540, 103, 18, 18);
 		mbtaMapPanel.add(canvas_46);
 		orangeLineTrains.add(canvas_46);
 
 		UITrain canvas_47 = new UITrain("70014");
-		canvas_47.setBounds(643, 103, 18, 18);
+		canvas_47.setBounds(590, 103, 18, 18);
 		mbtaMapPanel.add(canvas_47);
 		orangeLineTrains.add(canvas_47);
 
 		UITrain canvas_48 = new UITrain("70012");
-		canvas_48.setBounds(701, 103, 18, 18);
+		canvas_48.setBounds(643, 103, 18, 18);
 		mbtaMapPanel.add(canvas_48);
 		orangeLineTrains.add(canvas_48);
 
 		UITrain canvas_49 = new UITrain("70010");
-		canvas_49.setBounds(754, 103, 18, 18);
+		canvas_49.setBounds(701, 103, 18, 18);
 		mbtaMapPanel.add(canvas_49);
 		orangeLineTrains.add(canvas_49);
 
 		UITrain canvas_50 = new UITrain("70008");
-		canvas_50.setBounds(804, 103, 18, 18);
+		canvas_50.setBounds(754, 103, 18, 18);
 		mbtaMapPanel.add(canvas_50);
 		orangeLineTrains.add(canvas_50);
 
 		UITrain canvas_51 = new UITrain("70006");
-		canvas_51.setBounds(859, 103, 18, 18);
+		canvas_51.setBounds(804, 103, 18, 18);
 		mbtaMapPanel.add(canvas_51);
 		orangeLineTrains.add(canvas_51);
 
 		UITrain canvas_55 = new UITrain("70004");
-		canvas_55.setBounds(912, 103, 18, 18);
+		canvas_55.setBounds(859, 103, 18, 18);
 		mbtaMapPanel.add(canvas_55);
 		orangeLineTrains.add(canvas_55);
 
 		UITrain canvas_56 = new UITrain("70002");
-		canvas_56.setBounds(959, 103, 18, 18);
+		canvas_56.setBounds(912, 103, 18, 18);
 		mbtaMapPanel.add(canvas_56);
 		orangeLineTrains.add(canvas_56);
 
 		UITrain canvas_57 = new UITrain("70000");
-		canvas_57.setBounds(1026, 103, 18, 18);
+		canvas_57.setBounds(959, 103, 18, 18);
 		mbtaMapPanel.add(canvas_57);
 		orangeLineTrains.add(canvas_57);
 
@@ -890,6 +890,7 @@ public class TrainLocation extends JFrame {
 
 
 		JRadioButton rdbtnStationMode = new JRadioButton("Station Mode");
+		rdbtnStationMode.setBackground(Color.WHITE);
 		rdbtnStationMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mbtaMapPanel.setMode(Mode.STATION);
@@ -899,6 +900,7 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(rdbtnStationMode);
 
 		JRadioButton rdbtnRouteMode = new JRadioButton("Route Mode");
+		rdbtnRouteMode.setBackground(Color.WHITE);
 		rdbtnRouteMode.setSelected(true);
 		rdbtnRouteMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -909,6 +911,7 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(rdbtnRouteMode);
 
 		JRadioButton rdbtnUnorderedRouteMode = new JRadioButton("Unordered Route Mode");
+		rdbtnUnorderedRouteMode.setBackground(Color.WHITE);
 		rdbtnUnorderedRouteMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mbtaMapPanel.setMode(Mode.UNORDERED_ROUTE);
@@ -949,6 +952,7 @@ public class TrainLocation extends JFrame {
 
 
 		JRadioButton rdbtnTest = new JRadioButton("Test");
+		rdbtnTest.setBackground(Color.WHITE);
 		rdbtnTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				location = MyMbta.test;
@@ -960,6 +964,7 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(rdbtnTest);
 
 		JRadioButton rdbtnLive = new JRadioButton("Live");
+		rdbtnLive.setBackground(Color.WHITE);
 		rdbtnLive.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				location = MyMbta.http;
