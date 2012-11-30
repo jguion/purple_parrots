@@ -9,6 +9,7 @@ import java.util.Set;
 
 import softwaredev.purpleparrots.gui.MbtaMap;
 import softwaredev.purpleparrots.gui.Mode;
+import softwaredev.purpleparrots.gui.RouteType;
 import softwaredev.purpleparrots.gui.Station;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -156,9 +157,105 @@ public class MyMbta {
             return getOrderedRoute(map.getRoute(), location);
         }
         else if (map.getMode().equals(Mode.UNORDERED_ROUTE)){
-            return getUnorderedRouteV1(map.getRoute(), location);
+            Station startStation = map.getStartStation();
+            Station endStation = map.getEndStation();
+            int startTime = 0;
+            if(map.getRouteType().equals(RouteType.EARLIEST_DEPARTURE)){
+                startStation = getEarliestDepartingTrain(map.getRoute(), startTime, location);
+            }else{
+                startStation = map.getRoute().get(0);
+            }
+            return getUnorderedRouteV1(map.getRoute(), location, startStation, endStation);
         }
         else return new Route();//throw new Exception("Route mode not selected");
+    }
+    
+    private static Station getEarliestDepartingTrain(ArrayList<Station> route, int startTime, String location){
+        ArrayList<Train> orangeTrains = JsonData.getTrains(tMap.orangeLine, location);
+        ArrayList<Train> redTrains = JsonData.getTrains(tMap.redLine, location);
+        ArrayList<Train> blueTrains = JsonData.getTrains(tMap.blueLine, location);
+        
+        Pair<Integer, Station> orange = getEarliestDepartingTrainForLine(route, orangeTrains, startTime);
+        Pair<Integer, Station> red = getEarliestDepartingTrainForLine(route, redTrains, startTime);
+        Pair<Integer, Station> blue = getEarliestDepartingTrainForLine(route, blueTrains, startTime);
+        
+        if(orange.a <= red.a && orange.a <= blue.a){
+            return orange.b;
+        }else if(red.a <= orange.a && red.a <= blue.a){
+            return red.b;
+        }else{
+            return blue.b;
+        }
+    }
+    
+    /**
+     * This method finds the earliest departing train for any train on that line.
+     * This is so complicated because it has to look through each prediction for each of the incoming trains and then for 
+     * each prediction, it has to check if that stop is in your list of stops you want to stop at, if it is heading in the
+     * direction you want to go to, and if it is the earliest arriving train.
+     * 
+     * @param route
+     * @param trains
+     * @param startTime
+     * @param location
+     * @return
+     * @author jeffreyguion
+     */
+    private static Pair<Integer, Station> getEarliestDepartingTrainForLine(ArrayList<Station> route, ArrayList<Train> trains, int startTime){
+        int earliestTime = -1;
+        Station earliestStation = null;
+        ArrayList<String> stationNames = getStationNames(route);
+        for(int i=0; i< trains.size(); i++){
+            Train train = trains.get(i);
+            ArrayList<Prediction> predictions = train.getPredictions();
+            for(int j=0; j < predictions.size(); j++){
+                Prediction p = predictions.get(j);
+                if(stationNames.contains(p.stop)){
+                    if(earliestTime == -1 || p.seconds < earliestTime){
+                        if(p.seconds > startTime){
+                            Station startStop = findStationWithName(p.stop, route);
+                            Station nextStop = getClosestStation(route, startStop);
+                            String destinationStop = getDirectionToCurrentStation(startStop, nextStop);
+                            if(destinationStop.equals(train.getDestination())){
+                                earliestTime = p.seconds;
+                                earliestStation = startStop;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return new Pair<Integer, Station>(earliestTime, earliestStation);
+    }
+    
+    private static ArrayList<String> getStationNames(ArrayList<Station> stations){
+        ArrayList<String> names = new ArrayList();
+        for(int i=0; i< stations.size(); i++){
+            names.add(stations.get(i).getName());
+        }
+        return names;
+    }
+    
+    private static String getDirectionToCurrentStation(Station startStation, Station endStation){
+        return Route.getTrainDestination(startStation.getName(), endStation.getName(), tMap.getLine(startStation.getLine()));
+    }
+    
+    private static Station getClosestStation(ArrayList<Station> route, Station station){
+        ArrayList<String> shortestPath = new ArrayList<String>();
+        Station closestStation = null;
+        for(int j = 0; j < route.size(); j++){
+            Station destinationStation = route.get(j);
+            if(station.getName().equals(destinationStation.getName())){
+                continue;
+            }
+            Route r = new Route();
+            ArrayList<String> currentPath = getAtoBList(station, destinationStation, r);
+            if(shortestPath == null || shortestPath.size() > currentPath.size()){
+                shortestPath = currentPath;
+                closestStation = destinationStation;
+            }
+        }
+        return closestStation;
     }
 
     /**
@@ -343,19 +440,30 @@ public class MyMbta {
     
     /**
      * Creates an unordered route object through the stops selected by the user
-     * It does this by finding the shortest distance between each stop
+     * It does this by finding the shortest distance between each stop. 
+     * Generates the entire route before applying the JSON data.
      * 
      * @param trip - list of stops selected by the user
      * @return Route object with list of stops passed through and amount of transfers
      * 
      * @author jeffreyguion
      */
-    public static Route getUnorderedRouteV1(ArrayList<Station> route, String location){
+    public static Route getUnorderedRouteV1(ArrayList<Station> route, String location, Station startStation, Station endStation){
         int numStops = route.size();
         HashMap<String,ArrayList<String>> stationToShortestPath = new HashMap<String,ArrayList<String>>();
         Set<String> visitedStations = new HashSet<String>();
-        Station currentStation = route.get(0);
         int totalTransfers = 0;
+        Station currentStation = null;
+        if(startStation != null){
+            currentStation = startStation;
+        }else{
+            //TODO Something better
+            currentStation = route.get(0);
+        }
+         
+        if(endStation != null){
+            route.remove(endStation);
+        }
         //for each stop in the input list mark it as visited
         for(int i = 0; i < numStops - 1; i++){
             int transfers = 0;
@@ -381,9 +489,15 @@ public class MyMbta {
             totalTransfers += transfers + 1;
         }
         
-        //Generate the actual list of stops passed from a HashMap
-        Station firstStop = route.get(0);
-        ArrayList<String> stopsPassed = generatePath(firstStop, stationToShortestPath);
+        //Find route to end Station
+        if(endStation != null){
+            Route r = new Route();
+            ArrayList<String> currentPath = getAtoBList(currentStation, endStation, r);
+            stationToShortestPath.put(currentStation.getName(), currentPath);
+            totalTransfers += r.getTransfers() + 1;
+        }
+
+        ArrayList<String> stopsPassed = generatePath(startStation, stationToShortestPath);
 
         //Create the route
         Route finalRoute = new Route();
@@ -391,6 +505,14 @@ public class MyMbta {
         finalRoute.setTransfers(totalTransfers - 1);
         finalRoute.applyJsonToOrderedRoute(tMap, location);
         return finalRoute;
+    }
+    
+    private Station findReasonableStartStation(ArrayList<Station> route){
+        Line blueLine = tMap.getLine("Blue");
+        for(int i = 0; i < blueLine.getStops().size(); i++){
+            
+        }
+        return null;
     }
     
     /**

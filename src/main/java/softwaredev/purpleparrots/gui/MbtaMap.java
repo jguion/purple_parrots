@@ -12,12 +12,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class MbtaMap extends JPanel{
-	ArrayList<Station> route;
-	Mode mode;
+	private ArrayList<Station> route;
+	private Mode mode;
+	private RouteType routeType;
+	private Station startStation;
+	private Station endStation;
 	
 	MbtaMap(){
 		this.route = new ArrayList<Station>();
 		this.mode = Mode.ORDERED_ROUTE;
+		this.routeType = RouteType.FASTEST_ROUTE;
+		this.startStation = null;
+		this.endStation = null;
 	}
 	
 	Image image = null;
@@ -60,7 +66,31 @@ public class MbtaMap extends JPanel{
 	}
 	
 	
-	public void addStation(Station station){
+	public RouteType getRouteType() {
+        return routeType;
+    }
+
+    public void setRouteType(RouteType routeType) {
+        this.routeType = routeType;
+    }
+
+    public Station getStartStation() {
+        return startStation;
+    }
+
+    public void setStartStation(Station startStation) {
+        this.startStation = startStation;
+    }
+
+    public Station getEndStation() {
+        return endStation;
+    }
+
+    public void setEndStation(Station endStation) {
+        this.endStation = endStation;
+    }
+
+    public void addStation(Station station){
 		this.route.add(station);
 	}
 	
