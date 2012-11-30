@@ -1,34 +1,39 @@
 package softwaredev.purpleparrots.gui;
 
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Timer;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSpinner;
+import javax.swing.JSpinner.DateEditor;
+import javax.swing.SpinnerDateModel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Canvas;
-import java.awt.Color;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Timer;
-
-import javax.swing.JButton;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 import softwaredev.purpleparrots.MyMbta;
 import softwaredev.purpleparrots.Route;
 import softwaredev.purpleparrots.Train;
-import javax.swing.JRadioButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Dimension;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class TrainLocation extends JFrame {
 
@@ -41,8 +46,7 @@ public class TrainLocation extends JFrame {
 	private Timer timer = new Timer();
 	private ArrayList<UITrain> blueLineTrains;
 	private ArrayList<UITrain> orangeLineTrains;
-	private ArrayList<UITrain> redLineTrains;
-	
+	private ArrayList<UITrain> redLineTrains;	
 
 	/**
 	 * Launch the application.
@@ -905,7 +909,7 @@ public class TrainLocation extends JFrame {
 				mbtaMapPanel.setMode(Mode.UNORDERED_ROUTE);
 			}
 		});
-		rdbtnUnorderedRouteMode.setBounds(273, 649, 191, 23);
+		rdbtnUnorderedRouteMode.setBounds(273, 649, 148, 23);
 		mbtaMapPanel.add(rdbtnUnorderedRouteMode);
 		
 		updateTrains(orangeLineTrains, redLineTrains, blueLineTrains);
@@ -914,15 +918,28 @@ public class TrainLocation extends JFrame {
 		group.add(rdbtnStationMode);
 		group.add(rdbtnRouteMode);
 		group.add(rdbtnUnorderedRouteMode);
+
+        final JComboBox arriveDepart = new JComboBox(new String[]{"Leave Now", "Depart At", "Arrive By"});
+        arriveDepart.setBounds(443, 650, 89, 20);
+        mbtaMapPanel.add(arriveDepart);
+		
+        final JSpinner timeOfTrip = new JSpinner( new SpinnerDateModel() );
+        timeOfTrip.setEditor(new DateEditor(timeOfTrip, "HH:mm"));
+        timeOfTrip.setValue(new Date());
+        timeOfTrip.setBounds(538, 650, 66, 20);
+        mbtaMapPanel.add(timeOfTrip);
 		
 		JButton btnGetDirections = new JButton("Get Directions");
 		btnGetDirections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			    Long time = timeOfTripInMilliseconds((Date) timeOfTrip.getValue());
+		        mbtaMapPanel.setTimeOfTrip(time);
+		        mbtaMapPanel.setTimeOfTripIndex(arriveDepart.getSelectedIndex());
 			    Route route = MyMbta.getRoute(mbtaMapPanel, location);
 				JOptionPane.showMessageDialog(mbtaMapPanel, "Directions! \n "+ route);
 			}
 		});
-		btnGetDirections.setBounds(581, 648, 117, 29);
+		btnGetDirections.setBounds(663, 646, 117, 29);
 		mbtaMapPanel.add(btnGetDirections);
 		
 		
@@ -950,6 +967,21 @@ public class TrainLocation extends JFrame {
 		ButtonGroup dataGroup = new ButtonGroup();
         dataGroup.add(rdbtnTest);
         dataGroup.add(rdbtnLive);
+                
+	}
+	
+	/**
+	 * Converts the depart at/arrive by time to the correct milliseconds
+	 * @param date - date object created by the JSpinner with the desired time of the trip
+	 * @return time in milliseconds
+	 * @author - leighannastolfi
+	 */
+	private Long timeOfTripInMilliseconds(Date date){
+	    Calendar calendar = Calendar.getInstance();
+	    calendar.setTime(date);
+	    long timeInMillis = (calendar.get(Calendar.HOUR_OF_DAY)*3600000) + (calendar.get(Calendar.MINUTE) * 60000) 
+	            + (calendar.get(Calendar.SECOND)*6000) + calendar.get(Calendar.MILLISECOND);
+	    return timeInMillis;
 	}
 	
 	/**

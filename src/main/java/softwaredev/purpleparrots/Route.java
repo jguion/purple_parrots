@@ -1,6 +1,7 @@
 package softwaredev.purpleparrots;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,8 +57,16 @@ public class Route {
 	    ArrayList<Train> orange_trains = JsonData.getTrains(tMap.orangeLine, location);
 	    ArrayList<Train> red_trains = JsonData.getTrains(tMap.redLine, location);
 	    ArrayList<Train> blue_trains = JsonData.getTrains(tMap.blueLine, location);
-        
-        int travelTime = 0;
+          
+	    int travelTime = 0;
+	    if(tMap.getTimeOfTripIndex() == 1){
+	        Calendar calendar = Calendar.getInstance();
+	        int currentTime = (calendar.get(Calendar.HOUR_OF_DAY)*3600000) + (calendar.get(Calendar.MINUTE) * 60000) 
+	                + (calendar.get(Calendar.SECOND)*1000) + calendar.get(Calendar.MILLISECOND);
+
+	        travelTime = (int) ((tMap.getTimeOfTrip() - currentTime)/1000);
+	    }
+	    
         ArrayList<ArrayList<Leg>> possibleTrains = new ArrayList<ArrayList<Leg>>();
         ArrayList<Leg> bestTrains = new ArrayList<Leg>();
         HashMap<String, ArrayList<String>> stationToLine = tMap.getStationToLineMap();

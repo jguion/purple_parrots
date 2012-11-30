@@ -14,7 +14,9 @@ public class Map {
 	public Line orangeLine;
 	public Line redLine;
 	public Line blueLine;
-	public HashMap<String, ArrayList<String>> stationToLine;
+	public Long timeOfTrip;
+    public int timeOfTripIndex;
+    public HashMap<String, ArrayList<String>> stationToLine;
 	
 	
 	
@@ -36,7 +38,8 @@ public class Map {
 	 * @author leighannastolfi
 	 */
 	public void createMap(){
-		
+		this.timeOfTrip = new Long(0);
+	    
 		ArrayList<String> orangeLineStations = new ArrayList<String>();	
 		
 		Station oakGrove = new Station("Oak Grove", ORANGE);	
@@ -210,4 +213,20 @@ public class Map {
 	public HashMap<String, ArrayList<String>> getStationToLineMap(){
 	    return this.stationToLine;
 	}
+	
+	public Long getTimeOfTrip() {
+        return timeOfTrip;
+    }
+
+    public void setTimeOfTrip(Long timeOfTrip) {
+        this.timeOfTrip = timeOfTrip;
+    }
+
+    public int getTimeOfTripIndex() {
+        return timeOfTripIndex;
+    }
+
+    public void setTimeOfTripIndex(int timeOfTripIndex) {
+        this.timeOfTripIndex = timeOfTripIndex;
+    }
 }
