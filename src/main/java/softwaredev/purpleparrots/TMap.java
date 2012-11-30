@@ -15,6 +15,8 @@ public class TMap {
 	public Line orangeLine;
 	public Line redLine;
 	public Line blueLine;
+	public Long timeOfTrip;
+    public int timeOfTripIndex;
 	public Map<String, List<String>> stationToLine;
 	
 	
@@ -37,7 +39,8 @@ public class TMap {
 	 * @author leighannastolfi
 	 */
 	public void createMap(){
-		
+		this.timeOfTrip = new Long(0);
+	    
 		ArrayList<String> orangeLineStations = new ArrayList<String>();	
 		
 		Station oakGrove = new Station("Oak Grove", ORANGE);	
@@ -211,4 +214,20 @@ public class TMap {
 	public Map<String, List<String>> getStationToLineMap(){
 	    return this.stationToLine;
 	}
+	
+	public Long getTimeOfTrip() {
+        return timeOfTrip;
+    }
+
+    public void setTimeOfTrip(Long timeOfTrip) {
+        this.timeOfTrip = timeOfTrip;
+    }
+
+    public int getTimeOfTripIndex() {
+        return timeOfTripIndex;
+    }
+
+    public void setTimeOfTripIndex(int timeOfTripIndex) {
+        this.timeOfTripIndex = timeOfTripIndex;
+    }
 }

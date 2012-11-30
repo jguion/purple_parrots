@@ -76,7 +76,7 @@ public class MyMbta {
 
     /**
      * Slowly sorts the given list of trains. Calls to getPredFor are safe because
-     * we've already filtered on the existance of a prediction with the given stop ID.
+     * we've already filtered on the existence of a prediction with the given stop ID.
      * @param trains  the trains to sort
      * @return        the trains, sorted from earliest arrival to latest to the stop
      *                denoted by the given stop ID.
@@ -147,6 +147,8 @@ public class MyMbta {
      * @author leighannastolfi
      */
     public static Route getRoute(MbtaMap map, String location){
+        tMap.setTimeOfTrip(map.getTimeOfTrip());
+        tMap.setTimeOfTripIndex(map.getTimeOfTripIndex());
         if(map.getMode().equals(Mode.ORDERED_ROUTE)){
             return getOrderedRoute(map.getRoute(), location);
         }

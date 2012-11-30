@@ -2,20 +2,20 @@ package softwaredev.purpleparrots.gui;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class MbtaMap extends JPanel{
 	ArrayList<Station> route;
 	Mode mode;
-	
-	MbtaMap(){
+	Long timeOfTrip;
+	int timeOfTripIndex;
+
+    MbtaMap(){
 		this.route = new ArrayList<Station>();
 		this.mode = Mode.ORDERED_ROUTE;
 	}
@@ -71,5 +71,20 @@ public class MbtaMap extends JPanel{
 	public void clearRoute(){
 		this.route.clear();
 	}
+	   
+    public Long getTimeOfTrip() {
+        return timeOfTrip;
+    }
 
+    public void setTimeOfTrip(Long timeOfTrip) {
+        this.timeOfTrip = timeOfTrip;
+    }
+
+    public int getTimeOfTripIndex() {
+        return timeOfTripIndex;
+    }
+
+    public void setTimeOfTripIndex(int timeOfTripIndex) {
+        this.timeOfTripIndex = timeOfTripIndex;
+    }
 }
