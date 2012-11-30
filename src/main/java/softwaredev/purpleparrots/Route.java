@@ -105,7 +105,7 @@ public class Route {
                     }
                 }
                 //Get destination the train is heading
-                String destination = this.getTrainDestination(currentStation, transferStation, tMap.getLine(line));
+                String destination = getTrainDestination(currentStation, transferStation, tMap.getLine(line));
                 
                 //gets all trains for the current line
                 List<Train> trains = getTrainsForColor(line, orange_trains, red_trains, blue_trains);
@@ -191,8 +191,7 @@ public class Route {
                 }
                 if(l.startTime > 0 && startTime != -1){
                     legs.add(l);
-                }
-                
+                }             
             }
 	    }
 	    return legs;	    

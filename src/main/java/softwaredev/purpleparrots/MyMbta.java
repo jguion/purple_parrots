@@ -244,7 +244,7 @@ public class MyMbta {
             }
         }
         String lineDestination = Route.getTrainDestination(station.getName(), shortestPath.get(1), tMap.getLine(station.getLine()));
-        return new Pair(closestStation, lineDestination);
+        return new Pair<Station,String>(closestStation, lineDestination);
     }
 
     /**
@@ -438,10 +438,7 @@ public class MyMbta {
      * @author jeffreyguion
      */
     public static Route getUnorderedRouteV1(ArrayList<Station> route, String location, Station startStation, Station endStation){
-        int numStops = route.size();
         HashMap<String,ArrayList<String>> stationToShortestPath = new HashMap<String,ArrayList<String>>();
-        Set<String> visitedStations = new HashSet<String>();
-        int totalTransfers = 0;
         Station currentStation = null;
         if(startStation != null){
             currentStation = startStation;
@@ -452,32 +449,12 @@ public class MyMbta {
          
         if(endStation != null){
             route.remove(endStation);
-            numStops = numStops - 1;
         }
-        //for each stop in the input list mark it as visited
-        for(int i = 0; i < numStops - 1; i++){
-            int transfers = 0;
-            visitedStations.add(currentStation.getName());
-            //for each stop, if it has not already been visited, find the closest stop to it
-            for(int j = 0; j < numStops; j++){
-                Station destinationStation = route.get(j);
-                if(visitedStations.contains(destinationStation.getName())){
-                    continue;
-                }
-                Route r = new Route();
-                ArrayList<String> currentPath = getAtoBList(currentStation, destinationStation, r);
-                ArrayList<String> shortestPath = stationToShortestPath.get(currentStation.getName());
-                if(shortestPath == null || shortestPath.size() > currentPath.size()){
-                    stationToShortestPath.put(currentStation.getName(), currentPath);
-                    transfers = r.getTransfers();
-                }
-            }
-            //Get the last station in a path between stations and mark that as the new current station
-            ArrayList<String> shortestPath = stationToShortestPath.get(currentStation.getName());
-            String lastStation = shortestPath.get(shortestPath.size() - 1);
-            currentStation = findStationWithName(lastStation, route);
-            totalTransfers += transfers + 1;
-        }
+        
+        //This function can be replaced depending on the goal of the unordered route
+        Pair<Station, Integer> pathInformation = buildShortestPathMap(route, startStation, stationToShortestPath);
+        currentStation = pathInformation.a;
+        int totalTransfers = pathInformation.b;
         
         //Find route to end Station
         if(endStation != null){
@@ -503,6 +480,49 @@ public class MyMbta {
             
         }
         return null;
+    }
+    
+    /**
+     * Builds the Path Map by building a minimum spanning tree across the stations in the route starting at
+     * a given start station.
+     * 
+     * @param route
+     * @param startStation
+     * @param stationToShortestPath
+     * @return
+     * @author jeffreyguion
+     */
+    private static Pair<Station, Integer> buildShortestPathMap(ArrayList<Station> route, Station startStation, HashMap<String,ArrayList<String>> stationToShortestPath){
+        int numStops = route.size();
+        Station currentStation = startStation;
+        Set<String> visitedStations = new HashSet<String>();
+        int totalTransfers = 0;
+        //for each stop in the input list mark it as visited
+        for(int i = 0; i < numStops - 1; i++){
+            int transfers = 0;
+            visitedStations.add(currentStation.getName());
+            //for each stop, if it has not already been visited, find the closest stop to it
+            for(int j = 0; j < numStops; j++){
+                Station destinationStation = route.get(j);
+                if(visitedStations.contains(destinationStation.getName())){
+                    continue;
+                }
+                Route r = new Route();
+                ArrayList<String> currentPath = getAtoBList(currentStation, destinationStation, r);
+                ArrayList<String> shortestPath = stationToShortestPath.get(currentStation.getName());
+                if(shortestPath == null || shortestPath.size() > currentPath.size()){
+                    stationToShortestPath.put(currentStation.getName(), currentPath);
+                    transfers = r.getTransfers();
+                }
+            }
+            //Get the last station in a path between stations and mark that as the new current station
+            ArrayList<String> shortestPath = stationToShortestPath.get(currentStation.getName());
+            String lastStation = shortestPath.get(shortestPath.size() - 1);
+            currentStation = findStationWithName(lastStation, route);
+            totalTransfers += transfers + 1;
+        }
+        
+        return new Pair(currentStation, totalTransfers);
     }
     
     /**
