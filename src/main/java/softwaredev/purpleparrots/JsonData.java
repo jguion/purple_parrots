@@ -70,7 +70,7 @@ public class JsonData {
         	try {
         		rootNode = mapper.readValue(new URL(path), JsonNode.class);
         	} catch (UnknownHostException uhe) {
-        		
+        		MyMbta.log(uhe);
         	}
         } else {
             rootNode = mapper.readValue(readString(new File(path)), JsonNode.class);
