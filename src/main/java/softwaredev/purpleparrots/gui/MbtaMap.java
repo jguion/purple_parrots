@@ -1,5 +1,6 @@
 package softwaredev.purpleparrots.gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.net.MalformedURLException;
@@ -87,4 +88,30 @@ public class MbtaMap extends JPanel{
     public void setTimeOfTripIndex(int timeOfTripIndex) {
         this.timeOfTripIndex = timeOfTripIndex;
     }
+    
+	public void removeLastStation(){
+		if (this.route.size() == 0) {}
+		else 
+			this.route.remove(this.route.size() - 1);
+	}
+	
+	public void clearScreen(){
+		
+		for(Station s : this.route){
+			if(this.route.size() == 0){}
+			else {
+				if (s == this.route.get(this.route.size() - 1)){
+					s.setBackground(Color.yellow);
+					}
+				else
+					s.setBackground(Color.white);
+			}
+		}
+	}
+	
+	public void setAllWhite(){
+		for(Station s : this.route){
+			s.setBackground(Color.white);
+		}
+	}
 }
