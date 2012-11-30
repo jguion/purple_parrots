@@ -129,7 +129,9 @@ public class Station extends JPanel implements MouseListener{
     					" seconds away.<br>";
     		}
     		re = re.substring(0, re.length()-4) + "</html>";
-    	}
+    	} else {
+            re = "No train information available for this station.";
+        }
     	return re;
     }
 
