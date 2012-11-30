@@ -1,16 +1,15 @@
 package softwaredev.purpleparrots;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Train {
     private String id;
     private String line;
     private String destination;
-    private ArrayList<Prediction> predictions;
+    private List<Prediction> predictions;
 
     public Train(String id, String line, String destination,
-                 ArrayList<Prediction> predictions) {
+                 List<Prediction> predictions) {
         this.setId(id);
         this.line = line;
         this.setDestination(destination);
@@ -101,11 +100,11 @@ public class Train {
             && (this.getId() == null ? that.getId() == null : this.getId().equals(that.getId()));
     }
 
-    public ArrayList<Prediction> getPredictions() {
+    public List<Prediction> getPredictions() {
         return predictions;
     }
 
-    public void setPredictions(ArrayList<Prediction> predictions) {
+    public void setPredictions(List<Prediction> predictions) {
         this.predictions = predictions;
     }
 

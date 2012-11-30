@@ -37,7 +37,7 @@ public class JsonData {
                 String id = trip.path("TripID").asText();
                 String destination = trip.path("Destination").asText();
                 Iterator<JsonNode> predictions_iterator = trip.path("Predictions").iterator();
-                ArrayList<Prediction> predictions = new ArrayList<Prediction>();
+                List<Prediction> predictions = new ArrayList<Prediction>();
                 while(predictions_iterator.hasNext()){
                     JsonNode prediction = predictions_iterator.next();
                     String stopId = prediction.path("StopID").asText();
