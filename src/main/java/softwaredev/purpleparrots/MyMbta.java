@@ -167,19 +167,30 @@ public class MyMbta {
             return getOrderedRoute(map.getRoute(), location);
         }
         else if (map.getMode().equals(Mode.UNORDERED_ROUTE)){
-            Station startStation = map.getStartStation();
-            Station endStation = map.getEndStation();
+            Station startStation = findStationWithName(map.getStartStation(), map.getRoute());
+            Station endStation = findStationWithName(map.getEndStation(), map.getRoute());
             int startTime = 0;
-            if(map.getRouteType().equals(RouteType.EARLIEST_DEPARTURE)){
-                startStation = getEarliestDepartingTrain(map.getRoute(), startTime, location);
-            }else{
-                startStation = map.getRoute().get(0);
+            if(startStation == null){
+                if(map.getRouteType().equals(RouteType.EARLIEST_DEPARTURE)){
+                    startStation = getEarliestDepartingTrain(map.getRoute(), startTime, location);
+                }else{
+                    startStation = map.getRoute().get(0);
+                }
             }
+            
             return getUnorderedRouteV1(map.getRoute(), location, startStation, endStation);
         }
         else return new Route();//throw new Exception("Route mode not selected");
     }
     
+    /**
+     * Finds the earliest departing train for an unordered list of trains
+     * 
+     * @param route
+     * @param startTime
+     * @param location
+     * @return
+     */
     private static Station getEarliestDepartingTrain(ArrayList<Station> route, int startTime, String location){
         ArrayList<Train> orangeTrains = JsonData.getTrains(tMap.orangeLine, location);
         ArrayList<Train> redTrains = JsonData.getTrains(tMap.redLine, location);
@@ -214,7 +225,7 @@ public class MyMbta {
     private static Pair<Integer, Station> getEarliestDepartingTrainForLine(ArrayList<Station> route, ArrayList<Train> trains, int startTime){
         int earliestTime = -1;
         Station earliestStation = null;
-        ArrayList<String> stationNames = getStationNames(route);
+        List<String> stationNames = getStationNames(route);
         for(int i=0; i< trains.size(); i++){
             Train train = trains.get(i);
             ArrayList<Prediction> predictions = train.getPredictions();
@@ -224,9 +235,10 @@ public class MyMbta {
                     if(earliestTime == -1 || p.seconds < earliestTime){
                         if(p.seconds > startTime){
                             Station startStop = findStationWithName(p.stop, route);
-                            Station nextStop = getClosestStation(route, startStop);
-                            String destinationStop = getDirectionToCurrentStation(startStop, nextStop);
-                            if(destinationStop.equals(train.getDestination())){
+                            Pair<Station,String> closestStationInfo = getClosestStation(route, startStop);
+                            Station nextStop = closestStationInfo.a;
+                            String lineDestination = closestStationInfo.b;
+                            if(lineDestination.equals(train.getDestination())){
                                 earliestTime = p.seconds;
                                 earliestStation = startStop;
                             }
@@ -238,19 +250,31 @@ public class MyMbta {
         return new Pair<Integer, Station>(earliestTime, earliestStation);
     }
     
-    private static ArrayList<String> getStationNames(ArrayList<Station> stations){
-        ArrayList<String> names = new ArrayList();
+    /**
+     * From a list of stations, returns a list of strings that represent the station names
+     * @param stations
+     * @return
+     * @author jeffreyguion
+     */
+    private static List<String> getStationNames(List<Station> stations){
+        List<String> names = new ArrayList();
         for(int i=0; i< stations.size(); i++){
             names.add(stations.get(i).getName());
         }
         return names;
     }
-    
-    private static String getDirectionToCurrentStation(Station startStation, Station endStation){
-        return Route.getTrainDestination(startStation.getName(), endStation.getName(), tMap.getLine(startStation.getLine()));
-    }
-    
-    private static Station getClosestStation(ArrayList<Station> route, Station station){
+   
+   
+    /**
+     * Given a station and a route, finds the closest station on that route and returns 
+     * a pair of the closest station and the destination of the train from the start station
+     * 
+     * @param route
+     * @param station
+     * @return
+     * @author jeffreyguion
+     */
+    private static Pair<Station,String> getClosestStation(ArrayList<Station> route, Station station){
         ArrayList<String> shortestPath = new ArrayList<String>();
         Station closestStation = null;
         for(int j = 0; j < route.size(); j++){
@@ -260,12 +284,13 @@ public class MyMbta {
             }
             Route r = new Route();
             ArrayList<String> currentPath = getAtoBList(station, destinationStation, r);
-            if(shortestPath == null || shortestPath.size() > currentPath.size()){
+            if(shortestPath.size() == 0 || shortestPath.size() > currentPath.size()){
                 shortestPath = currentPath;
                 closestStation = destinationStation;
             }
         }
-        return closestStation;
+        String lineDestination = Route.getTrainDestination(station.getName(), shortestPath.get(1), tMap.getLine(station.getLine()));
+        return new Pair(closestStation, lineDestination);
     }
 
     /**
@@ -473,6 +498,7 @@ public class MyMbta {
          
         if(endStation != null){
             route.remove(endStation);
+            numStops = numStops - 1;
         }
         //for each stop in the input list mark it as visited
         for(int i = 0; i < numStops - 1; i++){
@@ -537,7 +563,7 @@ public class MyMbta {
     public static Station findStationWithName(String name, ArrayList<Station> stations){
         for(int i = 0; i < stations.size(); i++){
             Station station = stations.get(i);
-            if(station.getName() == name){
+            if(station.getName().equals(name)){
                 return station;
             }
         }

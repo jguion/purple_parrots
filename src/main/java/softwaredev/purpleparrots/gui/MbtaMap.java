@@ -14,15 +14,15 @@ public class MbtaMap extends JPanel{
 	private ArrayList<Station> route;
 	private Mode mode;
 	private RouteType routeType;
-	private Station startStation;
-	private Station endStation;
+	private String startStation;
+	private String endStation;
 	Long timeOfTrip;
 	int timeOfTripIndex;
 
     MbtaMap(){
 		this.route = new ArrayList<Station>();
 		this.mode = Mode.ORDERED_ROUTE;
-		this.routeType = RouteType.FASTEST_ROUTE;
+		this.routeType = null;
 		this.startStation = null;
 		this.endStation = null;
 	}
@@ -74,23 +74,32 @@ public class MbtaMap extends JPanel{
         return routeType;
     }
 
-    public void setRouteType(RouteType routeType) {
-        this.routeType = routeType;
+    public void setRouteType(int index) {
+        if(index == 0){
+            this.routeType = RouteType.FASTEST_ROUTE;
+        }else if(index == 1){
+            this.routeType = RouteType.EARLIEST_DEPARTURE;
+        }else if(index == 2){
+            this.routeType = RouteType.EARLIST_ARRIVAL;
+        }else{
+            this.routeType = RouteType.FEWEST_TRANSFERS;
+        }
+        
     }
 
-    public Station getStartStation() {
+    public String getStartStation() {
         return startStation;
     }
 
-    public void setStartStation(Station startStation) {
+    public void setStartStation(String startStation) {
         this.startStation = startStation;
     }
 
-    public Station getEndStation() {
+    public String getEndStation() {
         return endStation;
     }
 
-    public void setEndStation(Station endStation) {
+    public void setEndStation(String endStation) {
         this.endStation = endStation;
     }
 

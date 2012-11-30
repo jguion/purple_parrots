@@ -896,7 +896,7 @@ public class TrainLocation extends JFrame {
 				mbtaMapPanel.setMode(Mode.STATION);
 			}
 		});
-		rdbtnStationMode.setBounds(16, 649, 116, 23); 
+		rdbtnStationMode.setBounds(1099, 37, 116, 23); 
 		mbtaMapPanel.add(rdbtnStationMode);
 
 		JRadioButton rdbtnRouteMode = new JRadioButton("Route Mode");
@@ -907,7 +907,7 @@ public class TrainLocation extends JFrame {
 				mbtaMapPanel.setMode(Mode.ORDERED_ROUTE);
 			}
 		});
-		rdbtnRouteMode.setBounds(147, 649, 112, 23);
+		rdbtnRouteMode.setBounds(1099, 57, 112, 23);
 		mbtaMapPanel.add(rdbtnRouteMode);
 
 		JRadioButton rdbtnUnorderedRouteMode = new JRadioButton("Unordered Route Mode");
@@ -917,7 +917,7 @@ public class TrainLocation extends JFrame {
 				mbtaMapPanel.setMode(Mode.UNORDERED_ROUTE);
 			}
 		});
-		rdbtnUnorderedRouteMode.setBounds(254, 649, 178, 23);
+		rdbtnUnorderedRouteMode.setBounds(1099, 77, 178, 23);
 		mbtaMapPanel.add(rdbtnUnorderedRouteMode);
 
 		updateTrains(orangeLineTrains, redLineTrains, blueLineTrains);
@@ -928,26 +928,31 @@ public class TrainLocation extends JFrame {
 		group.add(rdbtnUnorderedRouteMode);
 
 		final JComboBox arriveDepart = new JComboBox(new String[]{"Leave Now", "Depart At", "Arrive By"});
-		arriveDepart.setBounds(432, 649, 137, 20);
+		arriveDepart.setBounds(1100, 588, 137, 23);
 		mbtaMapPanel.add(arriveDepart);
 
 		final JSpinner timeOfTrip = new JSpinner( new SpinnerDateModel() );
 		timeOfTrip.setEditor(new DateEditor(timeOfTrip, "HH:mm"));
 		timeOfTrip.setValue(new Date());
-		timeOfTrip.setBounds(569, 649, 66, 20);
+		timeOfTrip.setBounds(1234, 588, 66, 20);
 		mbtaMapPanel.add(timeOfTrip);
+		
+		final JComboBox routeTypeComboBox = new JComboBox(new String[]{"Fastest Route", "Earliest Departure", "Earliest Arrival", "Fewest Transfers"});
+	    routeTypeComboBox.setBounds(1100, 557, 200, 27);
+	    mbtaMapPanel.add(routeTypeComboBox);
 
-		JButton btnGetDirections = new JButton("Get Directions");
+		Button btnGetDirections = new Button("Get Directions");
 		btnGetDirections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Long time = timeOfTripInMilliseconds((Date) timeOfTrip.getValue());
 				mbtaMapPanel.setTimeOfTrip(time);
 				mbtaMapPanel.setTimeOfTripIndex(arriveDepart.getSelectedIndex());
+				mbtaMapPanel.setRouteType(routeTypeComboBox.getSelectedIndex());
 				Route route = MyMbta.getRoute(mbtaMapPanel, location);
 				JOptionPane.showMessageDialog(mbtaMapPanel, "Directions! \n "+ route);
 			}
 		});
-		btnGetDirections.setBounds(663, 646, 117, 29);
+		btnGetDirections.setBounds(1100, 615, 200, 57);
 		mbtaMapPanel.add(btnGetDirections);
 
 
@@ -960,7 +965,7 @@ public class TrainLocation extends JFrame {
 			}
 		});
 		rdbtnTest.setSelected(true);
-		rdbtnTest.setBounds(814, 649, 61, 23);
+		rdbtnTest.setBounds(948, 649, 61, 23);
 		mbtaMapPanel.add(rdbtnTest);
 
 		JRadioButton rdbtnLive = new JRadioButton("Live");
@@ -971,7 +976,7 @@ public class TrainLocation extends JFrame {
 				updateTrains(orangeLineTrains, redLineTrains, blueLineTrains);
 			}
 		});
-		rdbtnLive.setBounds(897, 649, 57, 23);
+		rdbtnLive.setBounds(1022, 649, 57, 23);
 		mbtaMapPanel.add(rdbtnLive);
 
 		ButtonGroup dataGroup = new ButtonGroup();
@@ -983,19 +988,19 @@ public class TrainLocation extends JFrame {
 		 */
 		
 		final List list = new List();
-		list.setBounds(1100, 50, 214, 550);
+		list.setBounds(1100, 103, 214, 299);
 
 		mbtaMapPanel.add(list);
 
 		Button button = new Button("Add/\nUpdate");
-		button.setBounds(1100, 600, 100, 80);
+		button.setBounds(1100, 401, 100, 80);
 		mbtaMapPanel.add(button);
 
 		button.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						mbtaMapPanel.clearScreen();
-						list.clear();
+						list.removeAll();
 						ArrayList<Station> stations = mbtaMapPanel.getRoute();
 						for(Station s : stations){
 							list.add(s.getName());
@@ -1008,19 +1013,37 @@ public class TrainLocation extends JFrame {
 		button_1.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						list.clear();
-						mbtaMapPanel.setAllWhite();
+					    list.removeAll();
+					    mbtaMapPanel.setAllWhite();
 						mbtaMapPanel.clearRoute();
 					}
 				});
 
-		button_1.setBounds(1200, 600, 100, 80);
+		button_1.setBounds(1200, 401, 100, 80);
 		mbtaMapPanel.add(button_1);
 
 		JLabel lblNewLabel = new JLabel("Route Planner");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblNewLabel.setBounds(1143, 0, 137, 50);
 		mbtaMapPanel.add(lblNewLabel);
+		
+		JButton btnSetAsStart = new JButton("Set as Start Station");
+		btnSetAsStart.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent arg0) {
+	                mbtaMapPanel.setStartStation(list.getSelectedItem());
+	            }
+	        });
+		btnSetAsStart.setBounds(1100, 487, 177, 29);
+		mbtaMapPanel.add(btnSetAsStart);
+		
+		JButton btnSetAsEnd = new JButton("Set as End Station");
+		btnSetAsEnd.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent arg0) {
+		        mbtaMapPanel.setEndStation(list.getSelectedItem());
+		    }
+		});
+		btnSetAsEnd.setBounds(1110, 518, 167, 29);
+		mbtaMapPanel.add(btnSetAsEnd);
 		
 	}
 
@@ -1059,5 +1082,4 @@ public class TrainLocation extends JFrame {
 	    timer = new Timer();
 	    timer.schedule(updater, 0, 10000);
 	}
-	
 }
