@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 
 import javax.swing.ButtonGroup;
@@ -159,7 +160,7 @@ public class TrainLocation extends JFrame {
 		// ^ last blue line stop
 
 		// v first <--- blue line train (yes, I know they're reverse ordered)
-		HashMap<String, Train> blue_line_map = MyMbta.getCurrentLocationMap("Blue", this.location);
+		Map<String, Train> blue_line_map = MyMbta.getCurrentLocationMap("Blue", this.location);
 		blueLineTrains = new ArrayList<UITrain>();
 
 		UITrain canvas_145 = new UITrain("70037");
@@ -371,7 +372,7 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(orangeLineEnd);
 
 		//ORANGE LINE STOPS 20 - 51
-		HashMap<String, Train> orange_line_map = MyMbta.getCurrentLocationMap("Orange", this.location);
+		Map<String, Train> orange_line_map = MyMbta.getCurrentLocationMap("Orange", this.location);
 		orangeLineTrains = new ArrayList<UITrain>();
 
 		JPanel FH_OG_panel = new JPanel();
@@ -666,7 +667,7 @@ public class TrainLocation extends JFrame {
 
 		// v First <---- red line train
 
-		HashMap<String, Train> red_line_map = MyMbta.getCurrentLocationMap("Red", this.location);
+		Map<String, Train> red_line_map = MyMbta.getCurrentLocationMap("Red", this.location);
 		redLineTrains = new ArrayList<UITrain>();
 
 		UITrain canvas_77 = new UITrain("70061");
