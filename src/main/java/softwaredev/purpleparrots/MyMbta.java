@@ -53,6 +53,19 @@ public class MyMbta {
         List<Train> trains = getTrains(new Line(color, stations));
         return trains.toString();
     }
+    
+    /**
+     * Forces a cache update from the given location.
+     * @param location  the location from which to update the caches.
+     * @autho           labichn
+     */
+    public static void updateCache(String location) {
+    	if (lines != null && lines.size() > 0) {
+    		for (TrainCache cache : lines.values()) {
+    			cache.forceUpdate(location == null ? def : location);
+    		}
+    	}
+    }
 
     /**
      * Gets a filtered list of trains--those which currently have predictions for the given stop ID.

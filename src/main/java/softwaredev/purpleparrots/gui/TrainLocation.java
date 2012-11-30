@@ -1041,13 +1041,14 @@ public class TrainLocation extends JFrame {
 	 * @author jeffreyguion
 	 */
 	private void updateTrains(ArrayList<UITrain> orange, ArrayList<UITrain> red, ArrayList<UITrain> blue){
-		timer.cancel();
-		updater = new TrainUpdater(this.location, this.mbtaMapPanel);
-		updater.setOrangeLineTrains(orange);
-		updater.setRedLineTrains(red);
-		updater.setBlueLineTrains(blue);
-		timer = new Timer();
-		timer.schedule(updater, 0, 10000);
+	    timer.cancel();
+	    MyMbta.updateCache(this.location);
+	    updater = new TrainUpdater(this.location, this.mbtaMapPanel);
+	    updater.setOrangeLineTrains(orange);
+	    updater.setRedLineTrains(red);
+	    updater.setBlueLineTrains(blue);
+	    timer = new Timer();
+	    timer.schedule(updater, 0, 10000);
 	}
 	
 }
