@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Route {
 
-	private ArrayList<String> trainIds;
-	private ArrayList<String> stops;
-	private ArrayList<Integer> schedule;
+	private List<String> trainIds;
+	private List<String> stops;
+	private List<Integer> schedule;
 	private Integer transfers;
 	private Integer time;
 	private String errorText;
-	private ArrayList<Leg> legs;
+	private List<Leg> legs;
 	
 	public Route(){
 	    this.errorText = "";
@@ -53,75 +54,78 @@ public class Route {
 	 * 
 	 * @author jeffreyguion
 	 */
-	public void applyJsonToOrderedRoute(Map tMap, String location){
-	    ArrayList<Train> orange_trains = JsonData.getTrains(tMap.orangeLine, location);
-	    ArrayList<Train> red_trains = JsonData.getTrains(tMap.redLine, location);
-	    ArrayList<Train> blue_trains = JsonData.getTrains(tMap.blueLine, location);
-          
-	    int travelTime = 0;
-	    if(tMap.getTimeOfTripIndex() == 1){
-	        Calendar calendar = Calendar.getInstance();
-	        int currentTime = (calendar.get(Calendar.HOUR_OF_DAY)*3600000) + (calendar.get(Calendar.MINUTE) * 60000) 
-	                + (calendar.get(Calendar.SECOND)*1000) + calendar.get(Calendar.MILLISECOND);
 
-	        travelTime = (int) ((tMap.getTimeOfTrip() - currentTime)/1000);
-	    }
+	public void applyJsonToOrderedRoute(TMap tMap, String location){
+	    List<Train> orange_trains = MyMbta.getTrains(tMap.orangeLine, location);
+	    List<Train> red_trains = MyMbta.getTrains(tMap.redLine, location);
+	    List<Train> blue_trains = MyMbta.getTrains(tMap.blueLine, location);
 	    
-        ArrayList<ArrayList<Leg>> possibleTrains = new ArrayList<ArrayList<Leg>>();
-        ArrayList<Leg> bestTrains = new ArrayList<Leg>();
-        HashMap<String, ArrayList<String>> stationToLine = tMap.getStationToLineMap();
-        ArrayList<String> stationsToTravel = this.stops;
+	    int travelTime = 0;
+        if(tMap.getTimeOfTripIndex() == 1){
+            Calendar calendar = Calendar.getInstance();
+            int currentTime = (calendar.get(Calendar.HOUR_OF_DAY)*3600000) + (calendar.get(Calendar.MINUTE) * 60000) 
+                    + (calendar.get(Calendar.SECOND)*1000) + calendar.get(Calendar.MILLISECOND);
+
+            travelTime = (int) ((tMap.getTimeOfTrip() - currentTime)/1000);
+        }
+        
+        List<List<Leg>> possibleTrains = new ArrayList<List<Leg>>();
+        List<Leg> bestTrains = new ArrayList<Leg>();
+        Map<String, List<String>> stationToLine = tMap.getStationToLineMap();
+        List<String> stationsToTravel = this.stops;
         //For each transfer
-        for(int i = 0; i <= this.transfers; i++){
-            String currentStation = stationsToTravel.get(0);
-            if(travelTime == -1){
-                this.errorText = "No predicted trains arriving to "+currentStation;
-            }
-            //find the next transfer station which is either the last stop in a route or
-            // the first stop to appear twice in the list of stops
-            String transferStation = stationsToTravel.get(stationsToTravel.size() - 1);
-            while(stationsToTravel.size() > 1){
-                if(stationsToTravel.get(0).equals(stationsToTravel.get(1))){
-                    stationsToTravel.remove(0);
-                    transferStation = stationsToTravel.get(0);
-                    break;
+        if (stationsToTravel != null && stationsToTravel.size() > 0) {
+            for(int i = 0; i <= this.transfers; i++){
+                String currentStation = stationsToTravel.get(0);
+                if(travelTime == -1){
+                    this.errorText = "No predicted trains arriving to "+currentStation;
+                }
+                //find the next transfer station which is either the last stop in a route or
+                // the first stop to appear twice in the list of stops
+                String transferStation = stationsToTravel.get(stationsToTravel.size() - 1);
+                while(stationsToTravel.size() > 1){
+                    if(stationsToTravel.get(0).equals(stationsToTravel.get(1))){
+                        stationsToTravel.remove(0);
+                        transferStation = stationsToTravel.get(0);
+                        break;
+                    }else{
+                        stationsToTravel.remove(0);
+                    }
+                }
+                //find the current line by comparing the lines the current station to the lines that
+                // the transfer station has. The line in common is the current line
+                List<String> currentLines = stationToLine.get(currentStation);
+                List<String> transferLines = stationToLine.get(transferStation);
+                String line = "";
+                for(int j = 0; j<currentLines.size(); j++){
+                    String startLine = currentLines.get(j);
+                    if(transferLines.contains(startLine)){
+                        line = startLine;
+                        break;
+                    }
+                }
+                //Get destination the train is heading
+                String destination = this.getTrainDestination(currentStation, transferStation, tMap.getLine(line));
+                
+                //gets all trains for the current line
+                List<Train> trains = getTrainsForColor(line, orange_trains, red_trains, blue_trains);
+                
+                //creates a list of all potential legs of a route
+                List<Leg> possibleLegs = createLegs(currentStation, transferStation, destination, stationToLine,
+                        line, trains, travelTime);
+                
+                possibleTrains.add(possibleLegs);
+                
+                //finds the best legs for an ordered route 
+                Leg bestLeg;
+                if(possibleLegs.isEmpty()){
+                    bestLeg = new Leg(currentStation, transferStation, line, destination);
                 }else{
-                    stationsToTravel.remove(0);
+                    bestLeg = findBestLeg(possibleLegs);
                 }
+                travelTime = bestLeg.endTime;
+                bestTrains.add(bestLeg);
             }
-            //find the current line by comparing the lines the current station to the lines that
-            // the transfer station has. The line in common is the current line
-            ArrayList<String> currentLines = stationToLine.get(currentStation);
-            ArrayList<String> transferLines = stationToLine.get(transferStation);
-            String line = "";
-            for(int j = 0; j<currentLines.size(); j++){
-                String startLine = currentLines.get(j);
-                if(transferLines.contains(startLine)){
-                    line = startLine;
-                    break;
-                }
-            }
-            //Get destination the train is heading
-            String destination = this.getTrainDestination(currentStation, transferStation, tMap.getLine(line));
-            
-            //gets all trains for the current line
-            ArrayList<Train> trains = getTrainsForColor(line, orange_trains, red_trains, blue_trains);
-            
-            //creates a list of all potential legs of a route
-            ArrayList<Leg> possibleLegs = createLegs(currentStation, transferStation, destination, stationToLine,
-                    line, trains, travelTime);
-            
-            possibleTrains.add(possibleLegs);
-            
-            //finds the best legs for an ordered route 
-            Leg bestLeg;
-            if(possibleLegs.isEmpty()){
-                bestLeg = new Leg(currentStation, transferStation, line, destination);
-            }else{
-                bestLeg = findBestLeg(possibleLegs);
-            }
-            travelTime = bestLeg.endTime;
-            bestTrains.add(bestLeg);
         }
         this.legs = bestTrains;
         
@@ -135,7 +139,7 @@ public class Route {
 	 * @return the best leg
 	 * @author jeffreyguion
 	 */
-	private Leg findBestLeg(ArrayList<Leg> legs){
+	private Leg findBestLeg(List<Leg> legs){
 	    Leg quickestLeg = new Leg();
 	    for(int i = 0; i < legs.size(); i++){
 	        Leg l = legs.get(i);
@@ -164,9 +168,9 @@ public class Route {
 	 * @return - list of all possible legs that can be taken
 	 * @author jeffreyguion
 	 */
-	private ArrayList<Leg> createLegs(String startStation, String endStation, String destination, HashMap<String, ArrayList<String>> stationToLine,
-	       String line, ArrayList<Train> trains, int startTime){
-	    ArrayList<Leg> legs = new ArrayList<Leg>();
+	private List<Leg> createLegs(String startStation, String endStation, String destination, java.util.Map<String, List<String>> stationToLine,
+	       String line, List<Train> trains, int startTime){
+	    List<Leg> legs = new ArrayList<Leg>();
 
 	    for(int i = 0; i < trains.size(); i++){
 	        Train train = trains.get(i);
@@ -204,7 +208,7 @@ public class Route {
 	 * @return - a list of trains from json data
 	 * @author jeffreyguion
 	 */
-	private ArrayList<Train> getTrainsForColor(String color, ArrayList<Train> orange_trains, ArrayList<Train> red_trains, ArrayList<Train> blue_trains ){
+	private List<Train> getTrainsForColor(String color, List<Train> orange_trains, List<Train> red_trains, List<Train> blue_trains ){
 	   if(color == "Orange"){
 	       return orange_trains;
 	   }else if(color == "Red"){
@@ -259,7 +263,7 @@ public class Route {
 	    return null;
 	}
 
-	public ArrayList<String> getTrainIds() {
+	public List<String> getTrainIds() {
 		return trainIds;
 	}
 
@@ -267,7 +271,7 @@ public class Route {
 		this.trainIds = trainIds;
 	}
 
-	public ArrayList<String> getStops() {
+	public List<String> getStops() {
 		return stops;
 	}
 
