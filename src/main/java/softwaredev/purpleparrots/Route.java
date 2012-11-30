@@ -1,6 +1,7 @@
 package softwaredev.purpleparrots;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,12 +54,21 @@ public class Route {
 	 * 
 	 * @author jeffreyguion
 	 */
+
 	public void applyJsonToOrderedRoute(TMap tMap, String location){
 	    List<Train> orange_trains = MyMbta.getTrains(tMap.orangeLine, location);
 	    List<Train> red_trains = MyMbta.getTrains(tMap.redLine, location);
 	    List<Train> blue_trains = MyMbta.getTrains(tMap.blueLine, location);
+	    
+	    int travelTime = 0;
+        if(tMap.getTimeOfTripIndex() == 1){
+            Calendar calendar = Calendar.getInstance();
+            int currentTime = (calendar.get(Calendar.HOUR_OF_DAY)*3600000) + (calendar.get(Calendar.MINUTE) * 60000) 
+                    + (calendar.get(Calendar.SECOND)*1000) + calendar.get(Calendar.MILLISECOND);
+
+            travelTime = (int) ((tMap.getTimeOfTrip() - currentTime)/1000);
+        }
         
-        int travelTime = 0;
         List<List<Leg>> possibleTrains = new ArrayList<List<Leg>>();
         List<Leg> bestTrains = new ArrayList<Leg>();
         Map<String, List<String>> stationToLine = tMap.getStationToLineMap();
