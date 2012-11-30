@@ -3,27 +3,30 @@ package softwaredev.purpleparrots;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 
-public class Map {
+public class TMap {
 	
-	public ArrayList<String> ORANGE = new ArrayList<String>();
-	public ArrayList<String> BLUE = new ArrayList<String>();
-	public ArrayList<String> RED = new ArrayList<String>();
+	public List<String> ORANGE = new ArrayList<String>();
+	public List<String> BLUE = new ArrayList<String>();
+	public List<String> RED = new ArrayList<String>();
 	public Line orangeLine;
 	public Line redLine;
 	public Line blueLine;
-	public HashMap<String, ArrayList<String>> stationToLine;
+	public Long timeOfTrip;
+    public int timeOfTripIndex;
+	public Map<String, List<String>> stationToLine;
 	
 	
 	
-	public Map(){
+	public TMap(){
 		ORANGE.add("Orange");
 		BLUE.add("Blue");
 		RED.add("Red");
 		
-		this.stationToLine = new HashMap<String, ArrayList<String>>();
+		this.stationToLine = new HashMap<String, List<String>>();
 
 		
 		createMap();
@@ -36,7 +39,8 @@ public class Map {
 	 * @author leighannastolfi
 	 */
 	public void createMap(){
-		
+		this.timeOfTrip = new Long(0);
+	    
 		ArrayList<String> orangeLineStations = new ArrayList<String>();	
 		
 		Station oakGrove = new Station("Oak Grove", ORANGE);	
@@ -169,7 +173,7 @@ public class Map {
     private void updateStationToLineMap(ArrayList<String> lineStations, String lineColor) {
         for(int i = 0; i < lineStations.size(); i++){
             String stationName = lineStations.get(i);
-            ArrayList<String> lines;
+            List<String> lines;
             if(this.stationToLine.get(stationName) == null){
                 lines = new ArrayList<String>();
             }else{
@@ -207,7 +211,23 @@ public class Map {
 	 * 
 	 * @author jeffreyguion
 	 */
-	public HashMap<String, ArrayList<String>> getStationToLineMap(){
+	public Map<String, List<String>> getStationToLineMap(){
 	    return this.stationToLine;
 	}
+	
+	public Long getTimeOfTrip() {
+        return timeOfTrip;
+    }
+
+    public void setTimeOfTrip(Long timeOfTrip) {
+        this.timeOfTrip = timeOfTrip;
+    }
+
+    public int getTimeOfTripIndex() {
+        return timeOfTripIndex;
+    }
+
+    public void setTimeOfTripIndex(int timeOfTripIndex) {
+        this.timeOfTripIndex = timeOfTripIndex;
+    }
 }

@@ -88,7 +88,7 @@ public class TrainUpdater extends TimerTask{
      * @author jeffreyguion
      */
     private void showOrangeLineTrains(ArrayList<UITrain> trains){
-        HashMap<String, Train> orange_line_map = MyMbta.getCurrentLocationHash("Orange", this.location);
+        HashMap<String, Train> orange_line_map = MyMbta.getCurrentLocationMap("Orange", this.location);
         for(int i = 0; i < trains.size(); i++){
             UITrain train = trains.get(i);
             if(orange_line_map.get(train.getStopId()) != null){
@@ -106,7 +106,7 @@ public class TrainUpdater extends TimerTask{
      * @author jeffreyguion
      */
     private void showRedLineTrains(ArrayList<UITrain> trains){
-        HashMap<String, Train> red_line_map = MyMbta.getCurrentLocationHash("Red", this.location);
+        HashMap<String, Train> red_line_map = MyMbta.getCurrentLocationMap("Red", this.location);
         for(int i = 0; i < trains.size(); i++){
             UITrain train = trains.get(i);
             if(red_line_map.get(train.getStopId()) != null){
@@ -125,7 +125,7 @@ public class TrainUpdater extends TimerTask{
      * @author jeffreyguion
      */
     private void showBlueLineTrains(ArrayList<UITrain> trains) {
-        HashMap<String, Train> blue_line_map = MyMbta.getCurrentLocationHash("Blue", this.location);
+        HashMap<String, Train> blue_line_map = MyMbta.getCurrentLocationMap("Blue", this.location);
         for(int i = 0; i < trains.size(); i++){
             UITrain train = trains.get(i);
             if(blue_line_map.get(train.getStopId()) != null){

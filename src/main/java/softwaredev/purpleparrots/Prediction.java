@@ -1,9 +1,9 @@
 package softwaredev.purpleparrots;
 
 public class Prediction {
-	String stopId;
-	String stop;
-	int seconds;
+	public String stopId;
+	public String stop;
+	public int seconds;
 	
 	public Prediction(String stopId, String stop, int seconds) {
 		this.stopId = stopId;

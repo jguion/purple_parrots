@@ -32,19 +32,19 @@ public class Train {
     }
 
     /**
-     * Determines whether this train has a prediction for the given stop ID.
-     * @param stopId  the stop ID of the predictions to look for
-     * @return        true if this train contains a prediction with the given
-     *                stop ID; false otherwise
-     * @author        labichn
+     * Determines whether this train has a prediction for the given stop name.
+     * @param name  the stop ID of the predictions to look for
+     * @return      true if this train contains a prediction with the given
+     *              stop name; false otherwise
+     * @author      labichn
      */
-    public boolean hasPredFor(String stopId) {
+    public boolean hasPredFor(String name) {
         boolean re = false;
-        if (stopId != null && getPredictions() != null) {
+        if (name != null && getPredictions() != null) {
             Prediction tmp = null;
             for (int i=0; i<getPredictions().size(); i++) {
                 tmp = getPredictions().get(i);
-                if (tmp.stopId.equals(stopId)) {
+                if (tmp.stop.equals(name)) {
                     re = true;
                     break;
                 }
@@ -54,17 +54,17 @@ public class Train {
     }
 
     /**
-     * Gets the first prediction with the given stop ID, if there is one.
+     * Gets the first prediction with the given stop name, if there is one.
      * Throws a runtime exception otherwise.
-     * @param stopId  the stop ID of the prediction to get
-     * @return        the prediction, if one exists. an insulting exception
-     *                will be thrown otherwise.
-     * @author        labichn
+     * @param name  the stop name of the prediction to get
+     * @return      the prediction, if one exists. an insulting exception
+     *              will be thrown otherwise.
+     * @author      labichn
      */
-    public Prediction getPredFor(String stopId) {
-        if (stopId != null) {
+    public Prediction getPredFor(String name) {
+        if (name != null) {
             for (int i=0; i< getPredictions().size(); i++) {
-                if (getPredictions().get(i).stopId.equals(stopId)) {
+                if (getPredictions().get(i).stop.equals(name)) {
                     return getPredictions().get(i);
                 }
             }
