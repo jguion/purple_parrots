@@ -14,9 +14,14 @@ public class TrainCache {
 	public List<Train> getTrains() { return getTrains(MyMbta.def); }
 	public List<Train> getTrains(String location) {
 		if (lastUpdate == null || !isWarm()) {
-			update(location);
+			forceUpdate(location);
 		}
 		return trains;
+	}
+	public void forceUpdate(String location) {
+		trains = JsonData.getTrains(line, location);
+		Calendar now = Calendar.getInstance();
+		lastUpdate = now;
 	}
 	private boolean isWarm() {
 		return lastUpdate != null &&
@@ -24,10 +29,5 @@ public class TrainCache {
 	}
 	private long diff(Calendar a, Calendar b) {
 		return a.getTimeInMillis() - b.getTimeInMillis();
-	}
-	private void update(String location) {
-		trains = JsonData.getTrains(line, location);
-		Calendar now = Calendar.getInstance();
-		lastUpdate = now;
 	}
 }

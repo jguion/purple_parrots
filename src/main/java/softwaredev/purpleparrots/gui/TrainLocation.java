@@ -994,6 +994,7 @@ public class TrainLocation extends JFrame {
 	 */
 	private void updateTrains(ArrayList<UITrain> orange, ArrayList<UITrain> red, ArrayList<UITrain> blue){
 	    timer.cancel();
+	    MyMbta.updateCache(this.location);
 	    updater = new TrainUpdater(this.location, this.mbtaMapPanel);
 	    updater.setOrangeLineTrains(orange);
 	    updater.setRedLineTrains(red);
