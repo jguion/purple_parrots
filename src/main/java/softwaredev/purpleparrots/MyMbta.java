@@ -1,6 +1,5 @@
 package softwaredev.purpleparrots;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,38 +10,34 @@ import softwaredev.purpleparrots.gui.MbtaMap;
 import softwaredev.purpleparrots.gui.Mode;
 import softwaredev.purpleparrots.gui.Station;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
 public class MyMbta {
 
     public static String http = "http://developer.mbta.com/lib/rthr/";
     public static String test = "src/test/resources/mbta-test-data/2012_10_19/";
-    private static String def = test;
-    public static Map tMap = new Map();
+    public static String def = test;
+    public static softwaredev.purpleparrots.TMap tMap = new softwaredev.purpleparrots.TMap();
 
-    public static void getCurrentLocationOfAllTrains() {
-        ArrayList<Line> lines = new ArrayList<Line>();
-        ArrayList<String> stations = new ArrayList<String>();
-        Line orange = new Line("Orange", stations);
-        Line red = new Line("Red", stations);
-        Line blue = new Line("Blue", stations);
-        List<Train> orange_trains = JsonData.getTrains(orange, test);
-        List<Train> red_trains = JsonData.getTrains(red, test);
-        List<Train> blue_trains = JsonData.getTrains(blue, test);
-        System.out.println(orange_trains);
-        System.out.println(red_trains);
-        System.out.println(blue_trains);
+    private static java.util.Map<Line, TrainCache> lines;
+    
+    public static List<Train> getTrains(Line line) {
+    	return lines.get(line).getTrains();
     }
-
-    /**
-     * Gets the trains for this line from the default location.
-     * @param line  the line to get train information for
-     * @return      the list of current trains on the given line
-     * @author      labichn
-     */
-    private static List<Train> getTrains(Line line) {
-        return JsonData.getTrains(line, def);
+    
+    public static List<Train> getTrains(Line line, String location) {
+    	return lines.get(line).getTrains(location);
+    }
+    
+    static {
+    	Line redL = new Line("Red");
+    	Line blueL = new Line("Blue");
+    	Line orangeL = new Line("Orange");
+        TrainCache red = new TrainCache(redL);
+        TrainCache blue = new TrainCache(blueL);
+        TrainCache orange = new TrainCache(orangeL);
+    	lines = new HashMap<Line, TrainCache>();
+    	lines.put(redL, red);
+    	lines.put(blueL, blue);
+    	lines.put(orangeL, orange);
     }
 
     /**
@@ -114,12 +109,12 @@ public class MyMbta {
      * @param location
      * @return
      * 
-     * @author jeffreyguion
+     * @author jeffreyguion, labichn
      */
-    public static HashMap<String, Train> getCurrentLocationHash(String color, String location) {
-        ArrayList<String> stations = new ArrayList<String>();
+    public static HashMap<String, Train> getCurrentLocationMap(String color, String location) {
+        List<String> stations = new ArrayList<String>();
         Line line = new Line(color, stations);
-        ArrayList<Train> trains = JsonData.getTrains(line, location);
+        List<Train> trains = getTrains(line, location);
         HashMap<String, Train> dict = new HashMap<String, Train>();
         Train t;
         Prediction p = null;

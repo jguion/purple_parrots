@@ -3,27 +3,28 @@ package softwaredev.purpleparrots;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 
-public class Map {
+public class TMap {
 	
-	public ArrayList<String> ORANGE = new ArrayList<String>();
-	public ArrayList<String> BLUE = new ArrayList<String>();
-	public ArrayList<String> RED = new ArrayList<String>();
+	public List<String> ORANGE = new ArrayList<String>();
+	public List<String> BLUE = new ArrayList<String>();
+	public List<String> RED = new ArrayList<String>();
 	public Line orangeLine;
 	public Line redLine;
 	public Line blueLine;
-	public HashMap<String, ArrayList<String>> stationToLine;
+	public Map<String, List<String>> stationToLine;
 	
 	
 	
-	public Map(){
+	public TMap(){
 		ORANGE.add("Orange");
 		BLUE.add("Blue");
 		RED.add("Red");
 		
-		this.stationToLine = new HashMap<String, ArrayList<String>>();
+		this.stationToLine = new HashMap<String, List<String>>();
 
 		
 		createMap();
@@ -169,7 +170,7 @@ public class Map {
     private void updateStationToLineMap(ArrayList<String> lineStations, String lineColor) {
         for(int i = 0; i < lineStations.size(); i++){
             String stationName = lineStations.get(i);
-            ArrayList<String> lines;
+            List<String> lines;
             if(this.stationToLine.get(stationName) == null){
                 lines = new ArrayList<String>();
             }else{
@@ -207,7 +208,7 @@ public class Map {
 	 * 
 	 * @author jeffreyguion
 	 */
-	public HashMap<String, ArrayList<String>> getStationToLineMap(){
+	public Map<String, List<String>> getStationToLineMap(){
 	    return this.stationToLine;
 	}
 }
