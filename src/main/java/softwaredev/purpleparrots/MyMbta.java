@@ -228,7 +228,7 @@ public class MyMbta {
         List<String> stationNames = getStationNames(route);
         for(int i=0; i< trains.size(); i++){
             Train train = trains.get(i);
-            ArrayList<Prediction> predictions = train.getPredictions();
+            List<Prediction> predictions = train.getPredictions();
             for(int j=0; j < predictions.size(); j++){
                 Prediction p = predictions.get(j);
                 if(stationNames.contains(p.stop)){
