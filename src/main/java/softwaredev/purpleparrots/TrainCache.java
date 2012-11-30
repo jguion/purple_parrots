@@ -11,7 +11,6 @@ public class TrainCache {
 	private List<Train> trains = new ArrayList<Train>();
 	private Calendar lastUpdate = null;
 	public TrainCache(Line line) { this.line = line; }
-	public List<Train> getTrains() { return getTrains(MyMbta.def); }
 	public List<Train> getTrains(String location) {
 		if (lastUpdate == null || !isWarm()) {
 			forceUpdate(location);

@@ -5,14 +5,12 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,7 +23,7 @@ public class JsonData {
      * @param root  the root of the path of the json strings to parse, expected to be
      *              a string beginning with "http:// or "file:// and ending with "/"
      * @return      the current trains from the path built with the given root and line
-     * @author      guionj, modified by labichn
+     * @author      guionj, labichn
      */
     public static ArrayList<Train> getTrains(Line line, String root) {
         ArrayList<Train> trains = new ArrayList<Train>();
@@ -50,7 +48,7 @@ public class JsonData {
                 trains.add(train);
             }
         } catch (Exception e) {
-            log(e);
+            MyMbta.log(e);
         }
         return trains;
     }
@@ -62,14 +60,18 @@ public class JsonData {
      *              a string beginning with "http:// or "file:// and ending with "/"
      * @return      a json node representation of the string at the path built with
      *              the line and the root
-     * @author      guionj, modified by labichn
+     * @author      guionj, labichn
      */
     private static JsonNode getTData(Line line, String root) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String path = getPath(line, root);
         JsonNode rootNode = null;
         if (path.startsWith("http://")) {
-            rootNode = mapper.readValue(new URL(path), JsonNode.class);
+        	try {
+        		rootNode = mapper.readValue(new URL(path), JsonNode.class);
+        	} catch (UnknownHostException uhe) {
+        		
+        	}
         } else {
             rootNode = mapper.readValue(readString(new File(path)), JsonNode.class);
         }
@@ -99,7 +101,7 @@ public class JsonData {
                 br.close();
             }
         } catch (Exception e) {
-            log(e);
+            MyMbta.log(e);
         }
         return re;
     }
@@ -144,39 +146,6 @@ public class JsonData {
             }
         }
         return re;
-    }
-
-    /**
-     * Logs the exception's message and stack trace to STDOUT. Pull into a static utility class if needed
-     * elsewhere.
-     * @param e  the exception to log
-     * @author   labichn
-     */
-    private static void log(Exception e) {
-        System.out.println(e.getClass().getName() + " " + e.getMessage() + "\n" + getStackTrace(e));
-    }
-
-    /**
-     * Returns a string representation of the stack trace of the given exception.
-     * Each element of the stack trace will be printed as follows:
-     * SomeClass.someMethod(...) in SomeClass.java: 42             // where 42 is the line number
-     * @param e  the exception to get the stack trace from
-     * @return   a string representation of the stack trace of the given exception.
-     * @author   labichn
-     */
-    private static String getStackTrace(Exception e) {
-        StringBuilder sb = new StringBuilder();
-        StackTraceElement[] stes = e.getStackTrace();
-        StackTraceElement tmp = null;
-        if (stes != null) {
-            for (int i=0; i<stes.length; i++) {
-                tmp = stes[i];
-                sb.append(tmp.getClassName() + "." + tmp.getMethodName() + "(...) in " +
-                          tmp.getFileName() + ": " + String.valueOf(tmp.getLineNumber()));
-                sb.append("\n");
-            }
-        }
-        return sb.toString();
     }
 
 }
