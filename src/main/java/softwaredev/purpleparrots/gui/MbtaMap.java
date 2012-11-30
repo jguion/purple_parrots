@@ -22,15 +22,10 @@ public class MbtaMap extends JPanel{
 	}
 	
 	Image image = null;
-	String url = "http://i46.tinypic.com/347xl68.jpg";
+	String url = "src/main/resources/v3.jpg";
 	
 	public void ImagePanel(String filename) {
-        try {
-			this.image = new ImageIcon(new URL(filename)).getImage();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.image = new ImageIcon(filename).getImage();
     }
 	
 	/**

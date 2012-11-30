@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import softwaredev.purpleparrots.gui.MbtaMap;
@@ -18,11 +19,26 @@ public class MyMbta {
     public static softwaredev.purpleparrots.TMap tMap = new softwaredev.purpleparrots.TMap();
 
     private static java.util.Map<Line, TrainCache> lines;
-    
+
+    /**
+     * Gets the trains for the given line from the default source from
+     * the cache.
+     * @param line      the line to get the trains for
+     * @return          the trains, if available
+     * @author          labichn
+     */
     public static List<Train> getTrains(Line line) {
-    	return lines.get(line).getTrains();
+    	return lines.get(line).getTrains(def);
     }
     
+    /**
+     * Gets the trains for the given line from the source at location from
+     * the cache.
+     * @param line      the line to get the trains for
+     * @param location  the location of the source of the train data
+     * @return          the trains, if available
+     * @author          labichn
+     */
     public static List<Train> getTrains(Line line, String location) {
     	return lines.get(line).getTrains(location);
     }
@@ -39,25 +55,11 @@ public class MyMbta {
     	lines.put(blueL, blue);
     	lines.put(orangeL, orange);
     }
-
-    /**
-     * Gets incoming trains for a line
-     * 
-     * @param color
-     * @return
-     * 
-     * @author jeffreyguion
-     */
-    public static String getCurrentLocationOfTrains(String color) {
-        ArrayList<String> stations = new ArrayList<String>();
-        List<Train> trains = getTrains(new Line(color, stations));
-        return trains.toString();
-    }
     
     /**
      * Forces a cache update from the given location.
      * @param location  the location from which to update the caches.
-     * @autho           labichn
+     * @author          labichn
      */
     public static void updateCache(String location) {
     	if (lines != null && lines.size() > 0) {
@@ -65,54 +67,6 @@ public class MyMbta {
     			cache.forceUpdate(location == null ? def : location);
     		}
     	}
-    }
-
-    /**
-     * Gets a filtered list of trains--those which currently have predictions for the given stop ID.
-     * @param trains  the list of trains to filter
-     * @param stopId  the stop ID which the trains must have in their predictions list
-     * @return        the list of trains which include predictions toward the given stop ID
-     * @author        labichn
-     */
-    public static List<Train> getTrainsForStop(List<Train> trains, String stopId) {
-        List<Train> re = new ArrayList<Train>();
-        if (stopId != null && trains != null) {
-            Train tmp = null;
-            for (int i=0; i<trains.size(); i++) {
-                tmp = trains.get(i);
-                if (tmp.hasPredFor(stopId)) re.add(tmp);
-            }
-            re = sort(re, stopId);
-        }
-        return re;
-    }
-
-    /**
-     * Slowly sorts the given list of trains. Calls to getPredFor are safe because
-     * we've already filtered on the existence of a prediction with the given stop ID.
-     * @param trains  the trains to sort
-     * @return        the trains, sorted from earliest arrival to latest to the stop
-     *                denoted by the given stop ID.
-     * @author        labichn
-     */
-    private static List<Train> sort(List<Train> trains, String stopId) {
-        List<Train> re = new ArrayList<Train>();
-        Train lowest, test;
-        while (re.size()<trains.size()) {
-            lowest = null;
-            test = null;
-            for (int i=0; i<trains.size(); i++) {
-                test = trains.get(i);
-                if (!re.contains(test)) {
-                    if (lowest == null
-                     || test.getPredFor(stopId).seconds < lowest.getPredFor(stopId).seconds) {
-                        lowest = test;
-                    }
-                }
-            }
-            re.add(lowest);
-        }
-        return re;
     }
 
     /**
@@ -124,7 +78,7 @@ public class MyMbta {
      * 
      * @author jeffreyguion, labichn
      */
-    public static HashMap<String, Train> getCurrentLocationMap(String color, String location) {
+    public static Map<String, Train> getCurrentLocationMap(String color, String location) {
         List<String> stations = new ArrayList<String>();
         Line line = new Line(color, stations);
         List<Train> trains = getTrains(line, location);
@@ -442,10 +396,37 @@ public class MyMbta {
         return stops;
     }
 
+    /**
+     * Logs the exception's message and stack trace to STDOUT. Pull into a static utility class if needed
+     * elsewhere.
+     * @param e  the exception to log
+     * @author   labichn
+     */
+    public static void log(Exception e) {
+        System.out.println(e.getClass().getName() + " " + e.getMessage() + "\n" + getStackTrace(e));
+    }
 
-    public static void main(String [] args) {
-        //        getCurrentLocationOfAllTrains();
-        System.out.println(getTrainsForStop(getTrains(new Line("Blue", new ArrayList<String>())), "70040").toString());
+    /**
+     * Returns a string representation of the stack trace of the given exception.
+     * Each element of the stack trace will be printed as follows:
+     * SomeClass.someMethod(...) in SomeClass.java: 42             // where 42 is the line number
+     * @param e  the exception to get the stack trace from
+     * @return   a string representation of the stack trace of the given exception.
+     * @author   labichn
+     */
+    private static String getStackTrace(Exception e) {
+        StringBuilder sb = new StringBuilder();
+        StackTraceElement[] stes = e.getStackTrace();
+        StackTraceElement tmp = null;
+        if (stes != null) {
+            for (int i=0; i<stes.length; i++) {
+                tmp = stes[i];
+                sb.append(tmp.getClassName() + "." + tmp.getMethodName() + "(...) in " +
+                          tmp.getFileName() + ": " + String.valueOf(tmp.getLineNumber()));
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
     }
 
 }
