@@ -11,14 +11,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class MbtaMap extends JPanel{
-	ArrayList<Station> route;
-	Mode mode;
+	private ArrayList<Station> route;
+	private Mode mode;
+	private RouteType routeType;
+	private String startStation;
+	private String endStation;
 	Long timeOfTrip;
 	int timeOfTripIndex;
 
     MbtaMap(){
 		this.route = new ArrayList<Station>();
 		this.mode = Mode.ORDERED_ROUTE;
+		this.routeType = null;
+		this.startStation = null;
+		this.endStation = null;
 	}
 	
 	Image image = null;
@@ -59,7 +65,40 @@ public class MbtaMap extends JPanel{
 	}
 	
 	
-	public void addStation(Station station){
+	public RouteType getRouteType() {
+        return routeType;
+    }
+
+    public void setRouteType(int index) {
+        if(index == 0){
+            this.routeType = RouteType.FASTEST_ROUTE;
+        }else if(index == 1){
+            this.routeType = RouteType.EARLIEST_DEPARTURE;
+        }else if(index == 2){
+            this.routeType = RouteType.EARLIST_ARRIVAL;
+        }else{
+            this.routeType = RouteType.FEWEST_TRANSFERS;
+        }
+        
+    }
+
+    public String getStartStation() {
+        return startStation;
+    }
+
+    public void setStartStation(String startStation) {
+        this.startStation = startStation;
+    }
+
+    public String getEndStation() {
+        return endStation;
+    }
+
+    public void setEndStation(String endStation) {
+        this.endStation = endStation;
+    }
+
+    public void addStation(Station station){
 		this.route.add(station);
 	}
 	

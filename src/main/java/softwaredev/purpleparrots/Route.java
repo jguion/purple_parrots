@@ -1,6 +1,7 @@
 package softwaredev.purpleparrots;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -104,7 +105,7 @@ public class Route {
                     }
                 }
                 //Get destination the train is heading
-                String destination = this.getTrainDestination(currentStation, transferStation, tMap.getLine(line));
+                String destination = getTrainDestination(currentStation, transferStation, tMap.getLine(line));
                 
                 //gets all trains for the current line
                 List<Train> trains = getTrainsForColor(line, orange_trains, red_trains, blue_trains);
@@ -190,8 +191,7 @@ public class Route {
                 }
                 if(l.startTime > 0 && startTime != -1){
                     legs.add(l);
-                }
-                
+                }             
             }
 	    }
 	    return legs;	    
@@ -217,8 +217,11 @@ public class Route {
 	   }
 	}
 	
+	
 	/**
-	 * Returns the destination of a train on a line given a start and transfer station
+	 * Returns the destination of a train on a line given a start and transfer station by 
+	 * returning the last stop, the first stop, or Ashmont for the red line case where the line
+	 * breaks.
 	 * 
 	 * @param startStation
 	 * @param transferStation
@@ -226,8 +229,12 @@ public class Route {
 	 * @return
 	 * @author jeffreyguion
 	 */
-	private String getTrainDestination(String startStation, String transferStation, Line line){
+	public static String getTrainDestination(String startStation, String transferStation, Line line){
         int numStops = line.getStops().size();
+        List<String> redLineIsNotStraight = Arrays.asList("Savin Hill","Fields Corner", "Shawmut", "Ashmont");
+        if(redLineIsNotStraight.contains(transferStation)){
+            return "Ashmont";
+        }
         for(int i = 0; i<numStops - 1 ; i++){
             String currentStop = line.getStops().get(i);            
             if(currentStop == startStation){
