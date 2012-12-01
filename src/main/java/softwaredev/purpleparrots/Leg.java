@@ -53,10 +53,10 @@ public class Leg {
      */
     public String toString(){
         if(this.startTime != -1 && this.endTime != -1){
-            return "Leave "+this.startStation+" in " +this.startTime + " seconds. Arrive at "
-                    +this.endStation+" in "+this.endTime+" seconds.";
+            return "Leave "+this.startStation+" in " + MyMbta.getMinutesAndSeconds(this.startTime) + ". Arrive at "
+                    +this.endStation+" in "+ MyMbta.getMinutesAndSeconds(this.endTime) +".";
         }else if(this.startTime != -1 && this.endTime == -1){
-            return "Leave "+this.startStation+" in " +this.startTime + " seconds. Arrival time at "
+            return "Leave "+this.startStation+" in " + MyMbta.getMinutesAndSeconds(this.startTime) + ". Arrival time at "
                     +this.endStation+" is unknown.";
         }else{
             return "Departure time from "+this.startStation+" is unknown. Arrival time at "
