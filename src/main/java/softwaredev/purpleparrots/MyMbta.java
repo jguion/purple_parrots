@@ -646,4 +646,32 @@ public class MyMbta {
                 + (calendar.get(Calendar.SECOND)*1000) + calendar.get(Calendar.MILLISECOND);
     }
     
+    /**
+     * Pretty-print seconds to seconds and minutes.
+     * @param seconds  the number of seconds
+     * @return         A string representation with minutes and seconds
+     * @author         labichn
+     */
+    public static String getMinutesAndSeconds(int seconds) {
+        String re = "";
+        int rem = seconds%60;
+        if (seconds < 60) {
+            re = String.valueOf(seconds) + " second" + (rem==1?"":"s");
+        } else {
+            int min = seconds/60;
+            re = String.valueOf(min) + " minute" + (min==1?"":"s") + " and " +
+                    String.valueOf(rem) + " second" + (rem==1?"":"s");
+        }
+        return re;
+    }
+    
+    /**
+     * Pretty-print seconds to minutes.
+     * @param seconds  the number of seconds
+     * @return         A string representation with minutes
+     * @author         labichn
+     */
+    public static String getMinutes(int seconds) {
+        return String.valueOf(seconds/60) + " minutes";
+    }
 }

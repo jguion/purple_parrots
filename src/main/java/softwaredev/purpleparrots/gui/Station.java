@@ -106,11 +106,11 @@ public class Station extends JPanel implements MouseListener{
             	}
             	sorted = sortCut(toSort, name, 5);
             	re += start + sorted.get(0).getDestination() + mid +
-            			getMinutesAndSeconds(sorted.get(0).getPredFor(name).seconds) + end;
+            			MyMbta.getMinutesAndSeconds(sorted.get(0).getPredFor(name).seconds) + end;
             	if (sorted.size() > 1) {
             		re += "  Others will follow in ";
             		for (int i=1; i<sorted.size(); i++) {
-            			re += getMinutes(sorted.get(i).getPredFor(name).seconds) + ", ";
+            			re += MyMbta.getMinutes(sorted.get(i).getPredFor(name).seconds) + ", ";
             		}
             		re = re.substring(0, re.length()-2) + " seconds.<br>";
             	}
@@ -122,35 +122,7 @@ public class Station extends JPanel implements MouseListener{
         }
         return re;
     }
-    
-    /**
-     * Pretty-print seconds to seconds and minutes.
-     * @param seconds  the number of seconds
-     * @return         A string representation with minutes and seconds
-     * @author         labichn
-     */
-    private String getMinutesAndSeconds(int seconds) {
-    	String re = "";
-    	int rem = seconds%60;
-    	if (seconds < 60) {
-    		re = String.valueOf(seconds) + " second" + (rem==1?"":"s");
-    	} else {
-    		int min = seconds/60;
-    		re = String.valueOf(min) + " minute" + (min==1?"":"s") + " and " +
-        			String.valueOf(rem) + " second" + (rem==1?"":"s");
-    	}
-    	return re;
-    }
-    
-    /**
-     * Pretty-print seconds to minutes.
-     * @param seconds  the number of seconds
-     * @return         A string representation with minutes
-     * @author         labichn
-     */
-    private String getMinutes(int seconds) {
-    	return String.valueOf(seconds/60) + " minutes";
-    }
+
 
     /**
      * Slowly sorts the given list of trains. Calls to getPredFor are safe because
