@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import softwaredev.purpleparrots.gui.TimeOfTrip;
+
 
 
 public class TMap {
@@ -15,8 +17,8 @@ public class TMap {
 	public Line orangeLine;
 	public Line redLine;
 	public Line blueLine;
-	public Long timeOfTrip;
-    public int timeOfTripIndex;
+	private Long timeOfTrip;
+    private TimeOfTrip timeOfTripIndex;
 	public Map<String, List<String>> stationToLine;
 	
 	
@@ -223,11 +225,11 @@ public class TMap {
         this.timeOfTrip = timeOfTrip;
     }
 
-    public int getTimeOfTripIndex() {
+    public TimeOfTrip getTimeOfTripIndex() {
         return timeOfTripIndex;
     }
 
-    public void setTimeOfTripIndex(int timeOfTripIndex) {
+    public void setTimeOfTripIndex(TimeOfTrip timeOfTripIndex) {
         this.timeOfTripIndex = timeOfTripIndex;
     }
 }
