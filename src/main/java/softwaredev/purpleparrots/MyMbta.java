@@ -1,6 +1,7 @@
 package softwaredev.purpleparrots;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +12,7 @@ import softwaredev.purpleparrots.gui.MbtaMap;
 import softwaredev.purpleparrots.gui.Mode;
 import softwaredev.purpleparrots.gui.RouteType;
 import softwaredev.purpleparrots.gui.Station;
+import softwaredev.purpleparrots.gui.TimeOfTrip;
 
 public class MyMbta {
 
@@ -117,13 +119,19 @@ public class MyMbta {
     public static Route getRoute(MbtaMap map, String location){
         tMap.setTimeOfTrip(map.getTimeOfTrip());
         tMap.setTimeOfTripIndex(map.getTimeOfTripIndex());
+        int startTime = 0;
         if(map.getMode().equals(Mode.ORDERED_ROUTE)){
-            return getOrderedRoute(map.getRoute(), location);
+            if(tMap.getTimeOfTripIndex().equals(TimeOfTrip.ARRIVE_BY)){
+                Route routeNow = getOrderedRoute(map.getRoute(), location, startTime);
+                int routeDuration = routeNow.getTime() + 300; //+5 minute buffer
+                return getOrderedRoute(map.getRoute(), location, getTimeOfTrip(routeDuration));
+            }
+            else
+                return getOrderedRoute(map.getRoute(), location, getTimeOfTrip(getCurrentTime()));
         }
         else if (map.getMode().equals(Mode.UNORDERED_ROUTE)){
             Station startStation = findStationWithName(map.getStartStation(), map.getRoute());
             Station endStation = findStationWithName(map.getEndStation(), map.getRoute());
-            int startTime = 0;
             if(startStation == null){
                 if(map.getRouteType().equals(RouteType.EARLIEST_DEPARTURE)){
                     startStation = getEarliestDepartingTrain(map.getRoute(), startTime, location);
@@ -131,8 +139,13 @@ public class MyMbta {
                     startStation = map.getRoute().get(0);
                 }
             }
-            
-            return getUnorderedRouteV1(map.getRoute(), location, startStation, endStation);
+            if(tMap.getTimeOfTripIndex().equals(TimeOfTrip.ARRIVE_BY)){
+                Route routeNow = getUnorderedRouteV1(map.getRoute(), location, startStation, endStation, startTime);
+                int routeDuration = routeNow.getTime() + 300; //+5 minute buffer
+                return getUnorderedRouteV1(map.getRoute(), location, startStation, endStation, getTimeOfTrip(routeDuration));
+            }
+            else
+                return getUnorderedRouteV1(map.getRoute(), location, startStation, endStation, getTimeOfTrip(getCurrentTime()));
         }
         else return new Route();//throw new Exception("Route mode not selected");
     }
@@ -255,7 +268,7 @@ public class MyMbta {
      * 
      * @author leighannastolfi
      */
-    public static Route getOrderedRoute(ArrayList<Station> trip, String location){
+    public static Route getOrderedRoute(ArrayList<Station> trip, String location, int timeOfTrip){
         int numberOfStops = trip.size();
         Route route = new Route();
         ArrayList<String> stopsPassed = new ArrayList<String>();
@@ -266,7 +279,7 @@ public class MyMbta {
             }
         }
         route.setStops(stopsPassed);
-        route.applyJsonToOrderedRoute(tMap, location);
+        route.applyJsonToOrderedRoute(tMap, location, timeOfTrip);
         return route;
     }
 
@@ -437,7 +450,7 @@ public class MyMbta {
      * 
      * @author jeffreyguion
      */
-    public static Route getUnorderedRouteV1(ArrayList<Station> route, String location, Station startStation, Station endStation){
+    public static Route getUnorderedRouteV1(ArrayList<Station> route, String location, Station startStation, Station endStation, int timeOfTrip){
         HashMap<String,ArrayList<String>> stationToShortestPath = new HashMap<String,ArrayList<String>>();
         Station currentStation = null;
         if(startStation != null){
@@ -470,7 +483,7 @@ public class MyMbta {
         Route finalRoute = new Route();
         finalRoute.setStops(stopsPassed);
         finalRoute.setTransfers(totalTransfers - 1);
-        finalRoute.applyJsonToOrderedRoute(tMap, location);
+        finalRoute.applyJsonToOrderedRoute(tMap, location, timeOfTrip);
         return finalRoute;
     }
     
@@ -596,6 +609,69 @@ public class MyMbta {
             }
         }
         return sb.toString();
-    }
+    }  
+   
+    /**
+     * Finds the earliest time in seconds the route can begin
+     * 
+     * @param time 
+     * @return time in seconds
+     * @author leighannastolfi
+     */
+    private static int getTimeOfTrip(int time){
+        int travelTime = 0;
+        if(tMap.getTimeOfTripIndex().equals(TimeOfTrip.DEPART_AT))
+            travelTime = (int) ((tMap.getTimeOfTrip() - time)/1000);
+        else if(tMap.getTimeOfTripIndex().equals(TimeOfTrip.ARRIVE_BY)){
+            //find the number of seconds from now to when the user wants to leave
+            int timeFromNow = (int) ((tMap.getTimeOfTrip() - getCurrentTime())/1000);
+            //based off previously found route time, determine when we want to leave
+            travelTime = (int) (timeFromNow - time);
+        }
+        if(travelTime <0)
+            travelTime = 0;
 
+        return travelTime;
+    }
+    
+    /**
+     * Finds the current time milliseconds instead of epoch time
+     * 
+     * @return current time in milliseconds of today only
+     * @author leighannastolfi
+     */
+    private static int getCurrentTime(){
+        Calendar calendar = Calendar.getInstance();
+        return (calendar.get(Calendar.HOUR_OF_DAY)*3600000) + (calendar.get(Calendar.MINUTE) * 60000) 
+                + (calendar.get(Calendar.SECOND)*1000) + calendar.get(Calendar.MILLISECOND);
+    }
+    
+    /**
+     * Pretty-print seconds to seconds and minutes.
+     * @param seconds  the number of seconds
+     * @return         A string representation with minutes and seconds
+     * @author         labichn
+     */
+    public static String getMinutesAndSeconds(int seconds) {
+        String re = "";
+        int rem = seconds%60;
+        if (seconds < 60) {
+            re = String.valueOf(seconds) + " second" + (rem==1?"":"s");
+        } else {
+            int min = seconds/60;
+            re = String.valueOf(min) + " minute" + (min==1?"":"s") + " and " +
+                    String.valueOf(rem) + " second" + (rem==1?"":"s");
+        }
+        return re;
+    }
+    
+    /**
+     * Pretty-print seconds to minutes.
+     * @param seconds  the number of seconds
+     * @return         A string representation with minutes
+     * @author         labichn
+     */
+    public static String getMinutes(int seconds) {
+        return String.valueOf(seconds/60) + " minutes";
+    }
 }
