@@ -117,7 +117,7 @@ public class Route {
                 }
                 travelTime = bestLeg.endTime;
                 bestTrains.add(bestLeg);
-                this.time =  this.time + bestLeg.endTime;
+                this.time = bestLeg.endTime;
             }
         }
         this.legs = bestTrains;
