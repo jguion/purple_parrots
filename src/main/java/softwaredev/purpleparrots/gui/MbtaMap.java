@@ -16,8 +16,8 @@ public class MbtaMap extends JPanel{
 	private RouteType routeType;
 	private String startStation;
 	private String endStation;
-	Long timeOfTrip;
-	int timeOfTripIndex;
+	private Long timeOfTrip;
+	private TimeOfTrip timeOfTripIndex;
 
     MbtaMap(){
 		this.route = new ArrayList<Station>();
@@ -81,6 +81,16 @@ public class MbtaMap extends JPanel{
         }
         
     }
+    
+    public void setTimeOfTripIndex(int index) {
+        if(index == 0){
+            this.timeOfTripIndex = TimeOfTrip.LEAVE_NOW;
+        }else if(index == 1){
+            this.timeOfTripIndex = TimeOfTrip.DEPART_AT;
+        }else{
+            this.timeOfTripIndex = TimeOfTrip.ARRIVE_BY;
+        }        
+    }
 
     public String getStartStation() {
         return startStation;
@@ -118,12 +128,8 @@ public class MbtaMap extends JPanel{
         this.timeOfTrip = timeOfTrip;
     }
 
-    public int getTimeOfTripIndex() {
+    public TimeOfTrip getTimeOfTripIndex() {
         return timeOfTripIndex;
-    }
-
-    public void setTimeOfTripIndex(int timeOfTripIndex) {
-        this.timeOfTripIndex = timeOfTripIndex;
     }
     
     /**

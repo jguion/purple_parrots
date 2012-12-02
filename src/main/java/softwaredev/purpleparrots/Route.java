@@ -19,6 +19,7 @@ public class Route {
 	public Route(){
 	    this.errorText = "";
 	    this.transfers = 0;
+	    this.time = 0;
 	    this.legs = new ArrayList<Leg>();
 	};
 	
@@ -55,19 +56,10 @@ public class Route {
 	 * @author jeffreyguion
 	 */
 
-	public void applyJsonToOrderedRoute(TMap tMap, String location){
+	public void applyJsonToOrderedRoute(TMap tMap, String location, int travelTime){
 	    List<Train> orange_trains = MyMbta.getTrains(tMap.orangeLine, location);
 	    List<Train> red_trains = MyMbta.getTrains(tMap.redLine, location);
 	    List<Train> blue_trains = MyMbta.getTrains(tMap.blueLine, location);
-	    
-	    int travelTime = 0;
-        if(tMap.getTimeOfTripIndex() == 1){
-            Calendar calendar = Calendar.getInstance();
-            int currentTime = (calendar.get(Calendar.HOUR_OF_DAY)*3600000) + (calendar.get(Calendar.MINUTE) * 60000) 
-                    + (calendar.get(Calendar.SECOND)*1000) + calendar.get(Calendar.MILLISECOND);
-
-            travelTime = (int) ((tMap.getTimeOfTrip() - currentTime)/1000);
-        }
         
         List<List<Leg>> possibleTrains = new ArrayList<List<Leg>>();
         List<Leg> bestTrains = new ArrayList<Leg>();
@@ -125,6 +117,7 @@ public class Route {
                 }
                 travelTime = bestLeg.endTime;
                 bestTrains.add(bestLeg);
+                this.time = bestLeg.endTime;
             }
         }
         this.legs = bestTrains;

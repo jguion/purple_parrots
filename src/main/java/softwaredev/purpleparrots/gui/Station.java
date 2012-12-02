@@ -95,8 +95,8 @@ public class Station extends JPanel implements MouseListener{
                 }
             }
         	String start = "The next ";
-        	String mid = " bound train will arrive in ";
-        	String end = " seconds.<br>";
+        	String mid = "-bound train will arrive in ";
+        	String end = ".<br>";
             List<Train> sorted;
             for (List<Train> toSort : map.values()) {
             	if (!re.equals(nothing)) {
@@ -106,12 +106,11 @@ public class Station extends JPanel implements MouseListener{
             	}
             	sorted = sortCut(toSort, name, 5);
             	re += start + sorted.get(0).getDestination() + mid +
-            			String.valueOf(sorted.get(0).getPredFor(name).seconds) + end;
+            			MyMbta.getMinutesAndSeconds(sorted.get(0).getPredFor(name).seconds) + end;
             	if (sorted.size() > 1) {
             		re += "  Others will follow in ";
             		for (int i=1; i<sorted.size(); i++) {
-            			re += String.valueOf(sorted.get(i).getPredFor(name).seconds) +
-            					", ";
+            			re += MyMbta.getMinutes(sorted.get(i).getPredFor(name).seconds) + ", ";
             		}
             		re = re.substring(0, re.length()-2) + " seconds.<br>";
             	}
@@ -123,6 +122,7 @@ public class Station extends JPanel implements MouseListener{
         }
         return re;
     }
+
 
     /**
      * Slowly sorts the given list of trains. Calls to getPredFor are safe because
