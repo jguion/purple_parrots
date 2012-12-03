@@ -167,7 +167,7 @@ public class MyMbta {
         
         Route r2 = getUnorderedRouteV1(route, location, startStation, endStation, timeOfTrip, false);
         
-        if(r1.getTime() < r2.getTime()){
+        if((r1.getTime() < r2.getTime() && r1.getTime() != -1) || r2.getTime() == -1){
             return r1;
         }else{
             return r2;
@@ -668,7 +668,7 @@ public class MyMbta {
             //based off previously found route time, determine when we want to leave
             travelTime = (int) (timeFromNow - time);
         }
-        if(travelTime <0)
+        if(travelTime < 0)
             travelTime = 0;
 
         return travelTime;
@@ -680,7 +680,8 @@ public class MyMbta {
      * @return current time in milliseconds of today only
      * @author leighannastolfi
      */
-    private static int getCurrentTime(){
+
+    public static int getCurrentTime(){
         Calendar calendar = Calendar.getInstance();
         return (calendar.get(Calendar.HOUR_OF_DAY)*3600000) + (calendar.get(Calendar.MINUTE) * 60000) 
                 + (calendar.get(Calendar.SECOND)*1000) + calendar.get(Calendar.MILLISECOND);

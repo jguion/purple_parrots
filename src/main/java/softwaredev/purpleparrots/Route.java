@@ -77,9 +77,31 @@ public class Route {
                 String transferStation = stationsToTravel.get(stationsToTravel.size() - 1);
                 while(stationsToTravel.size() > 1){
                     if(stationsToTravel.get(0).equals(stationsToTravel.get(1))){
-                        stationsToTravel.remove(0);
-                        transferStation = stationsToTravel.get(0);
+                        //Handle case if a transfer is at the end of the route, i.e do not need to transfer to another train
+                        if(stationsToTravel.size() == 2){
+                            this.transfers = 0;
+                            stationsToTravel.remove(0);
+                            stationsToTravel.remove(0);
+                        }
+                        else{
+                            stationsToTravel.remove(0);
+                            transferStation = stationsToTravel.get(0);
+                            //Handle the case when a transfer station is a selected station in a route
+                            while(transferStation.equals(stationsToTravel.get(1))){
+                                    this.transfers = this.transfers - 1;
+                                    stationsToTravel.remove(0);
+                                    transferStation = stationsToTravel.get(0);
+                            }
+                            // If going from red line Downtown Crossing to blue line State Street, need to handle case
+                            // of trying to go from Downtown to Downtown or State to State
+                            if(currentStation.equals(transferStation)){
+                                transferStation = stationsToTravel.get(stationsToTravel.size() - 1);
+                                this.transfers = this.transfers - 2;
+                                stationsToTravel.remove(0);
+                            }                            
+                        }
                         break;
+
                     }else{
                         stationsToTravel.remove(0);
                     }
