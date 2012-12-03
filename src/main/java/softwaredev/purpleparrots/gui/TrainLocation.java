@@ -950,12 +950,12 @@ public class TrainLocation extends JFrame {
 				mbtaMapPanel.setTimeOfTripIndex(arriveDepart.getSelectedIndex());
 				mbtaMapPanel.setRouteType(routeTypeComboBox.getSelectedIndex());
 				Route route = MyMbta.getRoute(mbtaMapPanel, location);
-				if(route.getTime() > ((time/1000)- MyMbta.getCurrentTime()) && arriveDepart.getSelectedIndex() == 2){
+				if(route.getTotalTime() > ((time/1000)- MyMbta.getCurrentTime()) && arriveDepart.getSelectedIndex() == 2){
 				    JOptionPane.showMessageDialog(mbtaMapPanel, "No route can arrive at the specified time. " +
 				                                        "Here is the closest route to your arrival time:  \n\n" + route);
 			    }
 				else{
-				    JOptionPane.showMessageDialog(mbtaMapPanel, "Directions! \n "+ route);
+				    JOptionPane.showMessageDialog(mbtaMapPanel, "Directions \n"+ route);
 				}
 			}
 		});
@@ -1037,7 +1037,23 @@ public class TrainLocation extends JFrame {
 		JButton btnSetAsStart = new JButton("Set as Start Station");
 		btnSetAsStart.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent arg0) {
-	                mbtaMapPanel.setStartStation(list.getSelectedItem());
+	                String selectedName = list.getSelectedItem();
+	                int selectedIndex = list.getSelectedIndex();
+	                for(int i = 0; i < list.getItemCount(); i++){
+                        String item = list.getItem(i);
+                        if(item.endsWith(" : Start Station")){
+                            item = item.replace(" : Start Station", "");
+                            list.remove(i);
+                            list.add(item, i);
+                        }
+                    }
+	                if(selectedName.equals(null) || selectedName.endsWith(" : Start Station")){
+	                    mbtaMapPanel.setStartStation(null);
+	                }else{
+	                    mbtaMapPanel.setStartStation(selectedName);
+	                    list.remove(selectedIndex);
+	                    list.add(selectedName + " : Start Station", selectedIndex);
+	                }
 	            }
 	        });
 		btnSetAsStart.setBounds(1100, 487, 177, 29);
@@ -1046,7 +1062,23 @@ public class TrainLocation extends JFrame {
 		JButton btnSetAsEnd = new JButton("Set as End Station");
 		btnSetAsEnd.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent arg0) {
-		        mbtaMapPanel.setEndStation(list.getSelectedItem());
+		        String selectedName = list.getSelectedItem();
+                int selectedIndex = list.getSelectedIndex();
+                for(int i = 0; i < list.getItemCount(); i++){
+                    String item = list.getItem(i);
+                    if(item.endsWith(" : End Station")){
+                        item = item.replace(" : End Station", "");
+                        list.remove(i);
+                        list.add(item, i);
+                    }
+                }
+                if(selectedName.equals(null) || selectedName.endsWith(" : End Station")){
+                    mbtaMapPanel.setEndStation(null);
+                }else{
+                    mbtaMapPanel.setEndStation(selectedName);
+                    list.remove(selectedIndex);
+                    list.add(selectedName + " : End Station", selectedIndex);
+                }
 		    }
 		});
 		btnSetAsEnd.setBounds(1110, 518, 167, 29);
