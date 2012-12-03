@@ -123,7 +123,7 @@ public class MyMbta {
         if(map.getMode().equals(Mode.ORDERED_ROUTE)){
             if(tMap.getTimeOfTripIndex().equals(TimeOfTrip.ARRIVE_BY)){
                 Route routeNow = getOrderedRoute(map.getRoute(), location, startTime);
-                int routeDuration = routeNow.getTime() + 300; //+5 minute buffer
+                int routeDuration = (int) (routeNow.getTime() * 1.2); //20% minute buffer
                 return getOrderedRoute(map.getRoute(), location, getTimeOfTrip(routeDuration));
             }
             else
@@ -132,6 +132,10 @@ public class MyMbta {
         else if (map.getMode().equals(Mode.UNORDERED_ROUTE)){
             Station startStation = findStationWithName(map.getStartStation(), map.getRoute());
             Station endStation = findStationWithName(map.getEndStation(), map.getRoute());
+            boolean isFewestTransfers = false;
+            if(map.getRouteType().equals(RouteType.FEWEST_TRANSFERS)){
+                isFewestTransfers = true;
+            }
             if(startStation == null){
                 if(map.getRouteType().equals(RouteType.EARLIEST_DEPARTURE)){
                     startStation = getEarliestDepartingTrain(map.getRoute(), startTime, location);
@@ -140,14 +144,34 @@ public class MyMbta {
                 }
             }
             if(tMap.getTimeOfTripIndex().equals(TimeOfTrip.ARRIVE_BY)){
-                Route routeNow = getUnorderedRouteV1(map.getRoute(), location, startStation, endStation, startTime);
-                int routeDuration = routeNow.getTime() + 300; //+5 minute buffer
-                return getUnorderedRouteV1(map.getRoute(), location, startStation, endStation, getTimeOfTrip(routeDuration));
+                Route routeNow = getBestUnorderedRouteAlgorithm(map.getRoute(), location, startStation, endStation, startTime, isFewestTransfers);
+                int routeDuration = (int) (routeNow.getTime() * 1.2); //20% minute buffer
+                return getBestUnorderedRouteAlgorithm(map.getRoute(), location, startStation, endStation, getTimeOfTrip(routeDuration), isFewestTransfers);
             }
             else
-                return getUnorderedRouteV1(map.getRoute(), location, startStation, endStation, getTimeOfTrip(getCurrentTime()));
+                return getBestUnorderedRouteAlgorithm(map.getRoute(), location, startStation, endStation, getTimeOfTrip(getCurrentTime()), isFewestTransfers);
         }
         else return new Route();//throw new Exception("Route mode not selected");
+    }
+    
+    /**
+     * Compare
+     */
+    
+    private static Route getBestUnorderedRouteAlgorithm(ArrayList<Station> route, String location, Station startStation, Station endStation, int timeOfTrip, boolean isFewestTransfers){
+        Route r1 = getUnorderedRouteV1(route, location, startStation, endStation, timeOfTrip, true);
+        
+        if(isFewestTransfers){
+            return r1;
+        }
+        
+        Route r2 = getUnorderedRouteV1(route, location, startStation, endStation, timeOfTrip, false);
+        
+        if(r1.getTime() < r2.getTime()){
+            return r1;
+        }else{
+            return r2;
+        }
     }
     
     /**
@@ -450,8 +474,8 @@ public class MyMbta {
      * 
      * @author jeffreyguion
      */
-    public static Route getUnorderedRouteV1(ArrayList<Station> route, String location, Station startStation, Station endStation, int timeOfTrip){
-        HashMap<String,ArrayList<String>> stationToShortestPath = new HashMap<String,ArrayList<String>>();
+    public static Route getUnorderedRouteV1(ArrayList<Station> route, String location, Station startStation, Station endStation, int timeOfTrip, boolean isFewestTransfers){
+        HashMap<String,Pair<ArrayList<String>,Integer>> stationToShortestPath = new HashMap<String,Pair<ArrayList<String>,Integer>>();
         Station currentStation = null;
         if(startStation != null){
             currentStation = startStation;
@@ -465,7 +489,7 @@ public class MyMbta {
         }
         
         //This function can be replaced depending on the goal of the unordered route
-        Pair<Station, Integer> pathInformation = buildShortestPathMap(route, startStation, stationToShortestPath);
+        Pair<Station, Integer> pathInformation = buildShortestPathMap(route, startStation, stationToShortestPath, isFewestTransfers);
         currentStation = pathInformation.a;
         int totalTransfers = pathInformation.b;
         
@@ -473,7 +497,7 @@ public class MyMbta {
         if(endStation != null){
             Route r = new Route();
             ArrayList<String> currentPath = getAtoBList(currentStation, endStation, r);
-            stationToShortestPath.put(currentStation.getName(), currentPath);
+            stationToShortestPath.put(currentStation.getName(), new Pair<ArrayList<String>, Integer>(currentPath, r.getTransfers()));
             totalTransfers += r.getTransfers() + 1;
         }
 
@@ -505,7 +529,7 @@ public class MyMbta {
      * @return
      * @author jeffreyguion
      */
-    private static Pair<Station, Integer> buildShortestPathMap(ArrayList<Station> route, Station startStation, HashMap<String,ArrayList<String>> stationToShortestPath){
+    private static Pair<Station, Integer> buildShortestPathMap(ArrayList<Station> route, Station startStation, HashMap<String,Pair<ArrayList<String>, Integer>> stationToShortestPath, boolean isFewestTransfers){
         int numStops = route.size();
         Station currentStation = startStation;
         Set<String> visitedStations = new HashSet<String>();
@@ -522,17 +546,29 @@ public class MyMbta {
                 }
                 Route r = new Route();
                 ArrayList<String> currentPath = getAtoBList(currentStation, destinationStation, r);
-                ArrayList<String> shortestPath = stationToShortestPath.get(currentStation.getName());
-                if(shortestPath == null || shortestPath.size() > currentPath.size()){
-                    stationToShortestPath.put(currentStation.getName(), currentPath);
+                Pair<ArrayList<String>,Integer> shortestPath = stationToShortestPath.get(currentStation.getName());
+                boolean bestPath = false;
+                if(shortestPath == null){
+                    bestPath = true;
+                }else if(isFewestTransfers){
+                    if(r.getTransfers() < shortestPath.b){
+                        bestPath = true;
+                    }else if(r.getTransfers() == shortestPath.b && currentPath.size() < shortestPath.a.size()){
+                        bestPath = true;
+                    }
+                }else if(currentPath.size() < shortestPath.a.size()){
+                    bestPath = true;
+                }
+                if(bestPath){
                     transfers = r.getTransfers();
+                    stationToShortestPath.put(currentStation.getName(), new Pair(currentPath, transfers));
                 }
             }
             //Get the last station in a path between stations and mark that as the new current station
-            ArrayList<String> shortestPath = stationToShortestPath.get(currentStation.getName());
-            String lastStation = shortestPath.get(shortestPath.size() - 1);
+            Pair<ArrayList<String>,Integer> shortestPath = stationToShortestPath.get(currentStation.getName());
+            String lastStation = shortestPath.a.get(shortestPath.a.size() - 1);
             currentStation = findStationWithName(lastStation, route);
-            totalTransfers += transfers + 1;
+            totalTransfers += shortestPath.b + 1;
         }
         
         return new Pair(currentStation, totalTransfers);
@@ -566,14 +602,18 @@ public class MyMbta {
      * 
      * @author jeffreyguion
      */
-    public static ArrayList<String> generatePath(Station startStation, HashMap<String,ArrayList<String>> stationToShortestPath){
+    public static ArrayList<String> generatePath(Station startStation, HashMap<String,Pair<ArrayList<String>, Integer>> stationToShortestPath){
         ArrayList<String> stops = new ArrayList<String>();
-        ArrayList<String> path = stationToShortestPath.get(startStation.getName());
+        ArrayList<String> path = stationToShortestPath.get(startStation.getName()).a;
         String lastStop = "";
         while(path != null){
             stops.addAll(path);
             lastStop = path.get(path.size() - 1);
-            path = stationToShortestPath.get(lastStop);
+            if(stationToShortestPath.containsKey(lastStop)){
+                path = stationToShortestPath.get(lastStop).a;
+            }else{
+                path = null;
+            }
         }
         return stops;
     }
@@ -609,8 +649,8 @@ public class MyMbta {
             }
         }
         return sb.toString();
-    }  
-   
+    }
+    
     /**
      * Finds the earliest time in seconds the route can begin
      * 
@@ -674,4 +714,5 @@ public class MyMbta {
     public static String getMinutes(int seconds) {
         return String.valueOf(seconds/60) + " minutes";
     }
+
 }
