@@ -12,14 +12,14 @@ public class Route {
 	private List<String> stops;
 	private List<Integer> schedule;
 	private Integer transfers;
-	private Integer time;
-	private String errorText;
+	private Integer totalTime;
+	private Integer elapsedTime;
 	private List<Leg> legs;
 	
 	public Route(){
-	    this.errorText = "";
 	    this.transfers = 0;
-	    this.time = 0;
+	    this.totalTime = -1;
+	    this.elapsedTime = -1;
 	    this.legs = new ArrayList<Leg>();
 	};
 	
@@ -28,7 +28,7 @@ public class Route {
 		this.stops = stops;
 		this.schedule = schedule;
 		this.transfers = transfers;
-		this.time = time;
+		this.totalTime = time;
 	}
 	
 	/**
@@ -69,9 +69,6 @@ public class Route {
         if (stationsToTravel != null && stationsToTravel.size() > 0) {
             for(int i = 0; i <= this.transfers; i++){
                 String currentStation = stationsToTravel.get(0);
-                if(travelTime == -1){
-                    this.errorText = "No predicted trains arriving to "+currentStation;
-                }
                 //find the next transfer station which is either the last stop in a route or
                 // the first stop to appear twice in the list of stops
                 String transferStation = stationsToTravel.get(stationsToTravel.size() - 1);
@@ -139,7 +136,6 @@ public class Route {
                 }
                 travelTime = bestLeg.endTime;
                 bestTrains.add(bestLeg);
-                this.time = bestLeg.endTime;
             }
         }
         this.legs = bestTrains;
@@ -320,12 +316,26 @@ public class Route {
 		this.transfers++;
 	}
 
-	public Integer getTime() {
-		return time;
+	public Integer getTotalTime() {
+	    if(this.totalTime == -1){
+	        if(this.legs.size() > 0){
+	            this.totalTime = this.legs.get(this.legs.size() - 1).getEndTime();
+	        }
+	    }
+		return totalTime;
 	}
-
-	public void setTime(Integer time) {
-		this.time = time;
+	  
+	public Integer getElapsedTime() {
+        if(this.elapsedTime == -1){
+            if(this.legs.size() > 0){
+                int startTime = this.legs.get(0).getStartTime();
+                int endTime = this.legs.get(this.legs.size() - 1).getEndTime();
+                if(endTime > startTime){
+                    this.elapsedTime = endTime - startTime;
+                }
+            }
+        }
+        return this.elapsedTime;        
 	}
 
 }

@@ -110,11 +110,13 @@ public class MyMbta {
 
     /**
      * Creates a route object through the stops selected by the user
+     * The parameters that are passed into getOrderedRoute and getUnorderedRoute are 
+     * modified dependent on which options the user selects from the GUI
      * 
      * @param map - instance of the GUI map
      * @return Route object, ordered or unordered, based on on the user's selection
      * 
-     * @author leighannastolfi
+     * @author leighannastolfi, modified by jeffreyguion
      */
     public static Route getRoute(MbtaMap map, String location){
         tMap.setTimeOfTrip(map.getTimeOfTrip());
@@ -123,7 +125,7 @@ public class MyMbta {
         if(map.getMode().equals(Mode.ORDERED_ROUTE)){
             if(tMap.getTimeOfTripIndex().equals(TimeOfTrip.ARRIVE_BY)){
                 Route routeNow = getOrderedRoute(map.getRoute(), location, startTime);
-                int routeDuration = (int) (routeNow.getTime() * 1.2); //20% minute buffer
+                int routeDuration = (int) (routeNow.getTotalTime() * 1.2); //20% minute buffer
                 return getOrderedRoute(map.getRoute(), location, getTimeOfTrip(routeDuration));
             }
             else
@@ -136,42 +138,126 @@ public class MyMbta {
             if(map.getRouteType().equals(RouteType.FEWEST_TRANSFERS)){
                 isFewestTransfers = true;
             }
+            boolean isFastestTime = false;
+            if(map.getRouteType().equals(RouteType.FASTEST_ROUTE)){
+                isFastestTime = true;
+            }
             if(startStation == null){
                 if(map.getRouteType().equals(RouteType.EARLIEST_DEPARTURE)){
                     startStation = getEarliestDepartingTrain(map.getRoute(), startTime, location);
-                }else{
-                    startStation = map.getRoute().get(0);
                 }
             }
             if(tMap.getTimeOfTripIndex().equals(TimeOfTrip.ARRIVE_BY)){
-                Route routeNow = getBestUnorderedRouteAlgorithm(map.getRoute(), location, startStation, endStation, startTime, isFewestTransfers);
-                int routeDuration = (int) (routeNow.getTime() * 1.2); //20% minute buffer
-                return getBestUnorderedRouteAlgorithm(map.getRoute(), location, startStation, endStation, getTimeOfTrip(routeDuration), isFewestTransfers);
+                Route routeNow = getBestUnorderedRoute(map.getRoute(), location, startStation, endStation, 
+                        startTime, isFewestTransfers, isFastestTime);
+                int routeDuration = (int) (routeNow.getTotalTime() * 1.2); //20% minute buffer
+                return getBestUnorderedRoute(map.getRoute(), location, startStation, endStation,
+                        getTimeOfTrip(routeDuration), isFewestTransfers, isFastestTime);
             }
             else
-                return getBestUnorderedRouteAlgorithm(map.getRoute(), location, startStation, endStation, getTimeOfTrip(getCurrentTime()), isFewestTransfers);
+                return getBestUnorderedRoute(map.getRoute(), location, startStation, endStation,
+                        getTimeOfTrip(getCurrentTime()), isFewestTransfers, isFastestTime);
         }
-        else return new Route();//throw new Exception("Route mode not selected");
+        else return new Route();
     }
     
     /**
-     * Compare
+     * Finds the best Unordered Route by comparing the time of each unordered route from each starting
+     * station.
+     * 
+     * @param route
+     * @param location
+     * @param startStation
+     * @param endStation
+     * @param timeOfTrip
+     * @param isFewestTransfers
+     * @param isFastestRoute
+     * @return
+     * @author jeffreyguion
      */
-    
-    private static Route getBestUnorderedRouteAlgorithm(ArrayList<Station> route, String location, Station startStation, Station endStation, int timeOfTrip, boolean isFewestTransfers){
-        Route r1 = getUnorderedRouteV1(route, location, startStation, endStation, timeOfTrip, true);
+    private static Route getBestUnorderedRoute(ArrayList<Station> route, String location,
+            Station startStation, Station endStation, int timeOfTrip, 
+            boolean isFewestTransfers, boolean isFastestRoute){
+        if(startStation == null){
+            List<Route> possibleRoutes = new ArrayList<Route>();
+            for(Station station : route){
+                if(station.equals(endStation)){
+                    continue;
+                }else{
+                    possibleRoutes.add(getBestUnorderedRouteAlgorithm(route, location, station,
+                            endStation, timeOfTrip, isFewestTransfers, isFastestRoute));
+                }
+            }
+            
+            return getBestRoute(possibleRoutes, isFastestRoute);
+        }
+        return getBestUnorderedRouteAlgorithm(route, location, startStation,
+                endStation, timeOfTrip, isFewestTransfers, isFastestRoute);
+    }
+
+    /**
+     * Compares whether the shortest path or the fewest transfers algorithm
+     * has a shorter overall time and returns the corresponding route
+     * 
+     * @param route
+     * @param location
+     * @param startStation
+     * @param endStation
+     * @param timeOfTrip
+     * @param isFewestTransfers
+     * @return
+     * @author jeffreyguion
+     */
+    private static Route getBestUnorderedRouteAlgorithm(ArrayList<Station> route, String location,
+            Station startStation, Station endStation, int timeOfTrip,
+            boolean isFewestTransfers, boolean isFastestRoute) {
         
+        Route r1 = getUnorderedRoute(route, location, startStation, endStation, timeOfTrip, true);     
         if(isFewestTransfers){
             return r1;
         }
         
-        Route r2 = getUnorderedRouteV1(route, location, startStation, endStation, timeOfTrip, false);
-        
-        if((r1.getTime() < r2.getTime() && r1.getTime() != -1) || r2.getTime() == -1){
-            return r1;
+        Route r2 = getUnorderedRoute(route, location, startStation, endStation, timeOfTrip, false);
+        if(isFastestRoute){
+            if((r1.getElapsedTime() < r2.getElapsedTime() && r1.getElapsedTime() != -1)
+                    || r2.getElapsedTime() == -1){
+                return r1;
+            }else{
+                return r2;
+            }
         }else{
-            return r2;
+            if((r1.getTotalTime() < r2.getTotalTime() && r1.getTotalTime() != -1)
+                    || r2.getTotalTime() == -1){
+                return r1;
+            }else{
+                return r2;
+            }
         }
+    }
+    
+    /**
+     * Given a list of routes, it returns the route with the shortest time
+     * 
+     * @param routes
+     * @return
+     * @author jeffreyguion
+     */
+    private static Route getBestRoute(List<Route> routes, boolean isFastestRoute){
+        Route bestRoute = null;
+        for(Route route : routes){
+            if(isFastestRoute){
+                if(bestRoute == null || bestRoute.getElapsedTime() == -1 || 
+                        (route.getElapsedTime() != -1 && route.getElapsedTime() < bestRoute.getElapsedTime())){
+                    bestRoute = route;
+                }
+            }else{
+                if(bestRoute == null || bestRoute.getTotalTime() == -1 || 
+                        (route.getTotalTime() != -1 && route.getTotalTime() < bestRoute.getTotalTime())){
+                    bestRoute = route;
+                }
+            }
+        }
+        return bestRoute;
     }
     
     /**
@@ -181,6 +267,8 @@ public class MyMbta {
      * @param startTime
      * @param location
      * @return
+     * 
+     * @author jeffreyguion
      */
     private static Station getEarliestDepartingTrain(ArrayList<Station> route, int startTime, String location){
         ArrayList<Train> orangeTrains = JsonData.getTrains(tMap.orangeLine, location);
@@ -466,24 +554,19 @@ public class MyMbta {
     
     /**
      * Creates an unordered route object through the stops selected by the user
-     * It does this by finding the shortest distance between each stop. 
-     * Generates the entire route before applying the JSON data.
+     * by using the start station, end station and fewest transfers flag to generate
+     * the best unordered route. 
+     * It generates the entire route before applying the JSON data.
      * 
      * @param trip - list of stops selected by the user
      * @return Route object with list of stops passed through and amount of transfers
      * 
      * @author jeffreyguion
      */
-    public static Route getUnorderedRouteV1(ArrayList<Station> route, String location, Station startStation, Station endStation, int timeOfTrip, boolean isFewestTransfers){
+    public static Route getUnorderedRoute(ArrayList<Station> route, String location, Station startStation, Station endStation, int timeOfTrip, boolean isFewestTransfers){
         HashMap<String,Pair<ArrayList<String>,Integer>> stationToShortestPath = new HashMap<String,Pair<ArrayList<String>,Integer>>();
         Station currentStation = null;
-        if(startStation != null){
-            currentStation = startStation;
-        }else{
-            //TODO Something better
-            currentStation = route.get(0);
-        }
-         
+        currentStation = startStation;
         if(endStation != null){
             route.remove(endStation);
         }
@@ -509,14 +592,6 @@ public class MyMbta {
         finalRoute.setTransfers(totalTransfers - 1);
         finalRoute.applyJsonToOrderedRoute(tMap, location, timeOfTrip);
         return finalRoute;
-    }
-    
-    private Station findReasonableStartStation(ArrayList<Station> route){
-        Line blueLine = tMap.getLine("Blue");
-        for(int i = 0; i < blueLine.getStops().size(); i++){
-            
-        }
-        return null;
     }
     
     /**
@@ -561,7 +636,8 @@ public class MyMbta {
                 }
                 if(bestPath){
                     transfers = r.getTransfers();
-                    stationToShortestPath.put(currentStation.getName(), new Pair(currentPath, transfers));
+                    stationToShortestPath.put(currentStation.getName(),
+                            new Pair<ArrayList<String>,Integer>(currentPath, transfers));
                 }
             }
             //Get the last station in a path between stations and mark that as the new current station
@@ -571,7 +647,7 @@ public class MyMbta {
             totalTransfers += shortestPath.b + 1;
         }
         
-        return new Pair(currentStation, totalTransfers);
+        return new Pair<Station, Integer>(currentStation, totalTransfers);
     }
     
     /**
