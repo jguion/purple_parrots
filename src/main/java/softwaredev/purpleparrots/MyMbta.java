@@ -191,9 +191,9 @@ public class MyMbta {
         Pair<Integer, Station> red = getEarliestDepartingTrainForLine(route, redTrains, startTime);
         Pair<Integer, Station> blue = getEarliestDepartingTrainForLine(route, blueTrains, startTime);
         
-        if(orange.a <= red.a && orange.a <= blue.a){
+        if((orange.a <= red.a || red.a == -1) && (orange.a <= blue.a || blue.a == -1)){
             return orange.b;
-        }else if(red.a <= orange.a && red.a <= blue.a){
+        }else if((red.a <= orange.a || orange.a == -1) && (red.a <= blue.a || blue.a == -1)){
             return red.b;
         }else{
             return blue.b;
