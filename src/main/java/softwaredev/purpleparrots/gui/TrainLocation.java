@@ -952,10 +952,11 @@ public class TrainLocation extends JFrame {
 				Route route = MyMbta.getRoute(mbtaMapPanel, location);
 				if(route.getTime() > ((time/1000)- MyMbta.getCurrentTime()) && arriveDepart.getSelectedIndex() == 2){
 				    JOptionPane.showMessageDialog(mbtaMapPanel, "No route can arrive at the specified time. " +
-				    		                        "Here is the closest route to your arrival time:  \n\n" + route);
-				}
-				else
+				                                        "Here is the closest route to your arrival time:  \n\n" + route);
+			    }
+				else{
 				    JOptionPane.showMessageDialog(mbtaMapPanel, "Directions! \n "+ route);
+				}
 			}
 		});
 		btnGetDirections.setBounds(1100, 615, 200, 57);
