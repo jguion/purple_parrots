@@ -680,6 +680,7 @@ public class MyMbta {
      * @return current time in milliseconds of today only
      * @author leighannastolfi
      */
+
     public static int getCurrentTime(){
         Calendar calendar = Calendar.getInstance();
         return (calendar.get(Calendar.HOUR_OF_DAY)*3600000) + (calendar.get(Calendar.MINUTE) * 60000) 
