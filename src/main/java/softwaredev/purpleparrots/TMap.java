@@ -153,7 +153,7 @@ public class TMap {
         blueLineStations.add(airport.getName());
         Station woodIsland = new Station("Wood Island", BLUE);
         blueLineStations.add(woodIsland.getName());
-        Station orientHeight = new Station("Orient Height", BLUE);
+        Station orientHeight = new Station("Orient Heights", BLUE);
         blueLineStations.add(orientHeight.getName());
         Station suffolkDowns = new Station("Suffolk Downs", BLUE);
         blueLineStations.add(suffolkDowns.getName());
