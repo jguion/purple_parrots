@@ -890,44 +890,7 @@ public class TrainLocation extends JFrame {
 		redLineTrains.add(canvas_121);
 
 
-		JRadioButton rdbtnStationMode = new JRadioButton("Station Mode");
-		rdbtnStationMode.setBackground(Color.WHITE);
-		rdbtnStationMode.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mbtaMapPanel.setMode(Mode.STATION);
-			}
-		});
-		rdbtnStationMode.setBounds(1099, 37, 116, 23); 
-		mbtaMapPanel.add(rdbtnStationMode);
-
-		JRadioButton rdbtnRouteMode = new JRadioButton("Route Mode");
-		rdbtnRouteMode.setBackground(Color.WHITE);
-		rdbtnRouteMode.setSelected(true);
-		rdbtnRouteMode.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mbtaMapPanel.setMode(Mode.ORDERED_ROUTE);
-			}
-		});
-		rdbtnRouteMode.setBounds(1099, 57, 112, 23);
-		mbtaMapPanel.add(rdbtnRouteMode);
-
-		JRadioButton rdbtnUnorderedRouteMode = new JRadioButton("Unordered Route Mode");
-		rdbtnUnorderedRouteMode.setBackground(Color.WHITE);
-		rdbtnUnorderedRouteMode.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mbtaMapPanel.setMode(Mode.UNORDERED_ROUTE);
-			}
-		});
-		rdbtnUnorderedRouteMode.setBounds(1099, 77, 178, 23);
-		mbtaMapPanel.add(rdbtnUnorderedRouteMode);
-
-		updateTrains(orangeLineTrains, redLineTrains, blueLineTrains);
-
-		ButtonGroup group = new ButtonGroup();
-		group.add(rdbtnStationMode);
-		group.add(rdbtnRouteMode);
-		group.add(rdbtnUnorderedRouteMode);
-
+		
 		final JComboBox arriveDepart = new JComboBox(new String[]{"Leave Now", "Depart At", "Arrive By"});
 		arriveDepart.setBounds(1100, 588, 137, 23);
 		mbtaMapPanel.add(arriveDepart);
@@ -950,6 +913,7 @@ public class TrainLocation extends JFrame {
 				mbtaMapPanel.setTimeOfTripIndex(arriveDepart.getSelectedIndex());
 				mbtaMapPanel.setRouteType(routeTypeComboBox.getSelectedIndex());
 				Route route = MyMbta.getRoute(mbtaMapPanel, location);
+				//If a route cannot arrive by the specified time, display message and directions from now
 				if(route.getTotalTime() > ((time/1000)- MyMbta.getCurrentTime()) && arriveDepart.getSelectedIndex() == 2){
 				    JOptionPane.showMessageDialog(mbtaMapPanel, "No route can arrive at the specified time. " +
 				                                        "Here is the closest route to your arrival time:  \n\n" + route);
@@ -1034,7 +998,7 @@ public class TrainLocation extends JFrame {
 		lblNewLabel.setBounds(1143, 0, 137, 50);
 		mbtaMapPanel.add(lblNewLabel);
 		
-		JButton btnSetAsStart = new JButton("Set as Start Station");
+		final JButton btnSetAsStart = new JButton("Set as Start Station");
 		btnSetAsStart.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent arg0) {
 	                String selectedName = list.getSelectedItem();
@@ -1047,7 +1011,7 @@ public class TrainLocation extends JFrame {
                             list.add(item, i);
                         }
                     }
-	                if(selectedName.equals(null) || selectedName.endsWith(" : Start Station")){
+	                if(selectedName == null || selectedName.endsWith(" : Start Station")){
 	                    mbtaMapPanel.setStartStation(null);
 	                }else{
 	                    mbtaMapPanel.setStartStation(selectedName);
@@ -1056,10 +1020,11 @@ public class TrainLocation extends JFrame {
 	                }
 	            }
 	        });
-		btnSetAsStart.setBounds(1100, 487, 177, 29);
+		btnSetAsStart.setBounds(1110, 487, 167, 29);
 		mbtaMapPanel.add(btnSetAsStart);
+		btnSetAsStart.setEnabled(false);
 		
-		JButton btnSetAsEnd = new JButton("Set as End Station");
+		final JButton btnSetAsEnd = new JButton("Set as End Station");
 		btnSetAsEnd.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent arg0) {
 		        String selectedName = list.getSelectedItem();
@@ -1072,7 +1037,7 @@ public class TrainLocation extends JFrame {
                         list.add(item, i);
                     }
                 }
-                if(selectedName.equals(null) || selectedName.endsWith(" : End Station")){
+                if(selectedName == null || selectedName.endsWith(" : End Station")){
                     mbtaMapPanel.setEndStation(null);
                 }else{
                     mbtaMapPanel.setEndStation(selectedName);
@@ -1083,7 +1048,52 @@ public class TrainLocation extends JFrame {
 		});
 		btnSetAsEnd.setBounds(1110, 518, 167, 29);
 		mbtaMapPanel.add(btnSetAsEnd);
+		btnSetAsEnd.setEnabled(false);
 		
+		JRadioButton rdbtnStationMode = new JRadioButton("Station Mode");
+        rdbtnStationMode.setBackground(Color.WHITE);
+        rdbtnStationMode.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                mbtaMapPanel.setMode(Mode.STATION);
+                btnSetAsStart.setEnabled(false);
+                btnSetAsEnd.setEnabled(false);
+            }
+        });
+        rdbtnStationMode.setBounds(1099, 37, 116, 23); 
+        mbtaMapPanel.add(rdbtnStationMode);
+
+        JRadioButton rdbtnRouteMode = new JRadioButton("Route Mode");
+        rdbtnRouteMode.setBackground(Color.WHITE);
+        rdbtnRouteMode.setSelected(true);
+        rdbtnRouteMode.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                mbtaMapPanel.setMode(Mode.ORDERED_ROUTE);
+                btnSetAsStart.setEnabled(false);
+                btnSetAsEnd.setEnabled(false);
+            }
+        });
+        rdbtnRouteMode.setBounds(1099, 57, 112, 23);
+        mbtaMapPanel.add(rdbtnRouteMode);
+
+        JRadioButton rdbtnUnorderedRouteMode = new JRadioButton("Unordered Route Mode");
+        rdbtnUnorderedRouteMode.setBackground(Color.WHITE);
+        rdbtnUnorderedRouteMode.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                mbtaMapPanel.setMode(Mode.UNORDERED_ROUTE);
+                btnSetAsStart.setEnabled(true);
+                btnSetAsEnd.setEnabled(true);
+            }
+        });
+        rdbtnUnorderedRouteMode.setBounds(1099, 77, 178, 23);
+        mbtaMapPanel.add(rdbtnUnorderedRouteMode);
+
+        updateTrains(orangeLineTrains, redLineTrains, blueLineTrains);
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(rdbtnStationMode);
+        group.add(rdbtnRouteMode);
+        group.add(rdbtnUnorderedRouteMode);
+
 	}
 
 	
