@@ -139,7 +139,7 @@ public class TrainLocation extends JFrame {
 		woodIsland.setBounds(568, 478, 36, 32);
 		mbtaMapPanel.add(woodIsland);
 
-		Station orientHeight = new Station("Orient Height", BLUE);
+		Station orientHeight = new Station("Orient Heights", BLUE);
 		orientHeight.setBounds(654, 478, 36, 32);
 		mbtaMapPanel.add(orientHeight);
 
