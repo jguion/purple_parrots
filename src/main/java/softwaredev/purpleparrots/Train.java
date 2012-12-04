@@ -21,13 +21,26 @@ public class Train {
         this.line = line;
         this.setDestination(destination);
     }
+    
+    private Prediction getNext(List<Prediction> preds) {
+    	Prediction re = null;
+    	if (preds != null && preds.size() > 0) {
+    		for (Prediction pred : preds) {
+    			if (pred.seconds > 0 && (re == null || pred.seconds < re.seconds)) {
+    				re = pred;
+    			}
+    		}
+    	}
+    	return re;
+    }
 
     public String toString(){
-        Prediction nextStop = this.getPredictions().get(0);
-        if(nextStop.seconds < 0 && this.getPredictions().size() > 1){
-            nextStop = this.getPredictions().get(1);
+    	String re = "Train " + id;
+        Prediction nextStop = getNext(getPredictions());
+        if (nextStop != null) {
+        	re = "A train will arrive at "+nextStop.stop +" in "+nextStop.seconds+" seconds.";
         }
-        return "A train will arrive at "+nextStop.stop +" in "+nextStop.seconds+" seconds.";
+        return re;
     }
 
     /**

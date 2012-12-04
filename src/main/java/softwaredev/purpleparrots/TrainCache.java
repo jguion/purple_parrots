@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
+/**
+ * A cache for trains.
+ * @author labichn
+ */
 public class TrainCache {
 	private Line line;
-	private long updateAt = 15000l;
+	private long updateAt = 5000l;
 	private List<Train> trains = new ArrayList<Train>();
 	private Calendar lastUpdate = null;
 	public TrainCache(Line line) { this.line = line; }
+	public Line getLine() { return line; }
 	public List<Train> getTrains(String location) {
 		if (lastUpdate == null || !isWarm()) {
 			forceUpdate(location);
