@@ -1,6 +1,14 @@
 #!/bin/bash
 
+BUILDDIR="target"
+
+if [ ! -d "$BUILDDIR" ]; then
+    mkdir "$BUILDDIR"
+fi
+
 # For those who use and love zsh:
 # javac -d target -cp $(find src/main/resources/ -name '*.jar' | tr '\n' ':' | sed 's/:$/\n/') $(find ./src/main/java -name '*.java' | tr '\n' ' ') -Xlint:unchecked
 
-javac -d target -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar src/main/java/softwaredev/purpleparrots/*.java src/main/java/softwaredev/purpleparrots/gui/*.java
+javac -d $BUILDDIR -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar src/main/java/softwaredev/purpleparrots/*.java src/main/java/softwaredev/purpleparrots/gui/*.java
+
+#javac -d $BUILDDIR -cp /course/cs4500f12/MBTA_test_data/jackson-annotations-2.0.6.jar:/course/cs4500f12/MBTA_test_data/jackson-core-2.0.6.jar:/course/cs4500f12/MBTA_test_data/jackson-databind-2.0.6.jar src/main/java/softwaredev/purpleparrots/*.java src/main/java/softwaredev/purpleparrots/gui/*.java
