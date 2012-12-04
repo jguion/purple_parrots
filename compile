@@ -11,4 +11,4 @@ fi
 
 javac -d $BUILDDIR -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar src/main/java/softwaredev/purpleparrots/*.java src/main/java/softwaredev/purpleparrots/gui/*.java
 
-#javac -d $BUILDDIR -cp /course/cs4500f12/MBTA_test_data/jackson-annotations-2.0.6.jar:/course/cs4500f12/MBTA_test_data/jackson-core-2.0.6.jar:/course/cs4500f12/MBTA_test_data/jackson-databind-2.0.6.jar src/main/java/softwaredev/purpleparrots/*.java src/main/java/softwaredev/purpleparrots/gui/*.java
+#javac -d $BUILDDIR -cp /course/cs4500f12/jackson/jackson-annotations-2.0.6.jar:/course/cs4500f12/jackson/jackson-core-2.0.6.jar:/course/cs4500f12/jackson/jackson-databind-2.0.6.jar src/main/java/softwaredev/purpleparrots/*.java src/main/java/softwaredev/purpleparrots/gui/*.java
