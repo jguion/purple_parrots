@@ -3,4 +3,4 @@
 # For those who use and love zsh:
 # java -cp $(find src/main/resources/ -name '*.jar' | tr '\n' ':' | sed 's/:$/\n/'):target softwaredev.purpleparrots.gui.MyMBTAGui
 
-java -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar:target softwaredev.purpleparrots.gui.MyMBTAGui
+java -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar:target softwaredev.purpleparrots.gui.TrainLocation
