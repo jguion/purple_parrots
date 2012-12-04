@@ -8,12 +8,94 @@ We are the Purple Parrots!
 
 Compilation:
   From the root of our project (where this file is located), run the following command to compile our program:
-  > javac -d target -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar src/main/java/softwaredev/purpleparrots/*.java src/main/java/softwaredev/purpleparrots/gui/*.java
+  > javac -d target -cp /course/cs4500f12/MBTA_test_data/jackson-annotations-2.0.6.jar:/course/cs4500f12/MBTA_test_data/jackson-core-2.0.6.jar:/course/cs4500f12/MBTA_test_data/jackson-databind-2.0.6.jar src/main/java/softwaredev/purpleparrots/*.java src/main/java/softwaredev/purpleparrots/gui/*.java
   (or just use the compile script, also in the root directory)
 
 Execution:
   From the root of our project (where this file is located), run the following command to run our GUI prototype:
-  > java -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar:target softwaredev.purpleparrots.gui.MyMBTAGui
+  > java -cp /course/cs4500f12/MBTA_test_data/jackson-annotations-2.0.6.jar:/course/cs4500f12/MBTA_test_data/jackson-core-2.0.6.jar:/course/cs4500f12/MBTA_test_data/jackson-databind-2.0.6.jar:target softwaredev.purpleparrots.gui.TrainLocation
   (or just use the run script, also in the root directory)
-  You should see a purple Swing window pop up (has been tested both locally and X-forwarded from login.ccs.neu.edu).
+  You should see a map in a Swing window pop up (has been tested both locally on a CCIS machine and X-forwarded from login.ccs.neu.edu).
   Click the only button on the main window, and you'll see the live locations of the trains on the orange, red, and blue lines.
+
+Use cases (all are implemented and functional):
+
+2.1.1. The user wants to know where she can go using the T.
+Priority: Essential
+1. The user launches the application.
+2. The system displays a map of train lines.
+
+2.1.2. The user wants to know the current location of all trains.
+Priority: Essential
+1. The user launches the application. 
+2. The system requests current JSON data. 
+3. The system displays a map of the train line showing the current location of each train in service. 
+4. The user hovers the mouse pointer over a train. 
+5. The system displays the time in seconds until the train reaches the next station.
+
+2.1.3. The user wants to know when the next trains get to stop A.
+Priority: Essential
+1. The user selects the "Station Mode" option from the main screen.
+2. The user clicks on stop A.
+3. The system requests current JSON data.
+4. The system displays at most five incoming trains in each direction to a station.
+
+2.1.4. The user wants to know her options for getting from stop A to stop B.
+Priority: Essential
+1. The user selects "Route Mode".
+2. The system displays a route menu. 
+3. The user selects a starting station and ending destination. 
+4. The system requests current JSON data.
+5. The system displays the fastest route, unless an alternate route option is selected.
+
+2.1.5. The user wants to know her options for getting to an ordered list of stops.
+Priority: Desirable
+1. The user selects "Route Mode". 
+2. The user adds stops to a route.
+3. The system requests current JSON data.
+4. The system displays the fastest route, unless an alternate route option is selected, to get to each stop in the order they were entered.
+
+2.1.6. The user wants to know her options for getting to an unordered list of stops.
+Priority: Optional
+1. The user selects "Unordered Route Mode".
+2. The user adds stops to a route.
+3. The system displays "Set As Start Station" and "Set As End Station" fields.  
+4. The user does not select a start or end stations. 
+5. The system requests current JSON data.
+6. The system displays the best logical route (fastest, unless other route option selected) through all of the stops.
+
+2.1.7. The user wants to know her options for getting to an unordered list of stops with specified starting and/or ending points.
+Priority: Optional
+1. The user selects "Unordered Route Mode".
+2. The user adds stops to a route.
+3. The system displays "Set As Start Station" and "Set As End Station" fields.
+4. The user selects a station from the list of selected stations and clicks "Set As Start Station".
+5. The user selects a station from the list of selected stations and clicks "Set As End Station".
+6. The system requests current JSON data.
+7. The system displays the best logical route (fastest, unless other route option selected)  through all the stops from start destination to end destination.
+
+2.1.8. For any trip on the T, the user wants the option to specify departure and/or arrival times.
+Priority: Desirable
+1. The user selects "Route Mode" or "Unordered Route Mode". 
+2. The user adds stops to a route.
+3. The system displays a "Time of Trip" drop down.
+4. The user selects "Arrive By" or "Depart At" option. 
+5. The user enters desired arrival or departure time. 
+6. The system requests current JSON data.
+7. The system displays the fastest route (unless other route option selected) ending or starting at the specified time.
+
+2.1.9. For any trip on the T, the user wants to know the fastest route, the earliest departure, the earliest arrival, and fewest transfers.
+Priority: Desirable
+1. The user selects "Route Mode" or "Unordered Route Mode".
+2. The user adds stops to a route.
+3. The system displays a "Route Options" drop down.
+4. The user selects desired route option. 
+5. The system requests current JSON data.
+6. The system displays the a route according to the desired route option.
+
+2.1.10. The client wants to test the system with old data.
+Priority: Essential
+1. The user selects the "Test" radio button.
+2. The system loads the original test data.
+4. The user can click on one of the three buttons marked "Orange", "Red", and "Blue" to enter the fully qualified path of a JSON file to override that line's test data.
+3. The user can perform all functionality from Requirements 2.1.1-2.1.9 using that test data.
