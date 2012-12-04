@@ -4,3 +4,5 @@
 # java -cp $(find src/main/resources/ -name '*.jar' | tr '\n' ':' | sed 's/:$/\n/'):target softwaredev.purpleparrots.gui.MyMBTAGui
 
 java -cp src/main/resources/jackson-annotations-2.0.6.jar:src/main/resources/jackson-core-2.0.6.jar:src/main/resources/jackson-databind-2.0.6.jar:target softwaredev.purpleparrots.gui.TrainLocation
+
+#java -cp /course/cs4500f12/MBTA_test_data/jackson-annotations-2.0.6.jar:/course/cs4500f12/MBTA_test_data/jackson-core-2.0.6.jar:/course/cs4500f12/MBTA_test_data/jackson-databind-2.0.6.jar:target softwaredev.purpleparrots.gui.TrainLocation
