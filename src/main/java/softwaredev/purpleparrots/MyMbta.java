@@ -16,12 +16,33 @@ import softwaredev.purpleparrots.gui.TimeOfTrip;
 
 public class MyMbta {
 
-    public static String http = "http://developer.mbta.com/lib/rthr/";
-    public static String test = "src/test/resources/mbta-test-data/2012_10_19/";
-    public static String def = test;
+    public static String http = "http";
+    private static String url = "http://developer.mbta.com/lib/rthr/";
+    public static String test = "test"; 
+    private static String testDir = "src/test/resources/mbta-test-data/2012_10_19/";
+    private static Map<Line, String> testOverrides = new HashMap<Line, String>();
+    public static String def = testDir;
     public static softwaredev.purpleparrots.TMap tMap = new softwaredev.purpleparrots.TMap();
 
     private static java.util.Map<Line, TrainCache> lines;
+    
+    /**
+     * Sets the test file for the given line to the given path.
+     * @param line  the line to set the path to
+     * @param path  the path of the test JSON file
+     * @author      labichn
+     */
+    public static void setTestFile(Line line, String path) {
+    	testOverrides.put(line, path);
+    }
+    
+    /**
+     * Clears all test file overrides.
+     * @author labichn
+     */
+    public static void clearTestFiles() {
+    	testOverrides.clear();
+    }
 
     /**
      * Gets the trains for the given line from the default source from
@@ -31,7 +52,28 @@ public class MyMbta {
      * @author          labichn
      */
     public static List<Train> getTrains(Line line) {
-    	return lines.get(line).getTrains(def);
+    	if (testOverrides.containsKey(line)) {
+    		return lines.get(line).getTrains(testOverrides.get(line));
+    	} else {
+    		return lines.get(line).getTrains(def);
+    	}
+    }
+    
+    /**
+     * Gets the path based on the given location token and line.
+     * @param location  the string denoting whether to look for live or test data
+     * @param line      the line to get the path for
+     * @return          the path to get trains from
+     * @author          labichn
+     */
+    private static String getPath(String location, Line line) {
+    	if (location.equals(http)) {
+    		return url;
+    	} else if (testOverrides.containsKey(line)) {
+    		return testOverrides.get(line);
+    	} else {
+    		return testDir;
+    	}
     }
     
     /**
@@ -43,7 +85,7 @@ public class MyMbta {
      * @author          labichn
      */
     public static List<Train> getTrains(Line line, String location) {
-    	return lines.get(line).getTrains(location);
+    	return lines.get(line).getTrains(getPath(location, line));
     }
     
     static {
@@ -67,7 +109,7 @@ public class MyMbta {
     public static void updateCache(String location) {
     	if (lines != null && lines.size() > 0) {
     		for (TrainCache cache : lines.values()) {
-    			cache.forceUpdate(location == null ? def : location);
+    			cache.forceUpdate(getPath(location, cache.getLine()));
     		}
     	}
     }

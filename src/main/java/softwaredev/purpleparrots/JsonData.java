@@ -21,7 +21,8 @@ public class JsonData {
      * of trains. If there is an error it is caught, logged, and an empty list is returned.
      * @param line  the line to get the current trains for
      * @param root  the root of the path of the json strings to parse, expected to be
-     *              a string beginning with "http:// or "file:// and ending with "/"
+     *              a string beginning with "http:// or "file:// and ending with either "/"
+     *              or ".json".
      * @return      the current trains from the path built with the given root and line
      * @author      guionj, labichn
      */
@@ -118,6 +119,8 @@ public class JsonData {
     private static String getPath(Line line, String root) {
         if (root != null && root.startsWith("http://")) {
             return root+line.getName().toLowerCase()+".json";
+        } else if (root.toLowerCase().endsWith(".json")) {
+        	return root;
         } else {
             return getPath(line, new File(root));
         }

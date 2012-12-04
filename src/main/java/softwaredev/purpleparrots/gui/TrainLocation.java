@@ -3,6 +3,7 @@ package softwaredev.purpleparrots.gui;
 import java.awt.Button;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -34,6 +35,7 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
+import softwaredev.purpleparrots.Line;
 import softwaredev.purpleparrots.MyMbta;
 import softwaredev.purpleparrots.Route;
 import softwaredev.purpleparrots.Train;
@@ -892,17 +894,17 @@ public class TrainLocation extends JFrame {
 
 		
 		final JComboBox arriveDepart = new JComboBox(new String[]{"Leave Now", "Depart At", "Arrive By"});
-		arriveDepart.setBounds(1100, 588, 137, 23);
+		arriveDepart.setBounds(1098, 507, 137, 23);
 		mbtaMapPanel.add(arriveDepart);
 
 		final JSpinner timeOfTrip = new JSpinner( new SpinnerDateModel() );
 		timeOfTrip.setEditor(new DateEditor(timeOfTrip, "HH:mm"));
 		timeOfTrip.setValue(new Date());
-		timeOfTrip.setBounds(1234, 588, 66, 20);
+		timeOfTrip.setBounds(1232, 507, 66, 20);
 		mbtaMapPanel.add(timeOfTrip);
 		
 		final JComboBox routeTypeComboBox = new JComboBox(new String[]{"Fastest Route", "Earliest Departure", "Earliest Arrival", "Fewest Transfers"});
-	    routeTypeComboBox.setBounds(1100, 557, 200, 27);
+	    routeTypeComboBox.setBounds(1098, 476, 200, 27);
 	    mbtaMapPanel.add(routeTypeComboBox);
 
 		Button btnGetDirections = new Button("Get Directions");
@@ -923,7 +925,7 @@ public class TrainLocation extends JFrame {
 				}
 			}
 		});
-		btnGetDirections.setBounds(1100, 615, 200, 57);
+		btnGetDirections.setBounds(1098, 538, 200, 39);
 		mbtaMapPanel.add(btnGetDirections);
 
 
@@ -936,7 +938,7 @@ public class TrainLocation extends JFrame {
 			}
 		});
 		rdbtnTest.setSelected(true);
-		rdbtnTest.setBounds(948, 649, 61, 23);
+		rdbtnTest.setBounds(1143, 583, 61, 23);
 		mbtaMapPanel.add(rdbtnTest);
 
 		JRadioButton rdbtnLive = new JRadioButton("Live");
@@ -947,7 +949,7 @@ public class TrainLocation extends JFrame {
 				updateTrains(orangeLineTrains, redLineTrains, blueLineTrains);
 			}
 		});
-		rdbtnLive.setBounds(1022, 649, 57, 23);
+		rdbtnLive.setBounds(1217, 583, 57, 23);
 		mbtaMapPanel.add(rdbtnLive);
 
 		ButtonGroup dataGroup = new ButtonGroup();
@@ -959,25 +961,24 @@ public class TrainLocation extends JFrame {
 		 */
 		
 		final List list = new List();
-		list.setBounds(1100, 103, 214, 299);
+		list.setBounds(1100, 103, 214, 252);
 
 		mbtaMapPanel.add(list);
-
+		 
 		Button button = new Button("Add/\nUpdate");
-		button.setBounds(1100, 401, 100, 80);
+		button.setBounds(1102, 361, 100, 39);
 		mbtaMapPanel.add(button);
 
-		button.addActionListener(
-				new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						mbtaMapPanel.clearScreen();
-						list.removeAll();
-						ArrayList<Station> stations = mbtaMapPanel.getRoute();
-						for(Station s : stations){
-							list.add(s.getName());
-						}
-					}
-				});
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mbtaMapPanel.clearScreen();
+				list.removeAll();
+				ArrayList<Station> stations = mbtaMapPanel.getRoute();
+				for(Station s : stations){
+					list.add(s.getName());
+				}
+			}
+		});
 
 		Button button_1 = new Button("Clear");
 
@@ -990,7 +991,7 @@ public class TrainLocation extends JFrame {
 					}
 				});
 
-		button_1.setBounds(1200, 401, 100, 80);
+		button_1.setBounds(1198, 361, 100, 39);
 		mbtaMapPanel.add(button_1);
 
 		JLabel lblNewLabel = new JLabel("Route Planner");
@@ -1020,7 +1021,7 @@ public class TrainLocation extends JFrame {
 	                }
 	            }
 	        });
-		btnSetAsStart.setBounds(1110, 487, 167, 29);
+		btnSetAsStart.setBounds(1108, 406, 167, 29);
 		mbtaMapPanel.add(btnSetAsStart);
 		btnSetAsStart.setEnabled(false);
 		
@@ -1046,7 +1047,7 @@ public class TrainLocation extends JFrame {
                 }
 		    }
 		});
-		btnSetAsEnd.setBounds(1110, 518, 167, 29);
+		btnSetAsEnd.setBounds(1108, 437, 167, 29);
 		mbtaMapPanel.add(btnSetAsEnd);
 		btnSetAsEnd.setEnabled(false);
 		
@@ -1093,10 +1094,67 @@ public class TrainLocation extends JFrame {
         group.add(rdbtnStationMode);
         group.add(rdbtnRouteMode);
         group.add(rdbtnUnorderedRouteMode);
+        
+        JLabel label = new JLabel("Set test files:");
+        label.setBounds(1126, 612, 106, 15);
+        mbtaMapPanel.add(label);
+        
+        Button redTest = new Button("Red");
+        redTest.addActionListener(new TestPathActionListener(new Line("Red"), rdbtnTest, rdbtnLive));
+        redTest.setBounds(1171, 636, 57, 21);
+        mbtaMapPanel.add(redTest);
+        
+        Button blueTest = new Button("Blue");
+        blueTest.addActionListener(new TestPathActionListener(new Line("Blue"), rdbtnTest, rdbtnLive));
+        blueTest.setBounds(1232, 636, 57, 21);
+        mbtaMapPanel.add(blueTest);
+
+		Button orangeTest = new Button("Orange");
+		orangeTest.addActionListener(new TestPathActionListener(new Line("Orange"), rdbtnTest, rdbtnLive));
+		orangeTest.setBounds(1108, 636, 57, 21);
+		mbtaMapPanel.add(orangeTest);
+
+		dataGroup.add(rdbtnTest);
+		dataGroup.add(rdbtnLive);
+		
+		Button clearTest = new Button("Clear");
+		clearTest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MyMbta.clearTestFiles();
+				MyMbta.updateCache(location);
+				updateTrains(orangeLineTrains, redLineTrains, blueLineTrains);
+			}
+		});
+		clearTest.setBounds(1232, 609, 57, 21);
+		mbtaMapPanel.add(clearTest);
 
 	}
 
-	
+	/**
+	 * @author labichn
+	 */
+	private class TestPathActionListener implements ActionListener {
+		private Line line;
+		private JRadioButton test;
+		private JRadioButton http;
+		TestPathActionListener(Line line, JRadioButton test, JRadioButton http) {
+			this.line = line;
+			this.test = test;
+			this.http = http;
+		}
+		public void actionPerformed(ActionEvent e) {
+			Component source = (Component) e.getSource();
+			Object response =
+			    JOptionPane.showInputDialog(source, "Please enter the fully qualified path of the test JSON file.", "Test File", JOptionPane.PLAIN_MESSAGE);
+			if (response != null && response instanceof String) {
+				MyMbta.setTestFile(line, (String)response);
+				MyMbta.updateCache(MyMbta.test);
+				test.setSelected(true);
+				http.setSelected(false);
+				updateTrains(orangeLineTrains, redLineTrains, blueLineTrains);
+			}
+		}
+	}
 
 
 	/**
