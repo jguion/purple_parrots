@@ -112,51 +112,50 @@ public class TrainLocation extends JFrame {
 		// v first blue line stop
 
 		Station bowdoin = new Station("Bowdoin", BLUE);
-		bowdoin.setBounds(52, 478, 36, 32);
+		bowdoin.setBounds(52, 528, 36, 32);
 		mbtaMapPanel.add(bowdoin);
 
 		Station governmentCenter = new Station("Government Center", BLUE);
-		governmentCenter.setBounds(138, 478, 36, 32);
+		governmentCenter.setBounds(138, 528, 36, 32);
 		mbtaMapPanel.add(governmentCenter);
 
 		Station stateStBlue = new Station("State Street", BLUE);
-		stateStBlue.setBounds(224, 478, 36, 32);
+		stateStBlue.setBounds(224, 528, 36, 32);
 		mbtaMapPanel.add(stateStBlue);
 
 		Station aquarium = new Station("Aquarium", BLUE);
-		aquarium.setBounds(310, 478, 36, 32);
+		aquarium.setBounds(310, 528, 36, 32);
 		mbtaMapPanel.add(aquarium);
 
 		Station maverick = new Station("Maverick", BLUE);
-		maverick.setBounds(396, 478, 36, 32);
+		maverick.setBounds(396, 528, 36, 32);
 		mbtaMapPanel.add(maverick);
 
 		Station airport = new Station("Airport", BLUE);
-		airport.setBounds(482, 478, 36, 32);
+		airport.setBounds(482, 528, 36, 32);
 		mbtaMapPanel.add(airport);
 
 		Station woodIsland = new Station("Wood Island", BLUE);
-		woodIsland.setBounds(568, 478, 36, 32);
+		woodIsland.setBounds(568, 528, 36, 32);
 		mbtaMapPanel.add(woodIsland);
 
 		Station orientHeight = new Station("Orient Heights", BLUE);
-		orientHeight.setBounds(654, 478, 36, 32);
+		orientHeight.setBounds(654, 528, 36, 32);
 		mbtaMapPanel.add(orientHeight);
 
 		Station suffolkDowns = new Station("Suffolk Downs", BLUE);
-		suffolkDowns.setBounds(740, 478, 36, 32);
+		suffolkDowns.setBounds(740, 528, 36, 32);
 		mbtaMapPanel.add(suffolkDowns);
-
 		Station beachmont = new Station("Beachmont", BLUE);
-		beachmont.setBounds(826, 478, 36, 32);
+		beachmont.setBounds(826, 528, 36, 32);
 		mbtaMapPanel.add(beachmont);
 
 		Station revereBeach = new Station("Revere Beach", BLUE);
-		revereBeach.setBounds(912, 478, 36, 32);
+		revereBeach.setBounds(912, 528, 36, 32);
 		mbtaMapPanel.add(revereBeach);
 
 		Station wonderland = new Station("Wonderland", BLUE);
-		wonderland.setBounds(998, 478, 36, 32);
+		wonderland.setBounds(998, 528, 36, 32);
 		mbtaMapPanel.add(wonderland);
 
 		// ^ last blue line stop
@@ -166,57 +165,57 @@ public class TrainLocation extends JFrame {
 		blueLineTrains = new ArrayList<UITrain>();
 
 		UITrain canvas_145 = new UITrain("70037");
-		canvas_145.setBounds(110, 450, 18, 18);
+		canvas_145.setBounds(110, 501, 18, 18);
 		mbtaMapPanel.add(canvas_145);
 		blueLineTrains.add(canvas_145);
 
 		UITrain canvas_144 = new UITrain("70039");
-		canvas_144.setBounds(200, 450, 18, 18);
+		canvas_144.setBounds(200, 501, 18, 18);
 		mbtaMapPanel.add(canvas_144);
 		blueLineTrains.add(canvas_144);
 
 		UITrain canvas_143 = new UITrain("70041");
-		canvas_143.setBounds(280, 450, 18, 18);
+		canvas_143.setBounds(280, 501, 18, 18);
 		mbtaMapPanel.add(canvas_143);
 		blueLineTrains.add(canvas_143);
 
 		UITrain canvas_142 = new UITrain("70043");
-		canvas_142.setBounds(375, 450, 18, 18);
+		canvas_142.setBounds(375, 501, 18, 18);
 		mbtaMapPanel.add(canvas_142);
 		blueLineTrains.add(canvas_142);
 
 		UITrain canvas_141 = new UITrain("70045");
-		canvas_141.setBounds(455, 450, 18, 18);
+		canvas_141.setBounds(455, 501, 18, 18);
 		mbtaMapPanel.add(canvas_141);
 		blueLineTrains.add(canvas_141);
 
 		UITrain canvas_140 = new UITrain("70047");
-		canvas_140.setBounds(540, 450, 18, 18);
+		canvas_140.setBounds(540, 501, 18, 18);
 		mbtaMapPanel.add(canvas_140);
 		blueLineTrains.add(canvas_140);
 
 		UITrain canvas_139 = new UITrain("70049");
-		canvas_139.setBounds(630, 450, 18, 18);
+		canvas_139.setBounds(630, 501, 18, 18);
 		mbtaMapPanel.add(canvas_139);
 		blueLineTrains.add(canvas_139);
 
 		UITrain canvas_138 = new UITrain("70051");
-		canvas_138.setBounds(720, 450, 18, 18);
+		canvas_138.setBounds(720, 501, 18, 18);
 		mbtaMapPanel.add(canvas_138);
 		blueLineTrains.add(canvas_138);
 
 		UITrain canvas_137 = new UITrain("70053");
-		canvas_137.setBounds(800, 450, 18, 18);
+		canvas_137.setBounds(800, 501, 18, 18);
 		mbtaMapPanel.add(canvas_137);
 		blueLineTrains.add(canvas_137);
 
 		UITrain canvas_136 = new UITrain("70055");
-		canvas_136.setBounds(880, 450, 18, 18);
+		canvas_136.setBounds(880, 501, 18, 18);
 		mbtaMapPanel.add(canvas_136);
 		blueLineTrains.add(canvas_136);
 
 		UITrain canvas_135 = new UITrain("70057");
-		canvas_135.setBounds(975, 450, 18, 18);
+		canvas_135.setBounds(975, 501, 18, 18);
 		mbtaMapPanel.add(canvas_135);
 		blueLineTrains.add(canvas_135);
 
@@ -225,72 +224,62 @@ public class TrainLocation extends JFrame {
 		// v first ---> blue line train
 
 		UITrain canvas_146 = new UITrain("70040");
-		canvas_146.setBounds(110, 518, 18, 18);
+		canvas_146.setBounds(110, 569, 18, 18);
 		mbtaMapPanel.add(canvas_146);
 		blueLineTrains.add(canvas_146);
 
 		UITrain canvas_147 = new UITrain("70042");
-		canvas_147.setBounds(200, 518, 18, 18);
+		canvas_147.setBounds(200, 569, 18, 18);
 		mbtaMapPanel.add(canvas_147);
 		blueLineTrains.add(canvas_147);
 
 		UITrain canvas_148 = new UITrain("70044");
-		canvas_148.setBounds(280, 518, 18, 18);
+		canvas_148.setBounds(280, 569, 18, 18);
 		mbtaMapPanel.add(canvas_148);
 		blueLineTrains.add(canvas_148);
 
 		UITrain canvas_149 = new UITrain("70046");
-		canvas_149.setBounds(375, 518, 18, 18);
+		canvas_149.setBounds(375, 569, 18, 18);
 		mbtaMapPanel.add(canvas_149);
 		blueLineTrains.add(canvas_149);
 
 		UITrain canvas_150 = new UITrain("70048");
-		canvas_150.setBounds(455, 518, 18, 18);
+		canvas_150.setBounds(455, 569, 18, 18);
 		mbtaMapPanel.add(canvas_150);
 		blueLineTrains.add(canvas_150);
 
 		UITrain canvas_151 = new UITrain("70050");
-		canvas_151.setBounds(540, 518, 18, 18);
+		canvas_151.setBounds(540, 569, 18, 18);
 		mbtaMapPanel.add(canvas_151);
 		blueLineTrains.add(canvas_151);
 
 		UITrain canvas_152 = new UITrain("70052");
-		canvas_152.setBounds(630, 518, 18, 18);
+		canvas_152.setBounds(630, 569, 18, 18);
 		mbtaMapPanel.add(canvas_152);
 		blueLineTrains.add(canvas_152);
 
 		UITrain canvas_153 = new UITrain("70054");
-		canvas_153.setBounds(720, 518, 18, 18);
+		canvas_153.setBounds(720, 569, 18, 18);
 		mbtaMapPanel.add(canvas_153);
 		blueLineTrains.add(canvas_153);
 
 		UITrain canvas_154 = new UITrain("70056");
-		canvas_154.setBounds(800, 518, 18, 18);
+		canvas_154.setBounds(800, 569, 18, 18);
 		mbtaMapPanel.add(canvas_154);
 		blueLineTrains.add(canvas_154);
 
 		UITrain canvas_155 = new UITrain("70058");
-		canvas_155.setBounds(880, 518, 18, 18);
+		canvas_155.setBounds(880, 569, 18, 18);
 		mbtaMapPanel.add(canvas_155);
 		blueLineTrains.add(canvas_155);
 
 		UITrain canvas_156 = new UITrain("70060");
-		canvas_156.setBounds(975, 518, 18, 18);
+		canvas_156.setBounds(975, 569, 18, 18);
 		mbtaMapPanel.add(canvas_156);
 		blueLineTrains.add(canvas_156);
 
 		// ^ last ---> blue line train
-
-		Canvas canvas_119 = new Canvas();
-		canvas_119.setBounds(822, 287, 5, 45);
-		canvas_119.setBackground(Color.BLACK);
-		mbtaMapPanel.add(canvas_119);
-
-		Canvas canvas_118 = new Canvas();
-		canvas_118.setBounds(630, 287, 5, 45);
-		canvas_118.setBackground(Color.BLACK);
-		mbtaMapPanel.add(canvas_118);
-
+		
 		Station oakGrove = new Station("Oak Grove", ORANGE);
 		oakGrove.setBounds(19, 63, 36, 32);
 		mbtaMapPanel.add(oakGrove);
@@ -630,39 +619,39 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(jfk);
 
 		Station savinHill = new Station("Savin Hill", RED);
-		savinHill.setBounds(638, 295, 36, 32);
+		savinHill.setBounds(712, 384, 36, 32);
 		mbtaMapPanel.add(savinHill);
 
 		Station fieldsCorner = new Station("Fields Corner", RED);
-		fieldsCorner.setBounds(686, 295, 36, 32);
+		fieldsCorner.setBounds(760, 384, 36, 32);
 		mbtaMapPanel.add(fieldsCorner);
 
 		Station shawmut = new Station("Shawmut", RED);
-		shawmut.setBounds(734, 295, 36, 32);
+		shawmut.setBounds(808, 384, 36, 32);
 		mbtaMapPanel.add(shawmut);
 
 		Station ashmont = new Station("Ashmont", RED);
-		ashmont.setBounds(782, 295, 36, 32);
+		ashmont.setBounds(856, 384, 36, 32);
 		mbtaMapPanel.add(ashmont);
 
 		Station northQuincy = new Station("North Quincy", RED);
-		northQuincy.setBounds(830, 295, 36, 32);
+		northQuincy.setBounds(680, 232, 36, 32);
 		mbtaMapPanel.add(northQuincy);
 
 		Station wollaston = new Station("Wollaston", RED);
-		wollaston.setBounds(878, 295, 36, 32);
+		wollaston.setBounds(728, 232, 36, 32);
 		mbtaMapPanel.add(wollaston);
 
 		Station quincyCenter = new Station("Quincy Center", RED);
-		quincyCenter.setBounds(926, 295, 36, 32);
+		quincyCenter.setBounds(776, 232, 36, 32);
 		mbtaMapPanel.add(quincyCenter);
 
 		Station quincyAdams = new Station("Quincy Adams", RED);
-		quincyAdams.setBounds(974, 295, 36, 32);
+		quincyAdams.setBounds(824, 232, 36, 32);
 		mbtaMapPanel.add(quincyAdams);
 
 		Station braintree = new Station("Braintree", RED);
-		braintree.setBounds(1022, 295, 36, 32);
+		braintree.setBounds(872, 232, 36, 32);
 		mbtaMapPanel.add(braintree);
 
 		// ^ Last red line stop
@@ -723,57 +712,57 @@ public class TrainLocation extends JFrame {
 		redLineTrains.add(canvas_86);
 
 		UITrain canvas_87 = new UITrain("70082");
-		canvas_87.setBounds(533, 267, 18, 18);
+		canvas_87.setBounds(533, 265, 18, 18);
 		mbtaMapPanel.add(canvas_87);
 		redLineTrains.add(canvas_87);
 
 		UITrain canvas_88 = new UITrain("70084");
-		canvas_88.setBounds(582, 267, 18, 18);
+		canvas_88.setBounds(582, 265, 18, 18);
 		mbtaMapPanel.add(canvas_88);
 		redLineTrains.add(canvas_88);
 
 		UITrain canvas_89 = new UITrain("70086");
-		canvas_89.setBounds(632, 267, 18, 18);
+		canvas_89.setBounds(717, 357, 18, 18);
 		mbtaMapPanel.add(canvas_89);
 		redLineTrains.add(canvas_89);
 
 		UITrain canvas_90 = new UITrain("70088");
-		canvas_90.setBounds(680, 267, 18, 18);
+		canvas_90.setBounds(761, 357, 18, 18);
 		mbtaMapPanel.add(canvas_90);
 		redLineTrains.add(canvas_90);
 
 		UITrain canvas_91 = new UITrain("70090");
-		canvas_91.setBounds(730, 267, 18, 18);
+		canvas_91.setBounds(814, 357, 18, 18);
 		mbtaMapPanel.add(canvas_91);
 		redLineTrains.add(canvas_91);
 
 		UITrain canvas_92 = new UITrain("70092");
-		canvas_92.setBounds(775, 267, 18, 18);
+		canvas_92.setBounds(859, 357, 18, 18);
 		mbtaMapPanel.add(canvas_92);
 		redLineTrains.add(canvas_92);
 
 		UITrain canvas_93 = new UITrain("70096");
-		canvas_93.setBounds(827, 267, 18, 18);
+		canvas_93.setBounds(680, 206, 18, 18);
 		mbtaMapPanel.add(canvas_93);
 		redLineTrains.add(canvas_93);
 
 		UITrain canvas_94 = new UITrain("70098");
-		canvas_94.setBounds(874, 267, 18, 18);
+		canvas_94.setBounds(719, 206, 18, 18);
 		mbtaMapPanel.add(canvas_94);
 		redLineTrains.add(canvas_94);
 
 		UITrain canvas_95 = new UITrain("70100");
-		canvas_95.setBounds(921, 267, 18, 18);
+		canvas_95.setBounds(761, 206, 18, 18);
 		mbtaMapPanel.add(canvas_95);
 		redLineTrains.add(canvas_95);
 
 		UITrain canvas_117 = new UITrain("70102");
-		canvas_117.setBounds(965, 267, 18, 18);
+		canvas_117.setBounds(814, 206, 18, 18);
 		mbtaMapPanel.add(canvas_117);
 		redLineTrains.add(canvas_117);
 
 		UITrain canvas_122 = new UITrain("70104");
-		canvas_122.setBounds(1014, 267, 18, 18);
+		canvas_122.setBounds(867, 206, 18, 18);
 		mbtaMapPanel.add(canvas_122);
 		redLineTrains.add(canvas_122);
 
@@ -844,50 +833,50 @@ public class TrainLocation extends JFrame {
 
 		// Savin hill
 		UITrain canvas_108 = new UITrain("70087");
-		canvas_108.setBounds(632, 333, 18, 18);
+		canvas_108.setBounds(717, 424, 18, 18);
 		mbtaMapPanel.add(canvas_108);
 		redLineTrains.add(canvas_108);
 
 		UITrain canvas_109 = new UITrain("70089");
-		canvas_109.setBounds(680, 333, 18, 18);
+		canvas_109.setBounds(762, 424, 18, 18);
 		mbtaMapPanel.add(canvas_109);
 		redLineTrains.add(canvas_109);
 
 		UITrain canvas_110 = new UITrain("70091");
-		canvas_110.setBounds(730, 333, 18, 18);
+		canvas_110.setBounds(814, 424, 18, 18);
 		mbtaMapPanel.add(canvas_110);
 		redLineTrains.add(canvas_110);
 
 		// Ashmont
 		UITrain canvas_111 = new UITrain("70093");
-		canvas_111.setBounds(775, 333, 18, 18);
+		canvas_111.setBounds(859, 424, 18, 18);
 		mbtaMapPanel.add(canvas_111);
 		redLineTrains.add(canvas_111);
 
 		// North quincy
 		UITrain canvas_112 = new UITrain("70097");
-		canvas_112.setBounds(827, 333, 18, 18);
+		canvas_112.setBounds(680, 272, 18, 18);
 		mbtaMapPanel.add(canvas_112);
 		redLineTrains.add(canvas_112);
 
 		UITrain canvas_113 = new UITrain("70099");
-		canvas_113.setBounds(874, 333, 18, 18);
+		canvas_113.setBounds(719, 272, 18, 18);
 		mbtaMapPanel.add(canvas_113);
 		redLineTrains.add(canvas_113);
 
 		UITrain canvas_114 = new UITrain("70101");
-		canvas_114.setBounds(921, 333, 18, 18);
+		canvas_114.setBounds(764, 272, 18, 18);
 		mbtaMapPanel.add(canvas_114);
 		redLineTrains.add(canvas_114);
 
 		UITrain canvas_116 = new UITrain("70103");
-		canvas_116.setBounds(965, 333, 18, 18);
+		canvas_116.setBounds(814, 272, 18, 18);
 		mbtaMapPanel.add(canvas_116);
 		redLineTrains.add(canvas_116);
 
 		// braintree
 		UITrain canvas_121 = new UITrain("70105");
-		canvas_121.setBounds(1014, 333, 18, 18);
+		canvas_121.setBounds(867, 272, 18, 18);
 		mbtaMapPanel.add(canvas_121);
 		redLineTrains.add(canvas_121);
 
