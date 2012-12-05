@@ -914,7 +914,7 @@ public class TrainLocation extends JFrame {
 				}
 			}
 		});
-		btnGetDirections.setBounds(1098, 538, 200, 39);
+		btnGetDirections.setBounds(1100, 538, 200, 39);
 		mbtaMapPanel.add(btnGetDirections);
 
 
