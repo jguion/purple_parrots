@@ -222,7 +222,8 @@ public class MyMbta {
             boolean isFewestTransfers, boolean isFastestRoute){
         if(startStation == null){
             List<Route> possibleRoutes = new ArrayList<Route>();
-            for(Station station : route){
+            for(int i = 0; i < route.size(); i++){
+                Station station = route.get(i);
                 if(station.equals(endStation)){
                     continue;
                 }else{
