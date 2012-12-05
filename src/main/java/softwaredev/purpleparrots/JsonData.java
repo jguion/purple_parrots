@@ -45,7 +45,7 @@ public class JsonData {
                     Prediction p = new Prediction(stopId, stop, seconds);
                     predictions.add(p);
                 }
-                Train train = new Train(id, line.getName(), destination, predictions);
+                Train train = new Train(id, destination, predictions);
                 trains.add(train);
             }
         } catch (Exception e) {

@@ -2,8 +2,6 @@ package softwaredev.purpleparrots.gui;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TimerTask;
 
@@ -13,15 +11,13 @@ import softwaredev.purpleparrots.Train;
 public class TrainUpdater extends TimerTask{
     
     private String location;
-    private MbtaMap mbtaMapPanel;
     private ArrayList<UITrain> blueLineTrains;
     private ArrayList<UITrain> redLineTrains;
     private ArrayList<UITrain> orangeLineTrains;
     
 
-    public TrainUpdater(String location, MbtaMap mbtaMapPanel) {
+    public TrainUpdater(String location) {
         this.location = location;
-        this.mbtaMapPanel=mbtaMapPanel;
     }
 
 

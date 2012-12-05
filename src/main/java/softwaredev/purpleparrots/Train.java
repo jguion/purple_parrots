@@ -4,21 +4,18 @@ import java.util.List;
 
 public class Train {
     private String id;
-    private String line;
     private String destination;
     private List<Prediction> predictions;
 
-    public Train(String id, String line, String destination,
+    public Train(String id, String destination,
                  List<Prediction> predictions) {
         this.setId(id);
-        this.line = line;
         this.setDestination(destination);
         this.setPredictions(predictions);
     }
 
-    public Train(String id, String line, String destination) {
+    public Train(String id, String destination) {
         this.setId(id);
-        this.line = line;
         this.setDestination(destination);
     }
     

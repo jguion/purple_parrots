@@ -1,16 +1,13 @@
 package softwaredev.purpleparrots.gui;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -19,8 +16,9 @@ import softwaredev.purpleparrots.Line;
 import softwaredev.purpleparrots.MyMbta;
 import softwaredev.purpleparrots.Train;
 
-public class Station extends JPanel implements MouseListener{
-    private String name;
+public class Station extends JPanel implements MouseListener {
+	private static final long serialVersionUID = -3661449242830224403L;
+	private String name;
     private String line;
 
     public Station(String name, String line) {

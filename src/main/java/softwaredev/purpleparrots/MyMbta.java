@@ -357,7 +357,6 @@ public class MyMbta {
                         if(p.seconds > startTime){
                             Station startStop = findStationWithName(p.stop, route);
                             Pair<Station,String> closestStationInfo = getClosestStation(route, startStop);
-                            Station nextStop = closestStationInfo.a;
                             String lineDestination = closestStationInfo.b;
                             if(lineDestination.equals(train.getDestination())){
                                 earliestTime = p.seconds;
@@ -378,7 +377,7 @@ public class MyMbta {
      * @author jeffreyguion
      */
     private static List<String> getStationNames(List<Station> stations){
-        List<String> names = new ArrayList();
+        List<String> names = new ArrayList<String>();
         for(int i=0; i< stations.size(); i++){
             names.add(stations.get(i).getName());
         }

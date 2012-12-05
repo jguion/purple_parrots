@@ -8,7 +8,6 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.font.*;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.event.ActionEvent;
@@ -17,8 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Timer;
 
 import javax.swing.ButtonGroup;
@@ -38,13 +35,11 @@ import javax.swing.JLabel;
 import softwaredev.purpleparrots.Line;
 import softwaredev.purpleparrots.MyMbta;
 import softwaredev.purpleparrots.Route;
-import softwaredev.purpleparrots.Train;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class TrainLocation extends JFrame {
-
+	private static final long serialVersionUID = -1553869965233268633L;
 	private MbtaMap mbtaMapPanel;
 	private String ORANGE = "Orange";
 	private String RED = "Red";
@@ -73,6 +68,10 @@ public class TrainLocation extends JFrame {
 	}
 
 	class ImagePanel extends JComponent {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -7393788530486807428L;
 		private Image image;
 		public ImagePanel(Image image) {
 			this.image = image;
@@ -161,7 +160,6 @@ public class TrainLocation extends JFrame {
 		// ^ last blue line stop
 
 		// v first <--- blue line train (yes, I know they're reverse ordered)
-		Map<String, Train> blue_line_map = MyMbta.getCurrentLocationMap("Blue", this.location);
 		blueLineTrains = new ArrayList<UITrain>();
 
 		UITrain canvas_145 = new UITrain("70037");
@@ -363,7 +361,6 @@ public class TrainLocation extends JFrame {
 		mbtaMapPanel.add(orangeLineEnd);
 
 		//ORANGE LINE STOPS 20 - 51
-		Map<String, Train> orange_line_map = MyMbta.getCurrentLocationMap("Orange", this.location);
 		orangeLineTrains = new ArrayList<UITrain>();
 
 		JPanel FH_OG_panel = new JPanel();
@@ -657,8 +654,6 @@ public class TrainLocation extends JFrame {
 		// ^ Last red line stop
 
 		// v First <---- red line train
-
-		Map<String, Train> red_line_map = MyMbta.getCurrentLocationMap("Red", this.location);
 		redLineTrains = new ArrayList<UITrain>();
 
 		UITrain canvas_77 = new UITrain("70061");
@@ -882,7 +877,7 @@ public class TrainLocation extends JFrame {
 
 
 		
-		final JComboBox arriveDepart = new JComboBox(new String[]{"Leave Now", "Depart At", "Arrive By"});
+		final JComboBox<String> arriveDepart = new JComboBox<String>(new String[]{"Leave Now", "Depart At", "Arrive By"});
 		arriveDepart.setBounds(1098, 507, 137, 23);
 		mbtaMapPanel.add(arriveDepart);
 
@@ -892,7 +887,7 @@ public class TrainLocation extends JFrame {
 		timeOfTrip.setBounds(1232, 507, 66, 20);
 		mbtaMapPanel.add(timeOfTrip);
 		
-		final JComboBox routeTypeComboBox = new JComboBox(new String[]{"Fastest Route", "Earliest Departure", "Earliest Arrival", "Fewest Transfers"});
+		final JComboBox<String> routeTypeComboBox = new JComboBox<String>(new String[]{"Fastest Route", "Earliest Departure", "Earliest Arrival", "Fewest Transfers"});
 	    routeTypeComboBox.setBounds(1098, 476, 200, 27);
 	    mbtaMapPanel.add(routeTypeComboBox);
 
@@ -1175,7 +1170,7 @@ public class TrainLocation extends JFrame {
 	        updater.cancel();
 	    }
 	    MyMbta.updateCache(this.location);
-	    updater = new TrainUpdater(this.location, this.mbtaMapPanel);
+	    updater = new TrainUpdater(this.location);
 	    updater.setOrangeLineTrains(orange);
 	    updater.setRedLineTrains(red);
 	    updater.setBlueLineTrains(blue);

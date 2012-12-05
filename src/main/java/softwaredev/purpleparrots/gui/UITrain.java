@@ -6,9 +6,10 @@ import javax.swing.JPanel;
 
 import softwaredev.purpleparrots.Train;
 
-public class UITrain extends JPanel{
+public class UITrain extends JPanel {
 
-    private boolean hasTrain;
+	private static final long serialVersionUID = 7822095715054713628L;
+	private boolean hasTrain;
     private String stopId;
     private Train train;
   

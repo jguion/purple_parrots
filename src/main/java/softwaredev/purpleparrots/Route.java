@@ -2,7 +2,6 @@ package softwaredev.purpleparrots;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -256,29 +255,6 @@ public class Route {
         }
         return null;
     }
-	
-	/**
-	 * Returns the destination of a train on a line given two consecutive stations
-	 * 
-	 * @param stopA
-	 * @param stopB
-	 * @param line
-	 * @return
-	 */
-	private String getTrainDestinationFromConsecutiveStops(String stopA, String stopB, Line line){
-	    int numStops = line.getStops().size();
-	    for(int i = 0; i<numStops - 1 ; i++){
-	        String currentStop = line.getStops().get(i);
-	        String nextStop = line.getStops().get(i+1);
-	        
-	        if(currentStop == stopA && nextStop == stopB){
-	            return line.getStops().get(numStops - 1);
-	        }else if (currentStop == stopB && nextStop == stopA){
-	            return line.getStops().get(0);
-	        }
-	    }
-	    return null;
-	}
 
 	public List<String> getTrainIds() {
 		return trainIds;

@@ -3,14 +3,13 @@ package softwaredev.purpleparrots.gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class MbtaMap extends JPanel{
+public class MbtaMap extends JPanel {
+	private static final long serialVersionUID = -1355842072891552614L;
 	private ArrayList<Station> route;
 	private Mode mode;
 	private RouteType routeType;
