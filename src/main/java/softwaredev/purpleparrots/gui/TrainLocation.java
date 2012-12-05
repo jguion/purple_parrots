@@ -877,7 +877,8 @@ public class TrainLocation extends JFrame {
 
 
 		
-		final JComboBox<String> arriveDepart = new JComboBox<String>(new String[]{"Leave Now", "Depart At", "Arrive By"});
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		final JComboBox arriveDepart = new JComboBox(new String[]{"Leave Now", "Depart At", "Arrive By"});
 		arriveDepart.setBounds(1098, 507, 137, 23);
 		mbtaMapPanel.add(arriveDepart);
 
@@ -887,7 +888,8 @@ public class TrainLocation extends JFrame {
 		timeOfTrip.setBounds(1232, 507, 66, 20);
 		mbtaMapPanel.add(timeOfTrip);
 		
-		final JComboBox<String> routeTypeComboBox = new JComboBox<String>(new String[]{"Fastest Route", "Earliest Departure", "Earliest Arrival", "Fewest Transfers"});
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		final JComboBox routeTypeComboBox = new JComboBox(new String[]{"Fastest Route", "Earliest Departure", "Earliest Arrival", "Fewest Transfers"});
 	    routeTypeComboBox.setBounds(1098, 476, 200, 27);
 	    mbtaMapPanel.add(routeTypeComboBox);
 
