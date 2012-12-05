@@ -28,7 +28,7 @@ public class MbtaMap extends JPanel{
 	}
 	
 	Image image = null;
-	String url = "src/main/resources/v3.jpg";
+	String url = "src/main/resources/v33.jpg";
 	
 	public void ImagePanel(String filename) {
 		this.image = new ImageIcon(filename).getImage();
